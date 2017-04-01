@@ -16,7 +16,7 @@ public:
 
 	bool ReadFromFile(std::string filename);
 	void WritetoFile(std::string filename);
-
+	void CreateSearchWaypoints(double VeiwRadius);
 	void InsertTakeoffandHomeposition(Coordinate home, Coordinate takeoff);
 	double CalculateCoordtoDec(double deg, double min, double sec);
 };

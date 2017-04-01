@@ -140,6 +140,42 @@ void Path::WritetoFile(string filename){
 
 }
 
+void Path::CreateSearchWaypoints(double ViewRadius){
+	int searchsize = 0;
+	searchsize = _searchArea.size();
+	double tempalt = 0.0;
+	double templat = 0.0;
+	double templon = 0.0;
+	//get a coordinate that is in the center of the polygon
+	for (int i = 0; i < searchsize; i++) {
+		templon = templon + _searchArea.at(i).getLongitude();
+		templat = templat + _searchArea.at(i).getLatitude();
+		tempalt = tempalt + _searchArea.at(i).getAltitude();
+	}
+	Coordinate centerPoint;
+	centerPoint.setAltitude(tempalt / searchsize);
+	centerPoint.setLatitude(templat / searchsize);
+	centerPoint.setLongitude(templon / searchsize);
+	//shrink the search size by radius
+	for (int j = 0; j < searchsize; j++) {
+		Shrinkvector(&_searchArea.at(j), ViewRadius, centerPoint);
+	}
+	
+
+}
+
+void Path::Shrinkvector(Coordinate * inputCoordinate, double viewRadius, Coordinate centerCoordinate){
+	double theta;
+	double lat = 0;
+	double lon = 0;
+	lat = inputCoordinate->getLatitude() - centerCoordinate.getLatitude();
+	lon = inputCoordinate->getLongitude() - centerCoordinate.getLongitude();
+	theta = atan(lat / lon);
+	double newdist = pow((pow(lat, 2) + pow(lon, 2)), 0.5) - viewRadius;
+	inputCoordinate->setLatitude(newdist*sin(theta));
+	inputCoordinate->setLongitude(newdist*cos(theta));
+}
+
 double Path::CalculateCoordtoDec(double deg, double min, double sec){
 	double decimal = 0.0;
 	double degree;
