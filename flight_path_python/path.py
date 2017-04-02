@@ -28,7 +28,7 @@ def generate_waypt_path(path_info, takeoff_pt, waypts_list, op_area):
     return pts_list
 
 
-def generate_search_path(path_info, start_pt, search_area, boundary_pts):
+def generate_search_path(path_info, start_pt, search_area, boundary_pts, alt):
     '''
     :param path_info: the parameter needed to generate the path
     :type path_info: tuple of int
@@ -38,33 +38,86 @@ def generate_search_path(path_info, start_pt, search_area, boundary_pts):
     :param boundary_points: the boundary pts of the search area
     :type boundary_pts: list GeoCoord
     '''
-    pts_list = []
-    pts_list.append(start_pt)
+    path_pts_list = []
+    path_pts_list.append(start_pt)
 
-    (closest_pt, index) = closest_point(start_pt, boundary_pts, True)
+    (closest_pt, closest_index) = closest_point(start_pt, search_area, True)
+    # Create a grid 
 
-    # First Pt
-    i = 1
-    next_index = index + i if index + i < len(boundary_pts) else 0
-    prev_index = index - i if index > i else len(boundary_pts) - 1
-    angle = angle_of_pt(boundary_pts[index], boundary_pts[next_index])
-    temp = coord_with_dist_from_pt(boundary_pts[index], path_info['boundary_cushine'], angle)
-    angle = angle_of_pt(boundary_pts[index], boundary_pts[prev_index])
-    waypt = coord_with_dist_from_pt(temp, path_info['boundary_cushine'], angle)
-    pts_list.append(waypt)
+    # Put the search area in the grid, mark the squares which are occupied
 
-    # Select second pt
-    dist_prev_index = dist_between_coord(boundary_pts[index], boundary_pts[prev_index])
-    dist_next_index = dist_between_coord(boundary_pts[index], boundary_pts[next_index])
-    i = 1 if dist_next_index >= dist_prev_index else -1
+    # Generate Path
 
-    # Recalculate the path cushine
-    (farthest_pt, index) = farthest_point(boundary_pts[index], boundary_pts, True)
+    # Check the grid to see if all area are cover
+
+    # Generate path to cover the uncover area
+
+    # Connect path
+
+    return path_pts_list
 
 
-    index = index + i if index + i < len(boundary_pts) else 0
+def generate_search_path_spiral(path_info, start_pt, search_area, boundary_pts, alt):
+    '''
+    :param path_info: the parameter needed to generate the path
+    :type path_info: tuple of int
+    :param start_pt: the starting point of the path, may or may not be
+        inside the search area boundary
+    :type start_pt: GeoCoord
+    :param boundary_points: the boundary pts of the search area
+    :type boundary_pts: list GeoCoord
+    '''
+    path_pts_list = []
+    path_pts_list.append(start_pt)
 
-    return pts_list
+    (closest_pt, closest_index) = closest_point(start_pt, search_area, True)
+
+    center_pt = center_point(search_area, alt)
+    pts_on_line_list = []
+    # Get the Max number of points on a line
+    min_num_of_pt = 0
+    for i in range(len(search_area)):
+        dist = dist_between_coord(search_area[i], center_pt)
+        num_of_pt = dist / path_info['path_cushine']
+        # Round num_of_pt upwards
+        num_of_pt = int(num_of_pt) if int(num_of_pt) == num_of_pt else int(num_of_pt) + 1
+        min_num_of_pt = num_of_pt if num_of_pt > min_num_of_pt else min_num_of_pt
+    #max_num_of_pt = 5
+
+    # Generate all points
+    for i in range(len(search_area)):
+        pts_on_line = []
+        dist = dist_between_coord(search_area[i], center_pt)
+        step_size = dist / min_num_of_pt
+        angle = angle_of_pt(search_area[i], center_pt)
+        for j in range(min_num_of_pt):
+            pt = coord_with_dist_from_pt(search_area[i], step_size * (j+1), angle)
+            pts_on_line.append(pt)
+        pts_on_line_list.append(pts_on_line)
+
+    # Generate the path (Connect the points in order)
+    pt_index_list = [0 for i in range(len(search_area))]
+    line_index = closest_index
+    while(True):
+        pt = pts_on_line_list[line_index][pt_index_list[line_index]]
+        path_pts_list.append(pt)
+        line_index = line_index + 1 if line_index + 1 < len(search_area) else 0
+        pt_index_list[line_index] += 1 if pt_index_list[line_index] < min_num_of_pt else 0
+        if(pt_index_list[line_index] >= min_num_of_pt):
+            break
+    path_pts_list.append(center_pt)
+    return path_pts_list
+
+
+def center_point(pts_list, alt):
+    lat = 0
+    lon = 0
+    for pt in pts_list:
+        lat += pt.lat
+        lon += pt.lon
+    lat /= len(pts_list)
+    lon /= len(pts_list)
+    return coordinate.GeoCoord(lat, lon, alt)
 
 
 def closest_point(pt1, pt_list, with_index = False):
@@ -148,15 +201,18 @@ def angle_between_three_pts(pt1, pt2, pt3):
     angle1 = m.atan2(d_lat1, d_lon1)
     angle3 = m.atan2(d_lat3, d_lon3)
     angle = abs(angle1 - angle3)
-    angle = angle if angle < m.pi else angle - m.pi
+    while(angle >= m.pi or angle <= -1*m.pi):
+        angle = angle if angle < -1*m.pi else angle + 2*m.pi
+        angle = angle if angle > m.pi else angle - 2*m.pi
     return angle
 
 def angle_of_pt(center_pt, pt1):
-    d_lat = center_pt.lat - pt1.lat
-    d_lon = center_pt.lon - pt1.lon
+    d_lat = pt1.lat - center_pt.lat
+    d_lon = pt1.lon - center_pt.lon
     angle = m.atan2(d_lat, d_lon)
-    angle = angle if angle < -2*m.pi else angle + 2*m.pi
-    angle = angle if angle > 2*m.pi else angle - 2*m.pi
+    while(angle >= m.pi or angle <= -1*m.pi):
+        angle = angle if angle <= -2*m.pi else angle + 2*m.pi
+        angle = angle if angle >= 2*m.pi else angle - 2*m.pi
     return angle
 
 def dist_between_coord(coord1, coord2):
@@ -200,19 +256,12 @@ def coord_with_dist_from_pt(pt, dist, angle):
 
 
     # Assume in the same hemisphere
-    assert(angle <= 2.0 * m.pi and angle >= -2.0 * m.pi)
+    assert(angle <= m.pi and angle >= -1.0 * m.pi)
     one_m = 0.000009
     one_m = 0.000011444
     one_m = 0.000010222
-    if(angle <= m.pi / 2.0 and angle >= m.pi / -2.0):
-        initial_lat = pt.lat + m.sin(angle) * dist * one_m
-        initial_lon = pt.lon + m.cos(angle) * dist * one_m
-    elif((angle >= m.pi / 2.0 and angle <= 2.0 * m.pi) \
-            or (angle <= m.pi / -2.0 and angle >= -2.0 * m.pi)):
-        initial_lat = pt.lat + m.sin(angle) * dist * one_m
-        initial_lon = pt.lon - m.cos(angle) * dist * one_m
-    else:
-        raise ValueError
+    initial_lat = pt.lat + m.sin(angle) * dist * one_m
+    initial_lon = pt.lon + m.cos(angle) * dist * one_m
     inital_guess_pt = coordinate.GeoCoord(initial_lat, initial_lon, pt.alt)
     return approximate(pt, inital_guess_pt, dist)
 

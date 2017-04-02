@@ -1,0 +1,78 @@
+
+"MAV_AUTOPILOT"     3
+"groundStation"     "QGroundControl"
+"item"
+        "autoContinue":     true
+        "command":          22 - takeoff
+                            16 - waypoint
+                            30 - change altitude
+                            178 - change speed
+                            21 - land
+        "frame":            3 - when takeoff, land and waypoint
+                            2 - when change altitude and speed
+        "id":               index of the mission item
+        "param1":           15 when takeoff, 25 if land; 1 if other param are not 0, 0 otherwise
+        "param2":           change in speed
+        "param3":           change in throttle
+        "type":             seem to always be "missionItem"
+"plannedHomePosition"   homeposition, same format as "item"
+                        frame, id, and all param are all 0
+
+-----------------------------------------------------------
+	Version 1.0
+-----------------------------------------------------------
+						
+Mission File Sample
+{
+    "MAV_AUTOPILOT": 12,
+    "complexItems": [ { complex mission item }, { complex mission item } ],
+    "groundStation": "QGroundControl",
+    "items": [ { mission item }, { mission item } ],
+    "plannedHomePosition": { mission item }, 
+    "version": "1.0"
+}
+
+Mission Item Sample:
+{
+    "autoContinue": true,
+    "command": 16,
+    "coordinate": [ 47.633425920000001, -122.08828776999999, 25 ],
+    "frame": 3,
+    "id": 2,
+    "param1": 0,
+    "param2": 0,
+    "param3": 0,
+    "param4": 0,
+    "type": "missionItem"
+},
+
+-----------------------------------------------------------
+	Version 2.0
+-----------------------------------------------------------
+
+{
+    "firmwareType": 3,
+    "groundStation": "QGroundControl",
+    "items": [ { } ],
+    "plannedHomePosition": [
+        37.803784,
+        -122.462276,
+        0
+    ],
+    "version": 2
+}
+
+{
+    "autoContinue": true,
+    "command": 22,
+    "coordinate": [
+        37.80380916,
+        -122.46207951,
+        50
+    ],
+    "doJumpId": 1,
+    "frame": 2,
+    "params": [15, 0, 0, 0],
+    "type": "SimpleItem"
+},
+

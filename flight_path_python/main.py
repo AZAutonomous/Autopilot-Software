@@ -4,9 +4,9 @@ import mission
 import path
 import file_parser
 
-path_info = {'turn_radius' : 1, \
-        'path_cushine' : 5, \
-        'boundary_cushine' : 5, \
+path_info = {'turn_radius' : 5, \
+        'path_cushine' : 20, \
+        'boundary_cushine' : 20, \
         'pt_distance' : 10}
 
 def main():
@@ -30,9 +30,13 @@ def main():
 
     # Generate search path within search_area
     search_area_path = []
-    search_area_path = path.generate_search_path(path_info, waypt_path[-1], search_area, op_area)
+    #search_area_path = path.generate_search_path(path_info, waypt_path[-1], search_area, op_area, 30)
+    search_area_path = path.generate_search_path_spiral(path_info, waypt_path[-1], search_area, op_area, 30)
+    for pt in search_area_path:
+        item1 = mission.MissionItem(pt, 16)
+        m1.add_mission_item(item1)
 
-    # Landing
+    # Add Landing point, assume to be takeoff point as well
     item1 = mission.MissionItem(takeoff_pt, 21)
     m1.add_mission_item(item1)
 
