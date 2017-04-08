@@ -322,18 +322,41 @@ double Path::CalculateCoordtoDec(double deg, double min, double sec){
 	return decimal;
 }
 
+double Path::GetDistance(double x1, double y1, double x2, double y2)
+{
+	double x = abs(x1 - x2);
+	double y = abs(y1 - y2);
+	double h = pow((x*x+y*y), 0.5);
+	return h;
+}
+
 void Path::SwapSearchVectors(int size){
 
 	int i = 1;
-	double increase1 = 0.0;
-	double increase2 = 0.0;
-	double increase3 = 0.0;
-	while (i < size-1) {
-		increase1 = abs(_searchArea.at(i - 1).getLongitude() - _searchArea.at(i).getLongitude());
-		increase2 = abs(_searchArea.at(i).getLongitude() - _searchArea.at(i+1).getLongitude());
-		increase1 = abs(_searchArea.at(i + 1).getLongitude() - _searchArea.at(i+2).getLongitude());
-		if (increase2 < increase1 && increase2 < increase3) {
-			
+	double dist1;
+	double dist2;
+	double dist3;
+	double dist4;
+	double dist5;
+	double theta1 = 0.0;
+	double theta2 = 0.0;
+	double theta3 = 0.0;
+	double theta4 = 0.0;
+	Coordinate tempCoor;
+	while (i < size+1) {
+		dist1 = GetDistance(_searchArea.at(i - 1).getLongitude(), _searchArea.at(i - 1).getLatitude(), _searchArea.at(i).getLongitude(), _searchArea.at(i).getLatitude());
+		dist2 = GetDistance(_searchArea.at(i + 1).getLongitude(), _searchArea.at(i + 1).getLatitude(), _searchArea.at(i).getLongitude(), _searchArea.at(i).getLatitude());
+		dist3 = GetDistance(_searchArea.at(i - 1).getLongitude(), _searchArea.at(i - 1).getLatitude(), _searchArea.at(i+1).getLongitude(), _searchArea.at(i+1).getLatitude());
+		dist4 = GetDistance(_searchArea.at(i + 1).getLongitude(), _searchArea.at(i + 1).getLatitude(), _searchArea.at(i+2).getLongitude(), _searchArea.at(i+2).getLatitude());
+		dist5 = GetDistance(_searchArea.at(i).getLongitude(), _searchArea.at(i).getLatitude(), _searchArea.at(i+2).getLongitude(), _searchArea.at(i+2).getLatitude());
+		theta1 = acos((dist1*dist1 + dist2*dist2 - dist3*dist3) / 2 * dist1*dist2);
+		theta2 = acos((dist2*dist2 + dist4*dist4 - dist5*dist5) / 2 * dist4*dist2);
+		theta3 = acos((dist2*dist2 + dist3*dist3 - dist1*dist1) / 2 * dist3*dist2);
+		theta4 = acos((dist2*dist2 + dist5*dist5 - dist4*dist4) / 2 * dist5*dist2);
+		if (theta3 + theta4 > theta1 + theta2) {//then swap i with i+1
+			tempCoor = _searchArea.at(i);
+			_searchArea.at(i) = _searchArea.at(i + 1);
+			_searchArea.at(i + 1) = tempCoor;
 		}
 		i++;
 	}
