@@ -43,6 +43,8 @@ public:
 	void InsertTakeoffandHomeposition(Coordinate home, Coordinate takeoff);
 
 	double CalculateCoordtoDec(double deg, double min, double sec);
+
+	double GetDistance(double x1, double y1, double x2, double y2);
 };
 
 #endif
