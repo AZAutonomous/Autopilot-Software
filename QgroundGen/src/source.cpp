@@ -21,13 +21,14 @@ bool Source::ReadFromFile(string filename, double SearchAlt){
 		cout << "Could not open input file " << filename << endl;
 		return false;
 	}
-	while (!inFile.eof()) {
-		inFile >> Point;
-		inFile >> Name;
-		inFile >> Name2;
-		inFile >> Latitude;
-		inFile >> Longitude;
-		inFile >> Altitude;
+	while (getline(inFile,buffer)) {
+		istringstream ISS(buffer);
+		ISS >> Point;
+		ISS >> Name;
+		ISS >> Name2;
+		ISS >> Latitude;
+		ISS >> Longitude;
+		ISS >> Altitude;
 		if (Point.compare(0, 1, "A") == 0) {
 			flag = 1;
 		}
@@ -70,15 +71,15 @@ bool Source::ReadFromFile(string filename, double SearchAlt){
 			alt = stod(Altitude);
 		}
 		//add coordinate points--------------------------------------------------------------------
-
+		
 		newCoor.setLatitude(lat);
-		newCoor.setLongitude(lon);
-		if (flag == 2) {
+		newCoor.setLongitude(-1*lon);
+		if (flag == 3) {
 			int size = _waypoints.size() + 1;
 			newCoor.setID(to_string(size));
-			_waypoints.push_back(newCoor);
+				_waypoints.push_back(newCoor);
 		}
-		else if (flag == 3) {
+		else if (flag == 2) {
 			_searchArea.push_back(newCoor);
 		}
 		else if (flag == 1) {
@@ -97,7 +98,7 @@ double Source::CalculateCoordtoDec(double deg, double min, double sec)
 	return decimal;
 }
 
-bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff, double alt, double turnDist, double Space, double Camera)
+bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff,Coordinate landway, Coordinate takeoffWay, double alt, double turnDist, double Space, double Camera)
 {
 	ofstream fileout;
 	fileout.open(filename);
@@ -113,6 +114,18 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	fileout << takeoff.getLatitude() << ",\n";
 	fileout << takeoff.getLongitude() << ",\n";
 	fileout << takeoff.getAltitude() << "\n";
+	fileout << "],\n";
+	fileout << "\"doJumpId\": " << "1" << ",\n";
+	fileout << "\"frame\": 3,\n";
+	fileout << "\"params\": [\n15,\n0,\n0,\n0\n],\n";
+	fileout << "\"type\": \"SimpleItem\"\n";
+	fileout << "},\n";
+	//print take off way
+	fileout << "{\n";
+	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
+	fileout << takeoffWay.getLatitude() << ",\n";
+	fileout << takeoffWay.getLongitude() << ",\n";
+	fileout << takeoffWay.getAltitude() << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -151,17 +164,46 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	fileout << "\"manualGrid\": true,\n";
 	fileout << "\"polygon\": [\n";
 	int size2 = _searchArea.size();
-	for (int i = 0; i < size2; i++) {
+	for (int i = 0; i < size2-1; i++) {
 		fileout << "[\n";
 		fileout << _searchArea.at(i).getLatitude() << ",\n";
 		fileout << _searchArea.at(i).getLongitude() << "\n";
 		fileout << "],\n";
 	}
+	fileout << "[\n";
+	fileout << _searchArea.at(size2-1).getLatitude() << ",\n";
+	fileout << _searchArea.at(size2-1).getLongitude() << "\n";
+	fileout << "]\n";
+
 	fileout << "],\n";
 	fileout << "\"type\": \"ComplexItem\",\n";
 	fileout << "\"version\": 3\n";
-	fileout << "}\n";
+	fileout << "},\n";
 	//--------------------------------------------------------------
+	//print pre land
+	fileout << "{\n";
+	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
+	fileout << landway.getLatitude() << ",\n";
+	fileout << landway.getLongitude() << ",\n";
+	fileout << landway.getAltitude() << "\n";
+	fileout << "],\n";
+	fileout << "\"doJumpId\": " << "1" << ",\n";
+	fileout << "\"frame\": 3,\n";
+	fileout << "\"params\": [\n15,\n0,\n0,\n0\n],\n";
+	fileout << "\"type\": \"SimpleItem\"\n";
+	fileout << "},\n";
+	//print land
+	fileout << "{\n";
+	fileout << "\"autoContinue\": true,\n\"command\": 21,\n\"coordinate\": [\n";
+	fileout << home.getLatitude() << ",\n";
+	fileout << home.getLongitude() << ",\n";
+	fileout << home.getAltitude() << "\n";
+	fileout << "],\n";
+	fileout << "\"doJumpId\": " << "1" << ",\n";
+	fileout << "\"frame\": 3,\n";
+	fileout << "\"params\": [\n15,\n0,\n0,\n0\n],\n";
+	fileout << "\"type\": \"SimpleItem\"\n";
+	fileout << "}\n";
 	//print the home pos
 	fileout << "],\n";
 	fileout << "\"plannedHomePosition\": [\n";

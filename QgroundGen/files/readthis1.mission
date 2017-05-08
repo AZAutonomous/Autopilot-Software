@@ -1,0 +1,172 @@
+{
+    "firmwareType": 12,
+    "groundStation": "QGroundControl",
+    "items": [
+        {
+            "autoContinue": true,
+            "command": 22,
+            "coordinate": [
+                37.803800000000003,
+                -122.46299999999999,
+                50
+            ],
+            "doJumpId": 1,
+            "frame": 3,
+            "params": [
+                15,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.804499999999997,
+                -122.46299999999999,
+                100
+            ],
+            "doJumpId": 2,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.804900000000004,
+                -122.462,
+                100
+            ],
+            "doJumpId": 3,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "cameraTrigger": true,
+            "cameraTriggerDistance": 25,
+            "complexItemType": "survey",
+            "fixedValueIsAltitude": false,
+            "grid": {
+                "altitude": 100,
+                "angle": 0,
+                "relativeAltitude": true,
+                "spacing": 10,
+                "turnAroundDistance": 10
+            },
+            "manualGrid": true,
+            "polygon": [
+                [
+                    37.804600000000001,
+                    -122.462
+                ],
+                [
+                    37.8048,
+                    -122.461
+                ],
+                [
+                    37.804099999999998,
+                    -122.461
+                ],
+                [
+                    37.804000000000002,
+                    -122.462
+                ]
+            ],
+            "type": "ComplexItem",
+            "version": 3
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.804630009999997,
+                -122.45991875,
+                100
+            ],
+            "doJumpId": 42,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.803432350000001,
+                -122.45991875,
+                50
+            ],
+            "doJumpId": 43,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 189,
+            "coordinate": [
+                37.803460780000002,
+                -122.46144806,
+                50
+            ],
+            "doJumpId": 44,
+            "frame": 2,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 21,
+            "coordinate": [
+                37.803809059999999,
+                -122.46067441,
+                50
+            ],
+            "doJumpId": 45,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        }
+    ],
+    "plannedHomePosition": [
+        37.803800000000003,
+        -122.462,
+        0
+    ],
+    "version": 2
+}
