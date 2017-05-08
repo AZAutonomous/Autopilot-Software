@@ -1,0 +1,154 @@
+{
+"firmwareType": 12,
+"groundStation" : "QGroundControl",
+"items" : [
+{
+"autoContinue": true,
+"command": 22,
+"coordinate": [
+37.8038,
+-122.463,
+50
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+37.8038,
+-122.472,
+100
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+37.8045,
+-122.463,
+120
+],
+"doJumpId": 2,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+37.8049,
+-122.462,
+120
+],
+"doJumpId": 3,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"cameraTrigger": true,
+"cameraTriggerDistance": 25,
+"complexItemType": "survey",
+"fixedValueIsAltitude": false,
+"grid": {
+"altitude": 120,
+"angle": 0,
+"relativeAltitude": true,
+"spacing": 10,
+"turnAroundDistance": 10
+},
+"manualGrid": true,
+"polygon": [
+[
+37.8046,
+-122.462
+],
+[
+37.8048,
+-122.461
+],
+[
+37.8041,
+-122.461
+],
+[
+37.804,
+-122.462
+]
+],
+"type": "ComplexItem",
+"version": 3
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+37.8038,
+-122.457,
+100
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 21,
+"coordinate": [
+37.8038,
+-122.462,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+}
+],
+"plannedHomePosition": [
+37.8038,
+-122.462,
+0
+],
+"version": 2
+}

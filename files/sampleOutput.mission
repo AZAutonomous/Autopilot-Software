@@ -1,0 +1,118 @@
+{
+    "firmwareType": 12,
+    "groundStation": "QGroundControl",
+    "items": [
+        {
+            "autoContinue": true,
+            "command": 22,
+            "coordinate": [
+                37.803800950000003,
+                -122.4626676,
+                50
+            ],
+            "doJumpId": 1,
+            "frame": 3,
+            "params": [
+                15,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.804504540000003,
+                -122.46326304999999,
+                50
+            ],
+            "doJumpId": 2,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "autoContinue": true,
+            "command": 16,
+            "coordinate": [
+                37.804941100000001,
+                -122.46247984999999,
+                50
+            ],
+            "doJumpId": 3,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        },
+        {
+            "cameraTrigger": true,
+            "cameraTriggerDistance": 25,
+            "complexItemType": "survey",
+            "fixedValueIsAltitude": false,
+            "grid": {
+                "altitude": 50,
+                "angle": 0,
+                "relativeAltitude": true,
+                "spacing": 10,
+                "turnAroundDistance": 10
+            },
+            "manualGrid": true,
+            "polygon": [
+                [
+                    37.804635934519453,
+                    -122.46196486375428
+                ],
+                [
+                    37.80482242633699,
+                    -122.4606720390091
+                ],
+                [
+                    37.80411036413637,
+                    -122.46067740342713
+                ],
+                [
+                    37.804038309840685,
+                    -122.46176101586914
+                ]
+            ],
+            "type": "ComplexItem",
+            "version": 3
+        },
+        {
+            "autoContinue": true,
+            "command": 21,
+            "coordinate": [
+                37.8034873,
+                -122.4606935,
+                50
+            ],
+            "doJumpId": 50,
+            "frame": 3,
+            "params": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "type": "SimpleItem"
+        }
+    ],
+    "plannedHomePosition": [
+        37.803784,
+        -122.462276,
+        0
+    ],
+    "version": 2
+}
