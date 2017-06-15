@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	Source datasource;
 	string file;
-	file  = "C:/Users/james/Desktop/QgroundGen/files/test1.txt";
+	file  = "C:/Users/james/Desktop/QgroundGen/files/2017Suasmission.txt";
 	string outputfile;
 	outputfile = "C:/Users/james/Desktop/QgroundGen/files/missionOutput.mission";
 	string outputfile2 = "C:/Users/james/Desktop/QgroundGen/files/missionOutput2.mission";
@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
 	cin >> lat1 >> lon1 >> alt1;
 	if (lat1 == 0 && lon1 == 0 && alt1 == 0) {
 		homePos.setAltitude(0.0);
-		homePos.setLatitude(37.803784);
-		homePos.setLongitude(-122.462276);
+		homePos.setLatitude(38.1508942);
+		homePos.setLongitude(-76.4342036);
 	}
 	else {
 		homePos.setAltitude(alt1);
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
 			flight_option = -1;
 		}
 		else if (flight_option == 1) {
-			datasource.WritetoFile2(outputfile2, homePos, searchalt, turnaround, spacingdist, 25);
+			datasource.WritetoFile2(outputfile, homePos, searchalt, turnaround, spacingdist, 25);
 			flight_option = -1;
 		}
 		else {
