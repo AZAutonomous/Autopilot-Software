@@ -1,12 +1,10 @@
-***************************************************************
 -- AutoPilot Obstacle Avoidance Algorith --
-***************************************************************
+---------------------------------------------------------------
 This program is to be the back end algorithm the server runs to generate avoidance nodes
 
--- Procedure of Program -- 
+- Procedure of Program -
 ----------------------------------------------------------------
 
-
--- Program Running Specs --
+- Program Running Specs -
 ----------------------------------------------------------------
 
