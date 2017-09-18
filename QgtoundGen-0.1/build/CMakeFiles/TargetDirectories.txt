@@ -1,0 +1,3 @@
+C:/Users/james/Desktop/autopilot/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/james/Desktop/autopilot/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/james/Desktop/autopilot/build/src/CMakeFiles/autopilot.dir

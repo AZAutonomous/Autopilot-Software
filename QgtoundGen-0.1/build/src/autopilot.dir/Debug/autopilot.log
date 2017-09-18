@@ -1,0 +1,9 @@
+﻿  path.cpp
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xlocale(341): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+C:\Users\james\Desktop\autopilot\src\path.cpp(287): warning C4189: 'size': local variable is initialized but not referenced
+C:\Users\james\Desktop\autopilot\src\path.cpp(352): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\james\Desktop\autopilot\src\path.cpp(400): warning C4101: 'minute': unreferenced local variable
+C:\Users\james\Desktop\autopilot\src\path.cpp(399): warning C4101: 'degree': unreferenced local variable
+C:\Users\james\Desktop\autopilot\src\path.cpp(401): warning C4101: 'second': unreferenced local variable
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\cmath(17): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  autopilot.vcxproj -> C:\Users\james\Desktop\autopilot\build\src\Debug\autopilot.exe
