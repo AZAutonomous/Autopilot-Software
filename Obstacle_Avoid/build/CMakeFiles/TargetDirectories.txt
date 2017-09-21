@@ -1,3 +1,0 @@
-C:/Users/james/Desktop/Obstacle_Avoid/build/CMakeFiles/Obstacle_Avoid.dir
-C:/Users/james/Desktop/Obstacle_Avoid/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/james/Desktop/Obstacle_Avoid/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,6 +1,0 @@
-﻿  main.cpp
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xlocale(341): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
-C:\Users\james\Desktop\Obstacle_Avoid\src\main.cpp(11): warning C4100: 'argv': unreferenced formal parameter
-C:\Users\james\Desktop\Obstacle_Avoid\src\main.cpp(11): warning C4100: 'argc': unreferenced formal parameter
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\exception(359): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  Obstacle_Avoid.vcxproj -> C:\Users\james\Desktop\Obstacle_Avoid\build\Debug\Obstacle_Avoid.exe
