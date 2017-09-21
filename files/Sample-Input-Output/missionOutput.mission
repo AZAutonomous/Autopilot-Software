@@ -1,0 +1,158 @@
+{
+"firmwareType": 12,
+"groundStation" : "QGroundControl",
+"items" : [
+{
+"cameraTrigger": true,
+"cameraTriggerDistance": 25,
+"complexItemType": "survey",
+"fixedValueIsAltitude": false,
+"grid": {
+"altitude": 45.72,
+"angle": 0,
+"relativeAltitude": true,
+"spacing": 45.72,
+"turnAroundDistance": 27.432
+},
+"manualGrid": true,
+"polygon": [
+[
+38.1432,
+-76.4339
+],
+[
+38.141,
+-76.4322
+],
+[
+38.1413,
+-76.4263
+],
+[
+38.1439,
+-76.422
+],
+[
+38.1466,
+-76.4236
+]
+],
+"type": "ComplexItem",
+"version": 3
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1453,
+-76.4291,
+60.96
+],
+"doJumpId": 2,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1492,
+-76.4295,
+91.44
+],
+"doJumpId": 3,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1501,
+-76.4309,
+91.44
+],
+"doJumpId": 4,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1489,
+-76.4323,
+91.44
+],
+"doJumpId": 5,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.147,
+-76.4306,
+121.92
+],
+"doJumpId": 6,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1438,
+-76.432,
+60.96
+],
+"doJumpId": 7,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+}
+],
+"plannedHomePosition": [
+38.1509,
+-76.4342,
+0
+],
+"version": 2
+}
