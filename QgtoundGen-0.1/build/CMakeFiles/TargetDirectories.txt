@@ -1,3 +1,3 @@
-C:/Users/james/Desktop/autopilot/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/james/Desktop/autopilot/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/james/Desktop/autopilot/build/src/CMakeFiles/autopilot.dir
+C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/autopilot.dir
+C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/ZERO_CHECK.dir

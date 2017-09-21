@@ -1,4 +1,4 @@
-The system is: Windows - 10.0.14393 - AMD64
+The system is: Windows - 10.0.15063 - AMD64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler:  
 Build flags: 
@@ -9,8 +9,8 @@ The output was:
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:46 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:12 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdC.tlog\".
@@ -21,7 +21,7 @@ ClCompile:
   CMakeCCompilerId.c
 Link:
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
-  CompilerIdC.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdC\.\CompilerIdC.exe
+  CompilerIdC.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdC\.\CompilerIdC.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
   :VCEnd
@@ -29,20 +29,20 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdC.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdC\CompilerIdC.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:02.59
+Time Elapsed 00:00:04.35
 
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
 
-The C compiler identification is MSVC, found in "C:/Users/james/Desktop/autopilot/build/CMakeFiles/3.6.1/CompilerIdC/CompilerIdC.exe"
+The C compiler identification is MSVC, found in "C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/3.6.1/CompilerIdC/CompilerIdC.exe"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler:  
@@ -54,8 +54,8 @@ The output was:
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:49 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:17 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
 PrepareForBuild:
   Creating directory "Debug\".
   Creating directory "Debug\CompilerIdCXX.tlog\".
@@ -66,7 +66,7 @@ ClCompile:
   CMakeCXXCompilerId.cpp
 Link:
   C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
-  CompilerIdCXX.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdCXX\.\CompilerIdCXX.exe
+  CompilerIdCXX.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdCXX\.\CompilerIdCXX.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
   :VCEnd
@@ -74,89 +74,89 @@ PostBuildEvent:
 FinalizeBuildStatus:
   Deleting file "Debug\CompilerIdCXX.tlog\unsuccessfulbuild".
   Touching "Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\3.6.1\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.43
+Time Elapsed 00:00:01.40
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
 
-The CXX compiler identification is MSVC, found in "C:/Users/james/Desktop/autopilot/build/CMakeFiles/3.6.1/CompilerIdCXX/CompilerIdCXX.exe"
+The CXX compiler identification is MSVC, found in "C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/3.6.1/CompilerIdCXX/CompilerIdCXX.exe"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp
+Change Dir: C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8c449.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_1cd60.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:51 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8c449.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:19 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_1cd60.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_8c449.dir\Debug\".
-  Creating directory "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_8c449.dir\Debug\cmTC_8c449.tlog\".
+  Creating directory "cmTC_1cd60.dir\Debug\".
+  Creating directory "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_1cd60.dir\Debug\cmTC_1cd60.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_8c449.dir\Debug\cmTC_8c449.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_1cd60.dir\Debug\cmTC_1cd60.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8c449.dir\Debug\\" /Fd"cmTC_8c449.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\testCCompiler.c
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1cd60.dir\Debug\\" /Fd"cmTC_1cd60.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8c449.dir\Debug\\" /Fd"cmTC_8c449.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\testCCompiler.c
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_1cd60.dir\Debug\\" /Fd"cmTC_1cd60.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   
   testCCompiler.c
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8c449.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8c449.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8c449.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8c449.dir\Debug\testCCompiler.obj
-  cmTC_8c449.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8c449.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_1cd60.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_1cd60.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_1cd60.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_1cd60.dir\Debug\testCCompiler.obj
+  cmTC_1cd60.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_1cd60.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_8c449.dir\Debug\cmTC_8c449.tlog\unsuccessfulbuild".
-  Touching "cmTC_8c449.dir\Debug\cmTC_8c449.tlog\cmTC_8c449.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8c449.vcxproj" (default targets).
+  Deleting file "cmTC_1cd60.dir\Debug\cmTC_1cd60.tlog\unsuccessfulbuild".
+  Touching "cmTC_1cd60.dir\Debug\cmTC_1cd60.tlog\cmTC_1cd60.lastbuildstate".
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_1cd60.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.57
+Time Elapsed 00:00:01.72
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp
+Change Dir: C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_732c6.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_61617.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:53 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_732c6.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:21 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_61617.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_732c6.dir\Debug\".
-  Creating directory "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_732c6.dir\Debug\cmTC_732c6.tlog\".
+  Creating directory "cmTC_61617.dir\Debug\".
+  Creating directory "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_61617.dir\Debug\cmTC_61617.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_732c6.dir\Debug\cmTC_732c6.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_61617.dir\Debug\cmTC_61617.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_732c6.dir\Debug\\" /Fd"cmTC_732c6.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_61617.dir\Debug\\" /Fd"cmTC_61617.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_732c6.dir\Debug\\" /Fd"cmTC_732c6.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_61617.dir\Debug\\" /Fd"cmTC_61617.dir\Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCCompilerABI.c"
   
   CMakeCCompilerABI.c
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_732c6.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_732c6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_732c6.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_732c6.dir\Debug\CMakeCCompilerABI.obj
-  cmTC_732c6.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_732c6.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_61617.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_61617.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_61617.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_61617.dir\Debug\CMakeCCompilerABI.obj
+  cmTC_61617.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_61617.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_732c6.dir\Debug\cmTC_732c6.tlog\unsuccessfulbuild".
-  Touching "cmTC_732c6.dir\Debug\cmTC_732c6.tlog\cmTC_732c6.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_732c6.vcxproj" (default targets).
+  Deleting file "cmTC_61617.dir\Debug\cmTC_61617.tlog\unsuccessfulbuild".
+  Touching "cmTC_61617.dir\Debug\cmTC_61617.tlog\cmTC_61617.lastbuildstate".
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_61617.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
@@ -166,119 +166,119 @@ Time Elapsed 00:00:01.24
 
 
 Determining if the CXX compiler works passed with the following output:
-Change Dir: C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp
+Change Dir: C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_71d92.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8e20c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:55 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_71d92.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:23 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_8e20c.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_71d92.dir\Debug\".
-  Creating directory "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_71d92.dir\Debug\cmTC_71d92.tlog\".
+  Creating directory "cmTC_8e20c.dir\Debug\".
+  Creating directory "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_8e20c.dir\Debug\cmTC_8e20c.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_71d92.dir\Debug\cmTC_71d92.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_8e20c.dir\Debug\cmTC_8e20c.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_71d92.dir\Debug\\" /Fd"cmTC_71d92.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8e20c.dir\Debug\\" /Fd"cmTC_8e20c.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_71d92.dir\Debug\\" /Fd"cmTC_71d92.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8e20c.dir\Debug\\" /Fd"cmTC_8e20c.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   
   testCXXCompiler.cxx
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_71d92.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_71d92.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_71d92.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_71d92.dir\Debug\testCXXCompiler.obj
-  cmTC_71d92.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_71d92.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_8e20c.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_8e20c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_8e20c.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8e20c.dir\Debug\testCXXCompiler.obj
+  cmTC_8e20c.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_8e20c.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_71d92.dir\Debug\cmTC_71d92.tlog\unsuccessfulbuild".
-  Touching "cmTC_71d92.dir\Debug\cmTC_71d92.tlog\cmTC_71d92.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_71d92.vcxproj" (default targets).
+  Deleting file "cmTC_8e20c.dir\Debug\cmTC_8e20c.tlog\unsuccessfulbuild".
+  Touching "cmTC_8e20c.dir\Debug\cmTC_8e20c.tlog\cmTC_8e20c.lastbuildstate".
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_8e20c.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.67
+Time Elapsed 00:00:01.50
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp
+Change Dir: C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8fa62.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_99d35.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:57 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8fa62.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:25 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_99d35.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_8fa62.dir\Debug\".
-  Creating directory "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_8fa62.dir\Debug\cmTC_8fa62.tlog\".
+  Creating directory "cmTC_99d35.dir\Debug\".
+  Creating directory "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_99d35.dir\Debug\cmTC_99d35.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_8fa62.dir\Debug\cmTC_8fa62.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_99d35.dir\Debug\cmTC_99d35.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8fa62.dir\Debug\\" /Fd"cmTC_8fa62.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_99d35.dir\Debug\\" /Fd"cmTC_99d35.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8fa62.dir\Debug\\" /Fd"cmTC_8fa62.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_99d35.dir\Debug\\" /Fd"cmTC_99d35.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Program Files\CMake\share\cmake-3.6\Modules\CMakeCXXCompilerABI.cpp"
   
   CMakeCXXCompilerABI.cpp
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8fa62.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8fa62.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8fa62.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8fa62.dir\Debug\CMakeCXXCompilerABI.obj
-  cmTC_8fa62.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8fa62.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_99d35.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_99d35.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_99d35.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_99d35.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTC_99d35.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_99d35.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_8fa62.dir\Debug\cmTC_8fa62.tlog\unsuccessfulbuild".
-  Touching "cmTC_8fa62.dir\Debug\cmTC_8fa62.tlog\cmTC_8fa62.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8fa62.vcxproj" (default targets).
+  Deleting file "cmTC_99d35.dir\Debug\cmTC_99d35.tlog\unsuccessfulbuild".
+  Touching "cmTC_99d35.dir\Debug\cmTC_99d35.tlog\cmTC_99d35.lastbuildstate".
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_99d35.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.15
+Time Elapsed 00:00:01.09
 
 
 
 
 Detecting CXX [] compiler features compiled with the following output:
-Change Dir: C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp
+Change Dir: C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_8b509.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_20339.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 2/25/2017 1:49:59 PM.
-Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8b509.vcxproj" on node 1 (default targets).
+Build started 9/20/2017 4:45:27 PM.
+Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_20339.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_8b509.dir\Debug\".
-  Creating directory "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_8b509.dir\Debug\cmTC_8b509.tlog\".
+  Creating directory "cmTC_20339.dir\Debug\".
+  Creating directory "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTC_20339.dir\Debug\cmTC_20339.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_8b509.dir\Debug\cmTC_8b509.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_20339.dir\Debug\cmTC_20339.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b509.dir\Debug\\" /Fd"cmTC_8b509.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\feature_tests.cxx
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_20339.dir\Debug\\" /Fd"cmTC_20339.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\feature_tests.cxx"
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_8b509.dir\Debug\\" /Fd"cmTC_8b509.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue C:\Users\james\Desktop\autopilot\build\CMakeFiles\feature_tests.cxx
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_20339.dir\Debug\\" /Fd"cmTC_20339.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\feature_tests.cxx"
   
   feature_tests.cxx
 Link:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b509.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b509.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/autopilot/build/CMakeFiles/CMakeTmp/Debug/cmTC_8b509.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_8b509.dir\Debug\feature_tests.obj
-  cmTC_8b509.vcxproj -> C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\Debug\cmTC_8b509.exe
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_20339.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_20339.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/build/CMakeFiles/CMakeTmp/Debug/cmTC_20339.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_20339.dir\Debug\feature_tests.obj
+  cmTC_20339.vcxproj -> C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\Debug\cmTC_20339.exe
 FinalizeBuildStatus:
-  Deleting file "cmTC_8b509.dir\Debug\cmTC_8b509.tlog\unsuccessfulbuild".
-  Touching "cmTC_8b509.dir\Debug\cmTC_8b509.tlog\cmTC_8b509.lastbuildstate".
-Done Building Project "C:\Users\james\Desktop\autopilot\build\CMakeFiles\CMakeTmp\cmTC_8b509.vcxproj" (default targets).
+  Deleting file "cmTC_20339.dir\Debug\cmTC_20339.tlog\unsuccessfulbuild".
+  Touching "cmTC_20339.dir\Debug\cmTC_20339.tlog\cmTC_20339.lastbuildstate".
+Done Building Project "C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\build\CMakeFiles\CMakeTmp\cmTC_20339.vcxproj" (default targets).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:01.21
+Time Elapsed 00:00:01.46
 
 
     Feature record: CXX_FEATURE:1cxx_alias_templates

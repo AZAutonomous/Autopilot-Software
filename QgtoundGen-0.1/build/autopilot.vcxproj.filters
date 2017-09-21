@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\coordinate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\pair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\coordinate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\pair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\james\Desktop\AZA\Autopilot-Software\QgtoundGen-0.1\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7370EEFB-B2B6-3885-AD16-0F650A9BDCE2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{B69CB1EC-4C40-3425-9FAE-0320FA93070A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
