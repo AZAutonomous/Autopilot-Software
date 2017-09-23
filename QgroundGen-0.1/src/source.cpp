@@ -53,13 +53,13 @@ bool Source::ReadFromFile(string filename, double SearchAlt){
 		lat = CalculateCoordtoDec(degs, mins, secs);
 		//_________________________________________________________________________________________
 		//get longitude ---------------------------------------------------------------------------
-		DD = Longitude.substr(1, 3);
+		DD = Longitude.substr(1, 2);
 		degs = stod(DD);
 
-		MM = Longitude.substr(5, 2);
+		MM = Longitude.substr(4, 2);
 		mins = stod(MM);
 
-		SS = Longitude.substr(8, 5);
+		SS = Longitude.substr(7, 5);
 		secs = stod(SS);
 		lon = CalculateCoordtoDec(degs, mins, secs);
 		//_________________________________________________________________________________________

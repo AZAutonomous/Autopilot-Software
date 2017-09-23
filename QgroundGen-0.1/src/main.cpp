@@ -11,9 +11,9 @@ using namespace std;
 int main(int argc, char *argv[]) {
 	Source datasource;
 	string file;
-	file = "C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/files/input.txt";
+	file = "../testFiles/2017Suasmission.txt";
 	string outputfile;
-	outputfile = "C:/Users/james/Desktop/AZA/Autopilot-Software/QgtoundGen-0.1/files/output.mission";
+	outputfile = "../testFiles/testOutput.mission";
 	double lat = 0.0;
 	double lon = 0.0;
 	int SearchSize = 0;
