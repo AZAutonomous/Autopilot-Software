@@ -1,0 +1,372 @@
+{
+"firmwareType": 12,
+"groundStation" : "QGroundControl",
+"items" : [
+{
+"autoContinue": true,
+"command": 22,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.4,
+0.1,
+100
+],
+"doJumpId": 2,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.425,
+0.15,
+100
+],
+"doJumpId": 3,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.25,
+0.15,
+100
+],
+"doJumpId": 4,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.1,
+0.2,
+100
+],
+"doJumpId": 5,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.45,
+0.2,
+100
+],
+"doJumpId": 6,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.475,
+0.25,
+100
+],
+"doJumpId": 7,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.1,
+0.25,
+100
+],
+"doJumpId": 8,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.1,
+0.3,
+100
+],
+"doJumpId": 9,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.5,
+0.3,
+100
+],
+"doJumpId": 10,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.475,
+0.35,
+100
+],
+"doJumpId": 11,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.1,
+0.35,
+100
+],
+"doJumpId": 12,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.1,
+0.4,
+100
+],
+"doJumpId": 13,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.45,
+0.4,
+100
+],
+"doJumpId": 14,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.425,
+0.45,
+100
+],
+"doJumpId": 15,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.25,
+0.45,
+100
+],
+"doJumpId": 16,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0.4,
+0.5,
+100
+],
+"doJumpId": 17,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 21,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+}
+],
+"plannedHomePosition": [
+0,
+0,
+0
+],
+"version": 2
+}

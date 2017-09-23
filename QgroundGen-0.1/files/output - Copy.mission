@@ -1,0 +1,84 @@
+{
+"firmwareType": 12,
+"groundStation" : "QGroundControl",
+"items" : [
+{
+"autoContinue": true,
+"command": 22,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 21,
+"coordinate": [
+0,
+0,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+}
+],
+"plannedHomePosition": [
+0,
+0,
+0
+],
+"version": 2
+}
