@@ -10,8 +10,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	Source datasource;
+	Path navigation;
 	string file;
 	file = "../testFiles/2017Suasmission.txt";
+	datasource.ReadFromFile (file, &navigation, 50.0);
 	string outputfile;
 	outputfile = "../testFiles/testOutput.mission";
 	double lat = 0.0;
@@ -38,31 +40,30 @@ int main(int argc, char *argv[]) {
 	Coordinate landingPosition;
 	Coordinate landingway;
 	Coordinate takeoffway;
-	homePosition.setAltitude(0);
-	homePosition.setLatitude(0.0);
-	homePosition.setLongitude(0.0);
-	takeoffPosition.setAltitude(0);
-	takeoffPosition.setLatitude(0.0);
-	takeoffPosition.setLongitude(0.0);
-	takeoffway.setAltitude(0);
-	takeoffway.setLatitude(0.0);
-	takeoffway.setLongitude(0.0);
-	landingway.setAltitude(0);
-	landingway.setLatitude(0.0);
-	landingway.setLongitude(0.0);
-	landingPosition.setAltitude(0);
-	landingPosition.setLatitude(0.0);
-	landingPosition.setLongitude(0.0);
+	homePosition.setAltitude(0.0);
+	homePosition.setLatitude(38.1509);
+	homePosition.setLongitude(-76.4342);
+	takeoffPosition.setAltitude(60.96);
+	takeoffPosition.setLatitude(38.1453);
+	takeoffPosition.setLongitude(-76.4291);
+	takeoffway.setAltitude(91.44);
+	takeoffway.setLatitude(38.1492);
+	takeoffway.setLongitude(-76.4295);
+	landingway.setAltitude(50.0);
+	landingway.setLatitude(38.1509);
+	landingway.setLongitude(-76.4342);
+	landingPosition.setAltitude(0.0);
+	landingPosition.setLatitude(38.1509);
+	landingPosition.setLongitude(-76.4342);
 	//---------------------------------------------------------------------------------------------------------------
-	Path navigation;
 
 	//navigation.ReadFromFile(argv[1]);
 	//delete these lines when done with testing ------------------------------------------
-	navigation.CreatTestSearchPoints();
+	/*navigation.CreatTestSearchPoints();
 	Coordinate tempCoor;
 	tempCoor.setAltitude(100);
 	tempCoor.setLatitude(0.1);
-	tempCoor.setLongitude(0.1);
+	tempCoor.setLongitude(0.1);*/
 	//-----------------------------------------------------------------------------
 	// Search Path Generation ----------------------------------------------------------------------
 	navigation.CreateSearchWaypoints(0.05);

@@ -23,6 +23,11 @@ std::vector<Coordinate> Path::getWVector() const
 	return this->_waypoints;
 }
 
+std::vector<Coordinate> Path::getOVector () const
+{
+	return this->_opArea;
+}
+
 void Path::setSVector(std::vector<Coordinate> S)
 {
 	this->_searchArea = S;
@@ -31,6 +36,11 @@ void Path::setSVector(std::vector<Coordinate> S)
 void Path::setWVector(std::vector<Coordinate> V)
 {
 	this->_waypoints = V;
+}
+
+void Path::setOVector (std::vector<Coordinate> O)
+{
+	this->_opArea = O;
 }
 
 bool Path::ReadFromFile(string filename){

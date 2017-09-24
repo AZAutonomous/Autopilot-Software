@@ -18,10 +18,14 @@ public:
 	std::vector<Coordinate> getSVector() const;
 
 	std::vector<Coordinate> getWVector() const;
+
+	std::vector<Coordinate> getOVector () const;
 	//setter for the vectors
 	void setSVector(std::vector<Coordinate> S);
 
 	void setWVector(std::vector<Coordinate> V);
+
+	void setOVector (std::vector<Coordinate> O);
 	// Other public methods go here.
 	//----------------------------------------------------------------------------------------------------//
 	bool ReadFromFile(std::string filename);

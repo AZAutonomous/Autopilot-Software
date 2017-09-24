@@ -6,7 +6,7 @@
 #include <sstream>
 using namespace std;
 
-bool Source::ReadFromFile(string filename, double SearchAlt){
+bool Source::ReadFromFile(string filename, Path* path, double SearchAlt){
 	ifstream inFile;
 	string buffer;
 	string temp;
@@ -16,6 +16,11 @@ bool Source::ReadFromFile(string filename, double SearchAlt){
 	double degs, mins, secs;
 	double lat, lon, alt;
 	int flag = 0;
+
+	//Vectors to set for path
+	std::vector<Coordinate> waypoints;
+	std::vector<Coordinate> searchArea;
+	std::vector<Coordinate> opArea;
 	
 	inFile.open(filename);
 	if (!inFile.good()) {
@@ -76,18 +81,23 @@ bool Source::ReadFromFile(string filename, double SearchAlt){
 		newCoor.setLatitude(lat);
 		newCoor.setLongitude(-1*lon);
 		if (flag == 3) {
-			int size = _waypoints.size() + 1;
+			int size = waypoints.size () + 1;
 			newCoor.setID(to_string(size));
-				_waypoints.push_back(newCoor);
+			waypoints.push_back (newCoor);
 		}
 		else if (flag == 2) {
-			_searchArea.push_back(newCoor);
+			searchArea.push_back (newCoor);
 		}
 		else if (flag == 1) {
-			_opArea.push_back(newCoor);
+			opArea.push_back (newCoor);
 		}
 
 	}
+
+	//Set the path vectors
+	path->setWVector (waypoints);
+	path->setSVector (searchArea);
+	path->setOVector (opArea);
 
 	return true;
 }
