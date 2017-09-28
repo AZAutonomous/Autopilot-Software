@@ -99,8 +99,8 @@ int main(int argc, char *argv[]) {
 		
 
 	//navigation.WritetoFile(argv[2]);
-	datasource.WriteToFile ("../testFiles/testOutput.mission", homePosition, takeoffPosition, landingPosition, takeoffway, navigation);
-	//datasource.WriteToFile(outputfile, homePosition, takeoffPosition, landingPosition, takeoffway,navigation);
+	//datasource.WriteToFile ("../testFiles/testOutput.mission", homePosition, takeoffPosition, landingPosition, takeoffway, navigation); //For fprintf
+	datasource.WriteToFile(outputfile, homePosition, takeoffPosition, landingPosition, takeoffway,navigation);
 
 	return EXIT_SUCCESS;
 }

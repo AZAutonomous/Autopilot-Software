@@ -123,9 +123,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 22,\n\"coordinate\": [\n";
-	fileout << takeoff.getLatitude() << ",\n";
-	fileout << takeoff.getLongitude() << ",\n";
-	fileout << takeoff.getAltitude() << "\n";
+	fileout << to_string (takeoff.getLatitude()) << ",\n";
+	fileout << to_string (takeoff.getLongitude()) << ",\n";
+	fileout << to_string (takeoff.getAltitude()) << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -135,9 +135,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	//print take off way
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-	fileout << takeoffWay.getLatitude() << ",\n";
-	fileout << takeoffWay.getLongitude() << ",\n";
-	fileout << takeoffWay.getAltitude() << "\n";
+	fileout << to_string (takeoffWay.getLatitude()) << ",\n";
+	fileout << to_string (takeoffWay.getLongitude()) << ",\n";
+	fileout << to_string (takeoffWay.getAltitude()) << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -150,9 +150,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	for (int i = 0; i < size; i++) {
 		fileout << "{\n";
 		fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-		fileout << path.getWVector().at(i).getLatitude() << ",\n";
-		fileout << path.getWVector().at(i).getLongitude() << ",\n";
-		fileout << path.getWVector().at(i).getAltitude() << "\n";
+		fileout << to_string (path.getWVector().at(i).getLatitude()) << ",\n";
+		fileout << to_string (path.getWVector().at(i).getLongitude()) << ",\n";
+		fileout << to_string (path.getWVector().at(i).getAltitude()) << "\n";
 		fileout << "],\n";
 		fileout << "\"doJumpId\": " << i+2 << ",\n";
 		fileout << "\"frame\": 3,\n";
@@ -166,9 +166,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	//print pre land
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-	fileout << landway.getLatitude() << ",\n";
-	fileout << landway.getLongitude() << ",\n";
-	fileout << landway.getAltitude() << "\n";
+	fileout << to_string (landway.getLatitude()) << ",\n";
+	fileout << to_string (landway.getLongitude()) << ",\n";
+	fileout << to_string (landway.getAltitude()) << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -178,9 +178,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	//print land
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 21,\n\"coordinate\": [\n";
-	fileout << home.getLatitude() << ",\n";
-	fileout << home.getLongitude() << ",\n";
-	fileout << home.getAltitude() << "\n";
+	fileout << to_string (home.getLatitude()) << ",\n";
+	fileout << to_string (home.getLongitude()) << ",\n";
+	fileout << to_string (home.getAltitude()) << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -190,9 +190,9 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	//print the home pos
 	fileout << "],\n";
 	fileout << "\"plannedHomePosition\": [\n";
-	fileout << home.getLatitude() << ",\n";
-	fileout << home.getLongitude() << ",\n";
-	fileout << home.getAltitude() << "\n";
+	fileout << to_string (home.getLatitude()) << ",\n";
+	fileout << to_string (home.getLongitude()) << ",\n";
+	fileout << to_string (home.getAltitude()) << "\n";
 	fileout << "],\n";
 	fileout << "\"version\": 2\n";
 	fileout << "}";
