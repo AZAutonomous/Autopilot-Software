@@ -263,7 +263,7 @@ void Path::CreateSearchWaypoints(double ViewRadius){
 	//}
 	//create the searcharea vectors
 	for (int k = 0; k < searchsize; k++) {
-		if (k == searchsize-1) {
+		if (k == searchsize-1) {   
 			CreatePirimeterVectors(_searchArea.at(k), _searchArea.at(0), ViewRadius, 100);
 		}
 		else {

@@ -13,6 +13,7 @@ public:
 	double CalculateCoordtoDec(double deg, double min, double sec);
 	//writes to file taking in alt, turn around dist, spacing, camera
 	bool WriteToFile(std::string filename,Coordinate home,Coordinate Takeoff,Coordinate landway, Coordinate takeoffWay,Path path);
+	bool WriteToFile (char* filename, Coordinate home, Coordinate takeoff, Coordinate descent, Coordinate ascent, Path path);
 };
 
 

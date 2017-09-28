@@ -1,5 +1,6 @@
 #include "source.h"
 #include "path.h"
+#include <stdio.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -198,5 +199,92 @@ bool Source::WriteToFile(std::string filename,Coordinate home,Coordinate takeoff
 	return true;
 }
 
+bool Source::WriteToFile (char* filename, Coordinate home, Coordinate takeoff, Coordinate descent, Coordinate ascent, Path path)
+{
+	FILE* output = fopen (filename, "w");
+	if (output == NULL)
+		return false;
 
+	fprintf (output, "{\n");
+	fprintf (output, "\"firmwareType\": 12,\n\"groundStation\" : \"QGroundControl\",\n\"items\" : [\n");
+	fprintf (output, "{\n");
+	fprintf (output, "\"autoContinue\": true,\n\"command\": 22,\n\"coordinate\": [\n");
+	fprintf (output, "%lf,\n", takeoff.getLatitude ());
+	fprintf (output, "%lf,\n", takeoff.getLongitude ());
+	fprintf (output, "%lf\n", takeoff.getAltitude ());
+	fprintf (output, "],\n");
+	fprintf (output, "\"doJumpId\": 1,\n");
+	fprintf (output, "\"frame\": 3,\n");
+	fprintf (output, "\"params\": [\n15,\n0,\n0,\n0\n],\n");
+	fprintf (output, "\"type\": \"SimpleItem\"\n");
+	fprintf (output, "},\n");
 
+	fprintf (output, "{\n");
+	fprintf (output, "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n");
+	fprintf (output, "%lf,\n", ascent.getLatitude ());
+	fprintf (output, "%lf,\n", ascent.getLongitude ());
+	fprintf (output, "%lf\n", ascent.getAltitude ());
+	fprintf (output, "],\n");
+	fprintf (output, "\"doJumpId\": 1,\n");
+	fprintf (output, "\"frame\": 3,\n");
+	fprintf (output, "\"params\": [\n15,\n0,\n0,\n0\n],\n");
+	fprintf (output, "\"type\": \"SimpleItem\"\n");
+	fprintf (output, "},\n");
+	int size = path.getWVector ().size ();
+	for (int i = 0; i < size; i++)
+	{
+		fprintf (output, "{\n");
+		fprintf (output, "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n");
+
+		fprintf (output, "%lf,\n", path.getWVector ().at (i).getLatitude ());
+		fprintf (output, "%lf,\n", path.getWVector ().at (i).getLongitude ());
+		fprintf (output, "%lf\n", path.getWVector ().at (i).getAltitude ());
+
+		fprintf (output, "],\n");
+		fprintf (output, "\"doJumpId\": %d,\n", i + 2);
+		fprintf (output, "\"frame\": 3,\n");
+		fprintf (output, "\"params\": [\n0,\n0,\n0,\n0\n],\n");
+		fprintf (output, "\"type\": \"SimpleItem\"\n");
+		fprintf (output, "},\n");
+	}
+	fprintf (output, "{\n");
+	fprintf (output, "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n");
+
+	fprintf (output, "%lf,\n", descent.getLatitude ());
+	fprintf (output, "%lf,\n", descent.getLongitude ());
+	fprintf (output, "%lf\n", descent.getAltitude ());
+	
+	fprintf (output, "],\n");
+	fprintf (output, "\"doJumpId\": 1,\n");
+	fprintf (output, "\"frame\": 3,\n");
+	fprintf (output, "\"params\": [\n15,\n0,\n0,\n0\n],\n");
+	fprintf (output, "\"type\": \"SimpleItem\"\n");
+	fprintf (output, "},\n");
+
+	fprintf (output, "{\n");
+	fprintf (output, "\"autoContinue\": true,\n\"command\": 21,\n\"coordinate\": [\n");
+
+	fprintf (output, "%lf,\n", home.getLatitude ());
+	fprintf (output, "%lf,\n", home.getLongitude ());
+	fprintf (output, "%lf\n", home.getAltitude ());
+
+	fprintf (output, "],\n");
+	fprintf (output, "\"doJumpId\": 1,\n");
+	fprintf (output, "\"frame\": 3,\n");
+	fprintf (output, "\"params\": [\n15,\n0,\n0,\n0\n],\n");
+	fprintf (output, "\"type\": \"SimpleItem\"\n");
+	fprintf (output, "}\n");
+
+	fprintf (output, "],\n");
+	fprintf (output, "\"plannedHomePosition\": [\n");
+
+	fprintf (output, "%lf,\n", home.getLatitude ());
+	fprintf (output, "%lf,\n", home.getLongitude ());
+	fprintf (output, "%lf\n", home.getAltitude ());
+
+	fprintf (output, "],\n");
+	fprintf (output, "\"version\": 2\n");
+	fprintf (output, "}");
+
+	return true;
+}

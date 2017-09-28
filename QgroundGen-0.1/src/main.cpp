@@ -20,6 +20,13 @@ int main(int argc, char *argv[]) {
 	double lon = 0.0;
 	int SearchSize = 0;
 	int WaypointSize = 0;
+
+	for (int i = 0; i < navigation.getWVector ().size (); i++)
+	{
+		cout << "Waypoint #" << i << endl;
+		cout << navigation.getWVector ().at (i).getLatitude () << endl;
+		cout << navigation.getWVector ().at (i).getLongitude () << endl;
+	}
 	
 	//remove this comment when not testing functions
 
@@ -66,7 +73,7 @@ int main(int argc, char *argv[]) {
 	tempCoor.setLongitude(0.1);*/
 	//-----------------------------------------------------------------------------
 	// Search Path Generation ----------------------------------------------------------------------
-	navigation.CreateSearchWaypoints(0.05);
+	navigation.CreateSearchWaypoints(0.0005);
 
 	SearchSize = navigation.getSVector().size();
 	navigation.sort(0, SearchSize - 1);
@@ -83,8 +90,17 @@ int main(int argc, char *argv[]) {
 
 	navigation.SetVectorIds();
 
+	for (int i = 0; i < navigation.getWVector ().size (); i++)
+	{
+		cout << "Waypoint #" << i << endl;
+		cout << navigation.getWVector ().at (i).getLatitude () << endl;
+		cout << navigation.getWVector ().at (i).getLongitude () << endl;
+	}
+		
+
 	//navigation.WritetoFile(argv[2]);
-	datasource.WriteToFile(outputfile, homePosition, takeoffPosition, landingPosition, takeoffway,navigation);
+	datasource.WriteToFile ("../testFiles/testOutput.mission", homePosition, takeoffPosition, landingPosition, takeoffway, navigation);
+	//datasource.WriteToFile(outputfile, homePosition, takeoffPosition, landingPosition, takeoffway,navigation);
 
 	return EXIT_SUCCESS;
 }
