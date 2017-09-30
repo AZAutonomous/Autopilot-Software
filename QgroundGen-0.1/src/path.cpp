@@ -453,8 +453,6 @@ void Path::TessellatePath(double turnRad, double viewRad){
 			break;
 		}
 	}
-	//insert tear drop node after end edge node 
-	AddTearDropNode(loc, turnRad);
 
 }
 

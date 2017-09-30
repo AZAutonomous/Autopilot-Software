@@ -20,13 +20,6 @@ int main(int argc, char *argv[]) {
 	double lon = 0.0;
 	int SearchSize = 0;
 	int WaypointSize = 0;
-
-	for (int i = 0; i < navigation.getWVector ().size (); i++)
-	{
-		cout << "Waypoint #" << i << endl;
-		cout << navigation.getWVector ().at (i).getLatitude () << endl;
-		cout << navigation.getWVector ().at (i).getLongitude () << endl;
-	}
 	
 	//remove this comment when not testing functions
 
@@ -79,24 +72,16 @@ int main(int argc, char *argv[]) {
 	navigation.sort(0, SearchSize - 1);
 
 	WaypointSize = navigation.getWVector().size();
-	navigation.SwapSearchVectors(SearchSize, 0.05);
+	navigation.SwapSearchVectors(SearchSize, 0.0005);
 
 	//place tessellate function here
-	//navigation.TessellatePath(0.03, 0.05);
+	navigation.TessellatePath(0.0003, 0.0005); //Comment out if tesselation not desired
 	//--------------------------------------------------------------------------------------------------
 	navigation.PushtoWaypoints(SearchSize, WaypointSize);
 	//------------------------------------------------------------------------------------------------
 	//navigation.InsertTakeoffandHomeposition(homePosition, takeoffPosition);
 
-	navigation.SetVectorIds();
-
-	for (int i = 0; i < navigation.getWVector ().size (); i++)
-	{
-		cout << "Waypoint #" << i << endl;
-		cout << navigation.getWVector ().at (i).getLatitude () << endl;
-		cout << navigation.getWVector ().at (i).getLongitude () << endl;
-	}
-		
+	navigation.SetVectorIds();		
 
 	//navigation.WritetoFile(argv[2]);
 	//datasource.WriteToFile ("../testFiles/testOutput.mission", homePosition, takeoffPosition, landingPosition, takeoffway, navigation); //For fprintf
