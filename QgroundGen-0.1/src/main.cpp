@@ -77,10 +77,13 @@ int main(int argc, char *argv[]) {
 	navigation.SwapSearchVectors(SearchSize, 0.0005);
 
 	//place tessellate function here
-	navigation.TessellatePath(0.0003, 0.0005); //Comment out if tesselation not desired
+	//navigation.TessellatePath(0.0005, 0.0005); //Comment out if tesselation not desired
 	//--------------------------------------------------------------------------------------------------
 	navigation.PushtoWaypoints(SearchSize, WaypointSize);
-	//------------------------------------------------------------------------------------------------
+
+	//obstical avoid currently only prints number of collissions 
+	navigation.avoidObsticals(obstacles);
+
 	//navigation.InsertTakeoffandHomeposition(homePosition, takeoffPosition);
 
 	navigation.SetVectorIds();		

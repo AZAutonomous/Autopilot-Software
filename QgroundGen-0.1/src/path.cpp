@@ -645,6 +645,44 @@ Coordinate Path::FindEndEdge(double viewRad)
 	}
 }
 
+//fix me
+//currenlty only prints number of collision
+void Path::avoidObsticals(std::vector<Obstacle> obstacles)
+{
+	int numCollisions = 0;
+	for (int i = 0; i < getWVector().size() - 1; i++) {
+		Coordinate a = getWVector().at(i);
+		Coordinate b = getWVector().at(i + 1);
+		for (int j = 0; j < obstacles.size(); j++) {
+			//hasCollosion needs another condition check
+			if (hasCollosion(a, b, obstacles.at(j), obstacles.at(j).get_radius()) == true) {
+				numCollisions++;
+			}
+		}
+
+	}
+	//prints the number of collisions to the stdout
+	cout << numCollisions;
+}
+
+bool Path::hasCollosion(Coordinate pointA, Coordinate pointB, Obstacle pointO, double radius)
+{
+	Coordinate coorO;
+	coorO.setLatitude(pointO.get_latitude());
+	coorO.setLongitude(pointO.get_longitude());
+	double theta = 0.0;
+	theta = CalculateTheta(pointB, pointA, coorO);
+	double distAO = GetDistance(pointA.getLatitude(), pointA.getLongitude(), pointO.get_latitude(), pointO.get_longitude());
+	double height = sin(theta)*distAO;
+	if (height <= radius) {
+		return true;
+	}
+	//check to see if either distance is less than the radius
+
+	//if both is false then return false
+	return false;
+}
+
 void Path::SwapSearchVectors(int size, double ViewRadius){
 	ViewRadius = (0 - ViewRadius)/2.0;
 	int i = 1;

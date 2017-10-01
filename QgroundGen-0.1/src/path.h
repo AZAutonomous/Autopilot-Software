@@ -4,6 +4,7 @@
 #include <vector>
 #include "coordinate.h"
 #include "pair.h"
+#include "obstacle.h"
 
 class Path {
 private:
@@ -67,6 +68,11 @@ public:
 	double CalculateTheta(Coordinate C1, Coordinate C2, Coordinate C3);
 	Coordinate FindStartEdge(double viewRad);
 	Coordinate FindEndEdge(double viewRad);
+
+	//creates avoidance nodes
+	void avoidObsticals(std::vector<Obstacle> obstacles);
+
+	bool hasCollosion(Coordinate pointA, Coordinate pointB, Obstacle pointO, double radius);
 };
 
 #endif
