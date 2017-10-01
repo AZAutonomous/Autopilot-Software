@@ -1,6 +1,7 @@
 #include <iostream>
 #include "path.h"
 #include "source.h"
+#include "obstacle_list.h"
 
 //------------------------------------------------------------------------------------------------
 
@@ -9,6 +10,7 @@ using namespace std;
 //------------------------------------------------------------------------------------------------
 
 int main(int argc, char *argv[]) {
+	std::vector<Obstacle> obstacles = createObstacles("../testFiles/obstacles.txt");
 	Source datasource;
 	Path navigation;
 	string file;
