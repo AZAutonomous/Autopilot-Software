@@ -216,7 +216,7 @@ void Path::DefineNormalBoundingBox(double search_alt)
 	_bounding_box.push_back(corners[3]);
 }
 
-//The function works, but some precision is lost and slopes don't come out to be perpendicular
+//The function almost works. The bounding box doesn't have 90 degree interior angles as it should
 void Path::DefineBoundingBox(double search_alt)
 {
 	double max_distance = 0.0;
@@ -454,14 +454,21 @@ Steps for Shrinking Nodes to Fit the search area
 */
 void Path::ShrinkNormalNodesToFit()
 {
-	//Currently works only when the left and right edges hold the nodes
 	double min_distance = 180;
 	double displacement;
+	bool use_vertical_edge = false; //Used to decide which edge to work along
 	Coordinate swap_coord;
 	Coordinate temp_coord1, temp_coord2; //coord1 holds the point with the most positive x/y, depending on bounding box orientation
 	Coordinate edge_coord1, edge_coord2;
 	Vector temp_vector1, temp_vector2;
 	LinearEq edge1, edge2;
+
+	//Determine edge to work on
+	if (_bounding_box[0].y == _bounding_box[1].y) //If the long edge is horizontal
+		use_vertical_edge = true; //Work along the vertical edge
+	else //If the long edge is vertical
+		use_vertical_edge = false; //Work along the horizontal edge
+
 	//Loop through all alternating pairs
 	//The first point pair is _bounding_box[1] and _bounding_box[2]
 	for (unsigned int i = 1; i < _bounding_box.size() - 1; i += 2)
@@ -471,15 +478,38 @@ void Path::ShrinkNormalNodesToFit()
 		{
 			temp_coord1 = _search_corners[j];
 			temp_coord2 = _search_corners[(j + 1) % _search_corners.size()]; //Uses modulo so the index circles back around
-			if (temp_coord1.y < temp_coord2.y) //Swap the coordinates so the most positive one is coord1
+
+			if (use_vertical_edge && temp_coord1.y < temp_coord2.y) //Swap the coordinates so the most positive one is coord1
 			{
 				swap_coord = temp_coord2;
 				temp_coord2 = temp_coord1;
 				temp_coord1 = swap_coord;
 			}
-			if (_bounding_box[i].y <= temp_coord1.y && _bounding_box[i].y >= temp_coord2.y) //If the current bounding box point is between two search area corners
+			else if (!use_vertical_edge && temp_coord1.x < temp_coord2.x)
 			{
+				swap_coord = temp_coord2;
+				temp_coord2 = temp_coord1;
+				temp_coord1 = swap_coord;
+			}
+
+			if (use_vertical_edge && _bounding_box[i].y <= temp_coord1.y && _bounding_box[i].y >= temp_coord2.y) //If the current bounding box point is between two search area corners
+			{
+				//THIS SECTION CAN BE REWRITTEN USING LINEAR EQUATIONS TO FIND THE CLOSEST EDGE MORE ACCURATELY
+				//THIS PART IS THE SAME WHETHER WORKING ON THE VERTICAL OR HORIZONTAL EDGE
 				//Determine if this edge is closer than the last one
+				temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
+				temp_vector1.setY(_bounding_box[i].y - temp_coord1.y);
+				temp_vector2.setX(_bounding_box[i].x - temp_coord2.x);
+				temp_vector2.setY(_bounding_box[i].y - temp_coord2.y);
+				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
+				{
+					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}
+			}
+			else if (!use_vertical_edge && _bounding_box[i].x <= temp_coord1.x && _bounding_box[i].x >= temp_coord2.x)
+			{
 				temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
 				temp_vector1.setY(_bounding_box[i].y - temp_coord1.y);
 				temp_vector2.setX(_bounding_box[i].x - temp_coord2.x);
@@ -495,21 +525,45 @@ void Path::ShrinkNormalNodesToFit()
 
 		edge1.setCoord1(edge_coord1);
 		edge1.setCoord2(edge_coord2);
-		displacement = _bounding_box[i].x - edge1.FindXatY(_bounding_box[i].y);
+
+		if (use_vertical_edge)
+			displacement = _bounding_box[i].x - edge1.FindXatY(_bounding_box[i].y);
+		else
+			displacement = _bounding_box[i].y - edge1.FindYatX(_bounding_box[i].x);
 
 		for (unsigned int j = 0; j < _search_corners.size(); j++) //Loop for the second point in the pair
 		{
 			temp_coord1 = _search_corners[j];
 			temp_coord2 = _search_corners[(j + 1) % _search_corners.size()];
-			if (temp_coord1.y < temp_coord2.y)
+			if (use_vertical_edge && temp_coord1.y < temp_coord2.y)
 			{
 				swap_coord = temp_coord2;
 				temp_coord2 = temp_coord1;
 				temp_coord1 = swap_coord;
 			}
-			if (_bounding_box[i + 1].y <= temp_coord1.y && _bounding_box[i + 1].y >= temp_coord2.y)
+			else if (!use_vertical_edge && temp_coord1.x < temp_coord2.x)
+			{
+				swap_coord = temp_coord2;
+				temp_coord2 = temp_coord1;
+				temp_coord1 = swap_coord;
+			}
+
+			if (use_vertical_edge && _bounding_box[i + 1].y <= temp_coord1.y && _bounding_box[i + 1].y >= temp_coord2.y)
 			{
 				//Determine if this edge is closer than the last one
+				temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
+				temp_vector1.setY(_bounding_box[i + 1].y - temp_coord1.y);
+				temp_vector2.setX(_bounding_box[i + 1].x - temp_coord2.x);
+				temp_vector2.setY(_bounding_box[i + 1].y - temp_coord2.y);
+				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
+				{
+					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}
+			}
+			else if (!use_vertical_edge && _bounding_box[i + 1].x <= temp_coord1.x && _bounding_box[i + 1].x >= temp_coord2.x)
+			{
 				temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
 				temp_vector1.setY(_bounding_box[i + 1].y - temp_coord1.y);
 				temp_vector2.setX(_bounding_box[i + 1].x - temp_coord2.x);
@@ -525,11 +579,23 @@ void Path::ShrinkNormalNodesToFit()
 
 		edge2.setCoord1(edge_coord1);
 		edge2.setCoord2(edge_coord2);
-		if (_bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y) < displacement)
-			displacement = _bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y);
 
-		_bounding_box[i].x -= displacement;
-		_bounding_box[i + 1].x -= displacement;
+		if (use_vertical_edge && _bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y) < displacement)
+			displacement = _bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y);
+		else if (!use_vertical_edge && _bounding_box[i + 1].y - edge2.FindYatX(_bounding_box[i + 1].x) < displacement)
+			displacement = _bounding_box[i + 1].y - edge2.FindYatX(_bounding_box[i + 1].x);
+
+		if (use_vertical_edge)
+		{
+			_bounding_box[i].x -= displacement;
+			_bounding_box[i + 1].x -= displacement;
+		}
+		else
+		{
+			_bounding_box[i].y -= displacement;
+			_bounding_box[i + 1].y -= displacement;
+		}
+		
 	}
 }
 
@@ -537,6 +603,12 @@ void Path::PushToWaypoints()
 {
 	for (unsigned int i = 0; i < _bounding_box.size(); i++)
 		_waypoints.push_back(_bounding_box[i]);
+}
+
+void Path::PushSearchToWaypoints()
+{
+	for (unsigned int i = 0; i < _search_corners.size(); i++)
+		_waypoints.push_back(_search_corners[i]);
 }
 
 double Path::DmsToDecimal(double deg, double min, double sec)

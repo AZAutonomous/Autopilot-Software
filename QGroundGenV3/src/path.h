@@ -35,6 +35,7 @@ public:
 	void SortNormalBoundingBoxNodes(); //Takes the nodes of the bounding box and puts them in the order they are to be flown to
 	void ShrinkNormalNodesToFit(); //Takes staggered pairs of points and shifts them closer to the search area to reduce flight outside of search area for normal bounding box
 	void PushToWaypoints(); //Takes the bounding box waypoints and adds them to the waypoint vector, adding the search area to the path
+	void PushSearchToWaypoints(); //Pushes the search boundary to waypoints for debugging
 };
 
 #endif

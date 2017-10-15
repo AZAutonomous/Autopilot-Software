@@ -18,15 +18,16 @@ int main()
 
 	//This block is for an unrotated bounding box
 	
-	//navigation.DefineNormalBoundingBox(100);
-	//navigation.CreateNormalEdgeNodes(0.00025);
-	//navigation.SortNormalBoundingBoxNodes();
-	//navigation.ShrinkNormalNodesToFit();
+	navigation.DefineNormalBoundingBox(100);
+	navigation.CreateNormalEdgeNodes(0.00025);
+	navigation.SortNormalBoundingBoxNodes();
+	navigation.ShrinkNormalNodesToFit();
 	
 
-	navigation.DefineBoundingBox(100);
+	//navigation.DefineBoundingBox(100);
 
 	navigation.PushToWaypoints();
+	navigation.PushSearchToWaypoints(); //For debugging, to see the search boundary
 
 	navigation.WriteToFile(out_path, home, takeoff, descent, ascent);
 	return EXIT_SUCCESS;
