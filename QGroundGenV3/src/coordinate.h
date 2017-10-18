@@ -36,6 +36,8 @@ public:
 
 	Vector operator*(double mult);
 	Vector operator/(double div);
+	Vector operator+(Vector& vect);
+	Vector operator-(Vector& vect);
 };
 
 class LinearEq {

@@ -75,6 +75,18 @@ Vector Vector::operator/(double div)
 	return result;
 }
 
+Vector Vector::operator+(Vector& vect)
+{
+	Vector result(_x + vect.getX(), _y + vect.getY(), _z + vect.getZ());
+	return result;
+}
+
+Vector Vector::operator-(Vector& vect)
+{
+	Vector result(_x - vect.getX(), _y - vect.getY(), _z - vect.getZ());
+	return result;
+}
+
 /////////////////////////////
 //LINEAR EQUATION FUNCTIONS//
 /////////////////////////////

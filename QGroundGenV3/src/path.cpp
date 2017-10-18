@@ -1,5 +1,5 @@
-
 #include "path.h"
+#include "obstacle.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,11 +12,13 @@ vector<Coordinate> Path::getWaypoints() const { return this->_waypoints; }
 vector<Coordinate> Path::getSearchCorners() const { return this->_search_corners; }
 vector<Coordinate> Path::getOpAreaCorners() const { return this->_op_area_corners; }
 vector<Coordinate> Path::getBoundingBox() const { return this->_bounding_box; }
+vector<Obstacle> Path::getObstacles() const { return this->_obstacles; }
 
 void Path::setWaypoints(vector<Coordinate> waypoints) { _waypoints = waypoints; }
 void Path::setSearchCorners(vector<Coordinate> search_corners) { _search_corners = search_corners; }
 void Path::setOpAreaCorners(vector<Coordinate> op_area_corners) { _op_area_corners = op_area_corners; }
 void Path::setBoundingBox(vector<Coordinate> bounding_box) { _bounding_box = bounding_box; }
+void Path::setObstacles(vector<Obstacle> obstacles) { _obstacles = obstacles; }
 
 bool Path::ReadFromFile(string file_path, double search_alt)
 {
@@ -340,8 +342,8 @@ Steps for sorting
 void Path::SortNormalBoundingBoxNodes()
 {
 	Coordinate temp = _waypoints.back(); //For swapping purposes
-	Vector last_path(_waypoints[_waypoints.size() - 2], _waypoints.back()); //To have a previous heading
 	Vector test_path(_bounding_box[0], _bounding_box[2]); //Vector that will be used to check for turning angles and distances
+	Vector last_path;
 	int index = 0; //The index of the first corner to travel to
 	double min_turn_angle = PI;
 	double max_distance = 0.0;
@@ -349,24 +351,28 @@ void Path::SortNormalBoundingBoxNodes()
 	const double kMaxDistance = min_distance;
 
 	//SECTION 1: Choosing best starting point
-	for (int i = 0; i < 4; i++) //Find the point that would require the least turning
+	if (_waypoints.size() > 1) //If there are at least 2 prior points to get a previous heading, else the starting point remains the top-left corner
 	{
-		test_path.setX(_bounding_box[i].x - temp.x);
-		test_path.setY(_bounding_box[i].y - temp.y);
-		test_path.setZ(_bounding_box[i].z - temp.z);
-
-		if (AngleBetween(last_path, test_path) < min_turn_angle)
+		last_path = Vector(_waypoints[_waypoints.size() - 2], _waypoints.back()); //Defines the previous heading
+		for (int i = 0; i < 4; i++) //Find the point that would require the least turning
 		{
-			min_turn_angle = AngleBetween(last_path, test_path);
-			index = i;
-		}
-	}
+			test_path.setX(_bounding_box[i].x - temp.x);
+			test_path.setY(_bounding_box[i].y - temp.y);
+			test_path.setZ(_bounding_box[i].z - temp.z);
 
-	//Swap the best starting point with the first coordinate
-	temp = _bounding_box[index];
-	_bounding_box[index] = _bounding_box[0];
-	_bounding_box[0] = temp;
-	last_path = test_path;
+			if (AngleBetween(last_path, test_path) < min_turn_angle)
+			{
+				min_turn_angle = AngleBetween(last_path, test_path);
+				index = i;
+			}
+		}
+
+		//Swap the best starting point with the first coordinate
+		temp = _bounding_box[index];
+		_bounding_box[index] = _bounding_box[0];
+		_bounding_box[0] = temp;
+		last_path = test_path;
+	}
 	
 	//END SECTION 1
 
@@ -455,13 +461,15 @@ Steps for Shrinking Nodes to Fit the search area
 void Path::ShrinkNormalNodesToFit()
 {
 	double min_distance = 180;
-	double displacement;
+	double displacement = 0.0;
+	int index = 0; //The index of the closest corner for shifting start/end points
 	bool use_vertical_edge = false; //Used to decide which edge to work along
-	Coordinate swap_coord;
+	const double kSearchAlt = _bounding_box[0].z;
+	Coordinate swap_coord, intersect_coord;
 	Coordinate temp_coord1, temp_coord2; //coord1 holds the point with the most positive x/y, depending on bounding box orientation
-	Coordinate edge_coord1, edge_coord2;
+	Coordinate edge_coord1, edge_coord2; //Points that define the closest edge to move pairs towards
 	Vector temp_vector1, temp_vector2;
-	LinearEq edge1, edge2;
+	LinearEq edge1, edge2, temp_edge;
 
 	//Determine edge to work on
 	if (_bounding_box[0].y == _bounding_box[1].y) //If the long edge is horizontal
@@ -497,13 +505,36 @@ void Path::ShrinkNormalNodesToFit()
 				//THIS SECTION CAN BE REWRITTEN USING LINEAR EQUATIONS TO FIND THE CLOSEST EDGE MORE ACCURATELY
 				//THIS PART IS THE SAME WHETHER WORKING ON THE VERTICAL OR HORIZONTAL EDGE
 				//Determine if this edge is closer than the last one
-				temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
+				/*temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
 				temp_vector1.setY(_bounding_box[i].y - temp_coord1.y);
 				temp_vector2.setX(_bounding_box[i].x - temp_coord2.x);
 				temp_vector2.setY(_bounding_box[i].y - temp_coord2.y);
 				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
 				{
 					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}*/
+				/*temp_edge.setCoord1(temp_coord1);
+				temp_edge.setCoord2(temp_coord2);
+				LinearEq temp_line(_bounding_box[i], -1 / temp_edge.getSlope());
+				intersect_coord = FindSolution(temp_edge, temp_line);
+				Vector temp_vector(_bounding_box[i], intersect_coord);
+				if (temp_vector.getMagnitude() < min_distance)
+				{
+					min_distance = temp_vector.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}*/
+				temp_edge.setCoord1(temp_coord1);
+				temp_edge.setCoord2(temp_coord2);
+				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
+				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
+				intersect_coord.z = kSearchAlt;
+				Vector temp_vector(intersect_coord, _bounding_box[i + 1]);
+				if (temp_vector.getMagnitude() < min_distance)
+				{
+					min_distance = temp_vector.getMagnitude();
 					edge_coord1 = temp_coord1;
 					edge_coord2 = temp_coord2;
 				}
@@ -531,6 +562,7 @@ void Path::ShrinkNormalNodesToFit()
 		else
 			displacement = _bounding_box[i].y - edge1.FindYatX(_bounding_box[i].x);
 
+		min_distance = 180;
 		for (unsigned int j = 0; j < _search_corners.size(); j++) //Loop for the second point in the pair
 		{
 			temp_coord1 = _search_corners[j];
@@ -551,13 +583,41 @@ void Path::ShrinkNormalNodesToFit()
 			if (use_vertical_edge && _bounding_box[i + 1].y <= temp_coord1.y && _bounding_box[i + 1].y >= temp_coord2.y)
 			{
 				//Determine if this edge is closer than the last one
-				temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
+				//Method 1: Sum of distances to the points defining the edge
+				/*temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
 				temp_vector1.setY(_bounding_box[i + 1].y - temp_coord1.y);
 				temp_vector2.setX(_bounding_box[i + 1].x - temp_coord2.x);
 				temp_vector2.setY(_bounding_box[i + 1].y - temp_coord2.y);
 				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
 				{
 					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}*/
+
+				//Method 2: Length of a path that is perpendicular to the edge
+				/*temp_edge.setCoord1(temp_coord1);
+				temp_edge.setCoord2(temp_coord2);
+				LinearEq temp_line(_bounding_box[i + 1], -1 / temp_edge.getSlope());
+				intersect_coord = FindSolution(temp_edge, temp_line);
+				Vector temp_vector(_bounding_box[i + 1], intersect_coord);
+				if (temp_vector.getMagnitude() < min_distance)
+				{
+					min_distance = temp_vector.getMagnitude();
+					edge_coord1 = temp_coord1;
+					edge_coord2 = temp_coord2;
+				}*/
+
+				//Method 3: Shortest translational distance directly to edge (depends on use_vertical_edge)
+				temp_edge.setCoord1(temp_coord1);
+				temp_edge.setCoord2(temp_coord2);
+				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
+				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
+				intersect_coord.z = kSearchAlt;
+				Vector temp_vector(intersect_coord, _bounding_box[i + 1]);
+				if (temp_vector.getMagnitude() < min_distance)
+				{
+					min_distance = temp_vector.getMagnitude();
 					edge_coord1 = temp_coord1;
 					edge_coord2 = temp_coord2;
 				}
@@ -577,14 +637,18 @@ void Path::ShrinkNormalNodesToFit()
 			}
 		}
 
+		//Set up the line to move the point pair towards
 		edge2.setCoord1(edge_coord1);
 		edge2.setCoord2(edge_coord2);
 
-		if (use_vertical_edge && _bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y) < displacement)
+		//Using a greater-than comparison results in pairs fitting to the inside
+		//Using a less-than comparison results in pairs fitting to the outside (path turns out better this way)
+		if (use_vertical_edge && fabs(_bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y)) < fabs(displacement))
 			displacement = _bounding_box[i + 1].x - edge2.FindXatY(_bounding_box[i + 1].y);
-		else if (!use_vertical_edge && _bounding_box[i + 1].y - edge2.FindYatX(_bounding_box[i + 1].x) < displacement)
+		else if (!use_vertical_edge && fabs(_bounding_box[i + 1].y - edge2.FindYatX(_bounding_box[i + 1].x)) < fabs(displacement))
 			displacement = _bounding_box[i + 1].y - edge2.FindYatX(_bounding_box[i + 1].x);
 
+		//Change the x or y position of the coordinate pair depending on the edge the points were on
 		if (use_vertical_edge)
 		{
 			_bounding_box[i].x -= displacement;
@@ -595,8 +659,31 @@ void Path::ShrinkNormalNodesToFit()
 			_bounding_box[i].y -= displacement;
 			_bounding_box[i + 1].y -= displacement;
 		}
-		
 	}
+
+	//Move the starting and ending points so they aren't so far from the search area
+	min_distance = 180;
+	for (unsigned int i = 0; i < _search_corners.size(); i++)
+	{
+		Vector temp_vector(_bounding_box.front(), _search_corners[i]);
+		if (temp_vector.getMagnitude() < min_distance)
+		{
+			min_distance = temp_vector.getMagnitude();
+			index = i;
+		}
+	}
+	_bounding_box.front() = _search_corners[index];
+	min_distance = 180;
+	for (unsigned int i = 0; i < _search_corners.size(); i++)
+	{
+		Vector temp_vector(_bounding_box.back(), _search_corners[i]);
+		if (temp_vector.getMagnitude() < min_distance)
+		{
+			min_distance = temp_vector.getMagnitude();
+			index = i;
+		}
+	}
+	_bounding_box.back() = _search_corners[index];
 }
 
 void Path::PushToWaypoints()
@@ -609,6 +696,89 @@ void Path::PushSearchToWaypoints()
 {
 	for (unsigned int i = 0; i < _search_corners.size(); i++)
 		_waypoints.push_back(_search_corners[i]);
+}
+
+void Path::PushOpToWaypoints()
+{
+	for (unsigned int i = 0; i < _op_area_corners.size(); i++)
+	{
+		_waypoints.push_back(_op_area_corners[i]);
+	}
+}
+
+void Path::PushObsToWaypoints()
+{
+	for (unsigned int i = 0; i < _obstacles.size(); i++)
+	{
+		_waypoints.push_back(_obstacles[i].getLocation());
+	}
+}
+
+int Path::DetectObtsacleCollisions()
+{
+	int num_collisions = 0;
+	double perp_slope = 0;
+	Coordinate intersect_point;
+	unsigned int waypoints_size = _waypoints.size();
+	unsigned int obstacles_size = _obstacles.size();
+
+	for (unsigned int i = 0; i < waypoints_size; i++)
+	{
+		LinearEq curr_path_line(_waypoints[i], _waypoints[(i + 1) % waypoints_size]);
+		Vector curr_path_vector(_waypoints[i], _waypoints[(i + 1) % waypoints_size]);
+		perp_slope = -1 / curr_path_line.getSlope();
+		for (unsigned int j = 0; j < obstacles_size; j++)
+		{
+			LinearEq curr_ob(_obstacles[j].getLocation(), perp_slope);
+			intersect_point = FindSolution(curr_path_line, curr_ob);
+			Vector intersect_to_point1_vector(_waypoints[i], intersect_point);
+			Vector intersect_to_point2_vector(_waypoints[(i + 1) % waypoints_size], intersect_point);
+			Vector ob_to_point1_vector(_obstacles[j].getLocation(), _waypoints[i]);
+			Vector ob_to_point2_vector(_obstacles[j].getLocation(), _waypoints[(i + 1) % waypoints_size]);
+			Vector ob_to_intersect_vector(_obstacles[j].getLocation(), intersect_point);
+			intersect_to_point1_vector.setZ(0);
+			intersect_to_point2_vector.setZ(0);
+			ob_to_point1_vector.setZ(0);
+			ob_to_point2_vector.setZ(0);
+			ob_to_intersect_vector.setZ(0);
+
+			if (intersect_to_point1_vector.getMagnitude() <= curr_path_vector.getMagnitude() &&
+				intersect_to_point2_vector.getMagnitude() <= curr_path_vector.getMagnitude()) //If the object is between the start and end points of the current path
+			{
+				if (ob_to_intersect_vector.getMagnitude() <= _obstacles[j].getRadius())
+					num_collisions++;
+			}
+			else if (ob_to_point1_vector.getMagnitude() <= _obstacles[j].getRadius() ||
+				ob_to_point2_vector.getMagnitude() <= _obstacles[j].getRadius()) //If the object is not between the points, but contains at least one of the points
+			{
+				num_collisions++;
+			}
+		}
+	}
+	return num_collisions;
+}
+
+bool Path::ReadObstacles(string file_path)
+{
+	ifstream in;
+	in.open(file_path);
+	if (!in.is_open())
+	{
+		cout << "Error opening the obstacles file" << endl;
+		return false;
+	}
+	string buffer;
+	while (!in.eof())
+	{
+		getline(in, buffer);
+		istringstream inSS(buffer);
+		double x, y, r;
+		inSS >> x >> y >> r;
+		Coordinate temp(x, y, 0);
+		Obstacle obs(temp, r);
+		_obstacles.push_back(obs);
+	}
+	return true;
 }
 
 double Path::DmsToDecimal(double deg, double min, double sec)

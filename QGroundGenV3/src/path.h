@@ -2,6 +2,7 @@
 #define PATH_H
 #include <vector>
 #include "coordinate.h"
+#include "obstacle.h"
 using namespace std;
 
 class Path {
@@ -10,6 +11,7 @@ private:
 	vector<Coordinate> _search_corners; //Holds the coordinates for the search area corners
 	vector<Coordinate> _op_area_corners; //Holds the coordinates for the op area corners
 	vector<Coordinate> _bounding_box; //Coordinates that define the box around the search area
+	vector<Obstacle> _obstacles; //Holds the obstacles
 	double DmsToDecimal(double deg, double min, double sec); //Used in the ReadFromFile function, has no use otherwise
 
 public:
@@ -19,11 +21,13 @@ public:
 	vector<Coordinate> getSearchCorners() const;
 	vector<Coordinate> getOpAreaCorners() const;
 	vector<Coordinate> getBoundingBox() const;
+	vector<Obstacle> getObstacles() const;
 
 	void setWaypoints(vector<Coordinate> waypoints);
 	void setSearchCorners(vector<Coordinate> search_corners);
 	void setOpAreaCorners(vector<Coordinate> op_area_corners);
 	void setBoundingBox(vector<Coordinate> bounding_box); //Shouldn't be used except for testing purposes
+	void setObstacles(vector<Obstacle> obstacles);
 
 	//void PartitionSearchArea(); //Possible approach, not a priority. Divides the search area into the smallest number of rectangles that covers the entire area
 	bool ReadFromFile(string file_path, double search_alt); //Reads data from a file containing points and their designations and assigns them to the waypoint or corner vectors
@@ -36,6 +40,10 @@ public:
 	void ShrinkNormalNodesToFit(); //Takes staggered pairs of points and shifts them closer to the search area to reduce flight outside of search area for normal bounding box
 	void PushToWaypoints(); //Takes the bounding box waypoints and adds them to the waypoint vector, adding the search area to the path
 	void PushSearchToWaypoints(); //Pushes the search boundary to waypoints for debugging
+	void PushOpToWaypoints(); //Pushes the op area boundary to waypoints for debugging
+	void PushObsToWaypoints();
+	int DetectObtsacleCollisions(); //Checks for obstacle collisions along the path
+	bool ReadObstacles(string file_path);
 };
 
 #endif

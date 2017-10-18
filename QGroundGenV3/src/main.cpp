@@ -8,6 +8,7 @@ int main()
 {
 	string in_path = "../test_files/2017Suasmission.txt";
 	string out_path = "../test_files/test_output.mission";
+	string obs_path = "../test_files/obstacle_list.txt";
 	Path navigation;
 	navigation.ReadFromFile(in_path, 100);
 
@@ -27,7 +28,12 @@ int main()
 	//navigation.DefineBoundingBox(100);
 
 	navigation.PushToWaypoints();
-	navigation.PushSearchToWaypoints(); //For debugging, to see the search boundary
+	//navigation.PushSearchToWaypoints(); //For debugging, to see the search boundary
+	//navigation.PushOpToWaypoints(); //For debugging, to see the op area
+	navigation.ReadObstacles(obs_path);
+	navigation.PushObsToWaypoints(); //For debugging, to see the obstacles on the map
+	if (navigation.getObstacles().size() > 0)
+		cout << navigation.DetectObtsacleCollisions() << endl;
 
 	navigation.WriteToFile(out_path, home, takeoff, descent, ascent);
 	return EXIT_SUCCESS;
