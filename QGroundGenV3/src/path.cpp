@@ -781,6 +781,43 @@ bool Path::ReadObstacles(string file_path)
 	return true;
 }
 
+int Path::hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O)
+{
+	Vector OAv = Vector(coorA, O.getLocation());
+	double OA = OAv.getMagnitude();
+	Vector OBv = Vector(coorB, O.getLocation());
+	double OB = OBv.getMagnitude();
+	double thetaOBA = AngleBetween(coorB, coorA, O.getLocation());
+	double thetaOAB = AngleBetween(coorA, coorB, O.getLocation());
+	double height = OA*sin(thetaOAB);
+	if ((thetaOBA >= PI/2 || thetaOAB >= PI/2) || (thetaOAB == 0 && thetaOBA == 0)) {
+		if (OA <= O.getRadius() && OB <= O.getRadius()) {
+			return 4;
+		}
+		if (OA <= O.getRadius()) {
+			return 2;
+		}
+		if (OB <= O.getRadius()) {
+			return 3;
+		}
+	}
+	else {
+		if (height < O.getRadius()) {
+			if (OA <= O.getRadius() && OB <= O.getRadius()) {
+				return 4;
+			}
+			if (OA <= O.getRadius()) {
+				return 2;
+			}
+			if (OB <= O.getRadius()) {
+				return 3;
+			}
+			return 1;
+		}
+	}
+	return 0;
+}
+
 double Path::DmsToDecimal(double deg, double min, double sec)
 {
 	return deg + (min / 60.0) + (sec / 3600.0);

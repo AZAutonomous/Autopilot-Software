@@ -978,24 +978,6 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.1434042,
--76.4281675,
-0
-],
-"doJumpId": 54,
-"frame": 3,
-"params": [
-0,
-0,
-0,
-0
-],
-"type": "SimpleItem"
-},
-{
-"autoContinue": true,
-"command": 16,
-"coordinate": [
 38.1509,
 -76.4342,
 50

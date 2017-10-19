@@ -23,15 +23,18 @@ int main()
 	navigation.CreateNormalEdgeNodes(0.00025);
 	navigation.SortNormalBoundingBoxNodes();
 	navigation.ShrinkNormalNodesToFit();
-	
-
+	//collision detection
+	Coordinate coorA = Coordinate(1.0, 1.0, 0.0);
+	Coordinate coorB = Coordinate(2.0, 2.0, 0.0);
+	Obstacle obs(Coordinate(0.0, 0.0, 0.0), 1.5);
+	int hasCollision = navigation.hasCollision(coorA, coorB, obs);
 	//navigation.DefineBoundingBox(100);
 
 	navigation.PushToWaypoints();
 	//navigation.PushSearchToWaypoints(); //For debugging, to see the search boundary
 	//navigation.PushOpToWaypoints(); //For debugging, to see the op area
 	navigation.ReadObstacles(obs_path);
-	navigation.PushObsToWaypoints(); //For debugging, to see the obstacles on the map
+	//navigation.PushObsToWaypoints(); //For debugging, to see the obstacles on the map
 	if (navigation.getObstacles().size() > 0)
 		cout << navigation.DetectObtsacleCollisions() << endl;
 

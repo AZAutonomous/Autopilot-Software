@@ -44,6 +44,7 @@ public:
 	void PushObsToWaypoints();
 	int DetectObtsacleCollisions(); //Checks for obstacle collisions along the path
 	bool ReadObstacles(string file_path);
+	int hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O); //returns 0 if no collosion between points, 1 if between points 2 if on coorA and 3 if on coorB
 };
 
 #endif
