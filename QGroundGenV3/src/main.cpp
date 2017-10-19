@@ -26,8 +26,9 @@ int main()
 	//collision detection
 	Coordinate coorA = Coordinate(1.0, 1.0, 0.0);
 	Coordinate coorB = Coordinate(2.0, 2.0, 0.0);
-	Obstacle obs(Coordinate(0.0, 0.0, 0.0), 1.5);
+	Obstacle obs(Coordinate(1.5, 1.5, 0.0), 0.1);
 	int hasCollision = navigation.hasCollision(coorA, coorB, obs);
+	cout << hasCollision << endl;
 	//navigation.DefineBoundingBox(100);
 
 	navigation.PushToWaypoints();

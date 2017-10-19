@@ -174,17 +174,35 @@ double AngleBetween(Vector vect1, Vector vect2) //Returns positive angle between
 	
 	if (dot == 0) //This will make the denominator 0 in arctan function, but dot product of 0 means perpendicular vectors
 		return M_PI / 2;
-	else if (dot == -1 * vect1.getMagnitude()*vect2.getMagnitude()) {
+	else if (dot == -1 * vect1.getMagnitude() * vect2.getMagnitude())
 		return M_PI;
-	}
+
 	result = atan(deter / dot); //Using arctan means no domain restrictions, but output must be corrected
 
-	if (dot < 0 && deter / dot > 0) //Fixes how arctan handles angles larger than 90 degrees
-		return M_PI - result;
-	else if (dot < 0 && deter / dot < 0) //Same as above, but for when the signs of deter and dot are different
-		return result + M_PI;
-	else
-		return fabs(result);
+	//if (dot < 0 && deter / dot > 0) //Fixes how arctan handles angles larger than 90 degrees
+	//	return M_PI - result;
+	//else if (dot < 0 && deter / dot < 0) //Same as above, but for when the signs of deter and dot are different
+	//	return result + M_PI;
+	//else
+	//	return fabs(result);
+
+	if (deter != 0)
+	{
+		if (dot > 0)
+			return fabs(result);
+		else if (deter < 0)
+			return M_PI - result;
+		else if (deter > 0)
+			return M_PI + result;
+	}
+	else if (dot < 0 && deter == 0)
+	{
+		return M_PI;
+	}
+	else if (dot > 0 && deter == 0)
+	{
+		return 0.0;
+	}
 }
 
 double AngleBetween(Coordinate vertex, Coordinate coord1, Coordinate coord2)

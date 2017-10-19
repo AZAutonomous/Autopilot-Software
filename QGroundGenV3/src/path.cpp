@@ -790,7 +790,7 @@ int Path::hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O)
 	double thetaOBA = AngleBetween(coorB, coorA, O.getLocation());
 	double thetaOAB = AngleBetween(coorA, coorB, O.getLocation());
 	double height = OA*sin(thetaOAB);
-	if ((thetaOBA >= PI/2 || thetaOAB >= PI/2) || (thetaOAB == 0 && thetaOBA == 0)) {
+	if (thetaOBA >= PI/2 || thetaOAB >= PI/2) { //Used to have a check for theta being 0
 		if (OA <= O.getRadius() && OB <= O.getRadius()) {
 			return 4;
 		}
