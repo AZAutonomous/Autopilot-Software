@@ -1,5 +1,6 @@
 #ifndef COORDINATE_H
 #define COORDINATE_H
+#include <vector>
 
 //BASIC LIBRARY FOR HANDLING COORDINATES, VECTORS, AND LINES.
 //HOLDS DATA FOR 3D SPACE, BUT ALL FUNCTIONS BUT THE DOT/CROSS
@@ -40,35 +41,47 @@ public:
 	Vector operator-(Vector& vect);
 };
 
-class LinearEq {
+class Line {
 private:
-	Coordinate _coord1;
-	Coordinate _coord2;
 	double _slope; //Slope of line formed by coord1 and coord2
 	double _y_intercept; //Y intercept of resulting line from coord1 and coord2
-	double CalculateSlope(); //Helper for handling slope
+	double CalculateSlope(Coordinate coord1, Coordinate coord2); //Helper for handling slope
 
 public:
-	LinearEq();
-	LinearEq(Coordinate coord1, Coordinate coord2);
-	LinearEq(Coordinate point, double slope);
+	Line();
+	Line(Coordinate coord1, Coordinate coord2);
+	Line(Coordinate point, double slope);
 
-	Coordinate getCoord1();
-	Coordinate getCoord2();
 	double getSlope();
 	double getYIntercept();
 
-	void setCoord1(Coordinate coord);
-	void setCoord2(Coordinate coord);
-
 	double FindYatX(double x); //Returns the Y value for a given X value
 	double FindXatY(double y); //Returns the X value where a given Y value occurs
+};
+
+class Circle {
+private:
+	Coordinate _center;
+	double _radius;
+
+public:
+	Circle(Coordinate center, double radius);
+
+	Coordinate getCenter();
+	double getRadius();
+
+	void setCenter(Coordinate center);
+	void setRadius(double radius);
+
+	double FindSlope(Coordinate point);
 };
 
 Vector CrossProduct(Vector vect1, Vector vect2); //Returns a vector product of 2 3-space vectors
 double DotProduct(Vector vect1, Vector vect2); //Returns the 3D dot product of 2 3-space vectors
 double AngleBetween(Vector vect1, Vector vect2); //Returns the angle between two vectors, with respect to xy-plane
 double AngleBetween(Coordinate vertex, Coordinate coord1, Coordinate coord2); //Does the same as the above, but with coordinates instead of vectors
-Coordinate FindSolution(LinearEq eq1, LinearEq eq2); //Returns the coordinate of the point that the two lines intersect at
+Coordinate FindSolution(Line line1, Line line2); //Returns the coordinate of the point that the two lines intersect at
+std::vector<Coordinate> FindSolutions(Circle circ, Line line); //Finds the coordinates that a line intersects a circle
+std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point); //Finds lines tangent to a circle that contain the coordinate 'point'
 
 #endif

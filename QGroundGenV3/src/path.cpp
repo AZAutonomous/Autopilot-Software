@@ -223,7 +223,7 @@ void Path::DefineBoundingBox(double search_alt)
 {
 	double max_distance = 0.0;
 	Vector edge_vector;
-	LinearEq longest_edge_line;
+	Line longest_edge_line;
 	int coord1_index = 0, coord2_index = 1;
 	double perpendicular_slope; //Slope of any line perpendicular to the longest edge
 	Coordinate farthest_point, intersect_point;
@@ -239,8 +239,7 @@ void Path::DefineBoundingBox(double search_alt)
 			coord1_index = i;
 			coord2_index = (i + 1) % _search_corners.size();
 			max_distance = edge_vector.getMagnitude();
-			longest_edge_line.setCoord1(temp1);
-			longest_edge_line.setCoord2(temp2);
+			longest_edge_line = Line(temp1, temp2);
 		}
 	}
 
@@ -249,7 +248,7 @@ void Path::DefineBoundingBox(double search_alt)
 
 	for (int i = (coord2_index + 1) % _search_corners.size(); i != coord1_index; i = (i + 1) % _search_corners.size()) //Find the point farthest from longest edge
 	{
-		LinearEq temp_line(_search_corners[i], perpendicular_slope);
+		Line temp_line(_search_corners[i], perpendicular_slope);
 		Coordinate temp;
 		temp = FindSolution(longest_edge_line, temp_line);
 		edge_vector.setX(temp.x - _search_corners[i].x);
@@ -469,7 +468,7 @@ void Path::ShrinkNormalNodesToFit()
 	Coordinate temp_coord1, temp_coord2; //coord1 holds the point with the most positive x/y, depending on bounding box orientation
 	Coordinate edge_coord1, edge_coord2; //Points that define the closest edge to move pairs towards
 	Vector temp_vector1, temp_vector2;
-	LinearEq edge1, edge2, temp_edge;
+	Line edge1, edge2, temp_edge;
 
 	//Determine edge to work on
 	if (_bounding_box[0].y == _bounding_box[1].y) //If the long edge is horizontal
@@ -526,8 +525,7 @@ void Path::ShrinkNormalNodesToFit()
 					edge_coord1 = temp_coord1;
 					edge_coord2 = temp_coord2;
 				}*/
-				temp_edge.setCoord1(temp_coord1);
-				temp_edge.setCoord2(temp_coord2);
+				temp_edge = Line(temp_coord1, temp_coord2);
 				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
 				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
 				intersect_coord.z = kSearchAlt;
@@ -554,8 +552,7 @@ void Path::ShrinkNormalNodesToFit()
 			}
 		}
 
-		edge1.setCoord1(edge_coord1);
-		edge1.setCoord2(edge_coord2);
+		edge1 = Line(edge_coord1, edge_coord2);
 
 		if (use_vertical_edge)
 			displacement = _bounding_box[i].x - edge1.FindXatY(_bounding_box[i].y);
@@ -609,8 +606,7 @@ void Path::ShrinkNormalNodesToFit()
 				}*/
 
 				//Method 3: Shortest translational distance directly to edge (depends on use_vertical_edge)
-				temp_edge.setCoord1(temp_coord1);
-				temp_edge.setCoord2(temp_coord2);
+				temp_edge = Line(temp_coord1, temp_coord2);
 				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
 				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
 				intersect_coord.z = kSearchAlt;
@@ -638,8 +634,7 @@ void Path::ShrinkNormalNodesToFit()
 		}
 
 		//Set up the line to move the point pair towards
-		edge2.setCoord1(edge_coord1);
-		edge2.setCoord2(edge_coord2);
+		edge2 = Line(edge_coord1, edge_coord2);
 
 		//Using a greater-than comparison results in pairs fitting to the inside
 		//Using a less-than comparison results in pairs fitting to the outside (path turns out better this way)
@@ -714,50 +709,6 @@ void Path::PushObsToWaypoints()
 	}
 }
 
-int Path::DetectObtsacleCollisions()
-{
-	int num_collisions = 0;
-	double perp_slope = 0;
-	Coordinate intersect_point;
-	unsigned int waypoints_size = _waypoints.size();
-	unsigned int obstacles_size = _obstacles.size();
-
-	for (unsigned int i = 0; i < waypoints_size; i++)
-	{
-		LinearEq curr_path_line(_waypoints[i], _waypoints[(i + 1) % waypoints_size]);
-		Vector curr_path_vector(_waypoints[i], _waypoints[(i + 1) % waypoints_size]);
-		perp_slope = -1 / curr_path_line.getSlope();
-		for (unsigned int j = 0; j < obstacles_size; j++)
-		{
-			LinearEq curr_ob(_obstacles[j].getLocation(), perp_slope);
-			intersect_point = FindSolution(curr_path_line, curr_ob);
-			Vector intersect_to_point1_vector(_waypoints[i], intersect_point);
-			Vector intersect_to_point2_vector(_waypoints[(i + 1) % waypoints_size], intersect_point);
-			Vector ob_to_point1_vector(_obstacles[j].getLocation(), _waypoints[i]);
-			Vector ob_to_point2_vector(_obstacles[j].getLocation(), _waypoints[(i + 1) % waypoints_size]);
-			Vector ob_to_intersect_vector(_obstacles[j].getLocation(), intersect_point);
-			intersect_to_point1_vector.setZ(0);
-			intersect_to_point2_vector.setZ(0);
-			ob_to_point1_vector.setZ(0);
-			ob_to_point2_vector.setZ(0);
-			ob_to_intersect_vector.setZ(0);
-
-			if (intersect_to_point1_vector.getMagnitude() <= curr_path_vector.getMagnitude() &&
-				intersect_to_point2_vector.getMagnitude() <= curr_path_vector.getMagnitude()) //If the object is between the start and end points of the current path
-			{
-				if (ob_to_intersect_vector.getMagnitude() <= _obstacles[j].getRadius())
-					num_collisions++;
-			}
-			else if (ob_to_point1_vector.getMagnitude() <= _obstacles[j].getRadius() ||
-				ob_to_point2_vector.getMagnitude() <= _obstacles[j].getRadius()) //If the object is not between the points, but contains at least one of the points
-			{
-				num_collisions++;
-			}
-		}
-	}
-	return num_collisions;
-}
-
 bool Path::ReadObstacles(string file_path)
 {
 	ifstream in;
@@ -816,6 +767,43 @@ int Path::hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O)
 		}
 	}
 	return 0;
+}
+
+Coordinate Path::AvoidObstacle(Coordinate A, Coordinate B, Circle O, int flag = 1)
+{
+	Line line_ab(A, B);
+	Coordinate avoidance_point;
+	if (flag == 1) //If the obstacle is on the path between point B and A
+	{
+		vector<Coordinate> intersections = FindSolutions(O, line_ab);
+		if (intersections.size() == 2) //The path intersects the obstacle twice
+		{
+			Line tangent1(intersections[0], O.FindSlope(intersections[0]));
+			Line tangent2(intersections[1], O.FindSlope(intersections[1]));
+			avoidance_point = Coordinate(FindSolution(tangent1, tangent2));
+		}
+		else if (intersections.size() == 1) //The path intersects the obstacle once
+		{
+
+		}
+		else if (intersections.size() == 0) //There is no intersection
+		{
+			//There is no solution and the detection algorithm is incorrect
+		}
+	}
+	else if (flag == 2) //If the obstacle covers point A
+	{
+
+	}
+	else if (flag == 3) //If the obstacle covers point B
+	{
+
+	}
+	else if (flag == 4) //If the obstacle covers both points
+	{
+
+	}
+	return avoidance_point;
 }
 
 double Path::DmsToDecimal(double deg, double min, double sec)

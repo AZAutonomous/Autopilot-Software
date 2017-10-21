@@ -36,8 +36,6 @@ int main()
 	//navigation.PushOpToWaypoints(); //For debugging, to see the op area
 	navigation.ReadObstacles(obs_path);
 	//navigation.PushObsToWaypoints(); //For debugging, to see the obstacles on the map
-	if (navigation.getObstacles().size() > 0)
-		cout << navigation.DetectObtsacleCollisions() << endl;
 
 	navigation.WriteToFile(out_path, home, takeoff, descent, ascent);
 	return EXIT_SUCCESS;

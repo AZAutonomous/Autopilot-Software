@@ -39,12 +39,12 @@ public:
 	void SortNormalBoundingBoxNodes(); //Takes the nodes of the bounding box and puts them in the order they are to be flown to
 	void ShrinkNormalNodesToFit(); //Takes staggered pairs of points and shifts them closer to the search area to reduce flight outside of search area for normal bounding box
 	void PushToWaypoints(); //Takes the bounding box waypoints and adds them to the waypoint vector, adding the search area to the path
-	void PushSearchToWaypoints(); //Pushes the search boundary to waypoints for debugging
-	void PushOpToWaypoints(); //Pushes the op area boundary to waypoints for debugging
-	void PushObsToWaypoints();
-	int DetectObtsacleCollisions(); //Checks for obstacle collisions along the path
+	void PushSearchToWaypoints(); //For debugging. Pushes the search boundary to waypoints
+	void PushOpToWaypoints(); //For debugging. Pushes the op area boundary to waypoints
+	void PushObsToWaypoints(); //For debugging. Pushes the obstacles to the waypoint vector so they can be seen on the map
 	bool ReadObstacles(string file_path);
 	int hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O); //returns 0 if no collosion between points, 1 if between points 2 if on coorA and 3 if on coorB
+	Coordinate AvoidObstacle(Coordinate A, Coordinate B, Circle O, int flag); //After a detection, this will run to create an avoidance point
 };
 
 #endif
