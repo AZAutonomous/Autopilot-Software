@@ -1,0 +1,1020 @@
+{
+"firmwareType": 12,
+"groundStation" : "QGroundControl",
+"items" : [
+{
+"autoContinue": true,
+"command": 22,
+"coordinate": [
+38.1453,
+-76.4291,
+60.96
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1492,
+-76.4295,
+91.44
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14531389,
+-76.42911944,
+200
+],
+"doJumpId": 2,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14922222,
+-76.42948333,
+300
+],
+"doJumpId": 3,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.15013333,
+-76.43085556,
+300
+],
+"doJumpId": 4,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14895,
+-76.43228611,
+300
+],
+"doJumpId": 5,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14701111,
+-76.43064167,
+400
+],
+"doJumpId": 6,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14378333,
+-76.43199444,
+200
+],
+"doJumpId": 7,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14103889,
+-76.43223056,
+100
+],
+"doJumpId": 8,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14103889,
+-76.42617217,
+100
+],
+"doJumpId": 9,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14134444,
+-76.42617217,
+100
+],
+"doJumpId": 10,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14134444,
+-76.43266363,
+100
+],
+"doJumpId": 11,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14159444,
+-76.43266363,
+100
+],
+"doJumpId": 12,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14159444,
+-76.42537186,
+100
+],
+"doJumpId": 13,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14184444,
+-76.42537186,
+100
+],
+"doJumpId": 14,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14184444,
+-76.43305339,
+100
+],
+"doJumpId": 15,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14209444,
+-76.43305339,
+100
+],
+"doJumpId": 16,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14209444,
+-76.42457154,
+100
+],
+"doJumpId": 17,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14234444,
+-76.42457154,
+100
+],
+"doJumpId": 18,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14234444,
+-76.43344315,
+100
+],
+"doJumpId": 19,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14259444,
+-76.43344315,
+100
+],
+"doJumpId": 20,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14259444,
+-76.42377123,
+100
+],
+"doJumpId": 21,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14284444,
+-76.42377123,
+100
+],
+"doJumpId": 22,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14284444,
+-76.43383292,
+100
+],
+"doJumpId": 23,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14309444,
+-76.43383292,
+100
+],
+"doJumpId": 24,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14309444,
+-76.42297092,
+100
+],
+"doJumpId": 25,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14334444,
+-76.42297092,
+100
+],
+"doJumpId": 26,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14334444,
+-76.43331541,
+100
+],
+"doJumpId": 27,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14359444,
+-76.43331541,
+100
+],
+"doJumpId": 28,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14359444,
+-76.42217061,
+100
+],
+"doJumpId": 29,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14384444,
+-76.42217061,
+100
+],
+"doJumpId": 30,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14384444,
+-76.43181945,
+100
+],
+"doJumpId": 31,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14409444,
+-76.43181945,
+100
+],
+"doJumpId": 32,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14409444,
+-76.42214005,
+100
+],
+"doJumpId": 33,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14434444,
+-76.42214005,
+100
+],
+"doJumpId": 34,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14434444,
+-76.43032349,
+100
+],
+"doJumpId": 35,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14459444,
+-76.43032349,
+100
+],
+"doJumpId": 36,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14459444,
+-76.42243038,
+100
+],
+"doJumpId": 37,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14484444,
+-76.42243038,
+100
+],
+"doJumpId": 38,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14484444,
+-76.42882753,
+100
+],
+"doJumpId": 39,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14509444,
+-76.42882753,
+100
+],
+"doJumpId": 40,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14509444,
+-76.4227207,
+100
+],
+"doJumpId": 41,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14534444,
+-76.4227207,
+100
+],
+"doJumpId": 42,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14534444,
+-76.42733157,
+100
+],
+"doJumpId": 43,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14559444,
+-76.42733157,
+100
+],
+"doJumpId": 44,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14559444,
+-76.42301102,
+100
+],
+"doJumpId": 45,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14584444,
+-76.42301102,
+100
+],
+"doJumpId": 46,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14584444,
+-76.42583561,
+100
+],
+"doJumpId": 47,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14609444,
+-76.42583561,
+100
+],
+"doJumpId": 48,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14609444,
+-76.42330134,
+100
+],
+"doJumpId": 49,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14634444,
+-76.42330134,
+100
+],
+"doJumpId": 50,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14634444,
+-76.42359167,
+100
+],
+"doJumpId": 51,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14659444,
+-76.42359167,
+100
+],
+"doJumpId": 52,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14659444,
+-76.42359167,
+100
+],
+"doJumpId": 53,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.1509,
+-76.4342,
+50
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 21,
+"coordinate": [
+38.1509,
+-76.4342,
+0
+],
+"doJumpId": 1,
+"frame": 3,
+"params": [
+15,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+}
+],
+"plannedHomePosition": [
+38.1509,
+-76.4342,
+0
+],
+"version": 2
+}

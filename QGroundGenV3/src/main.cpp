@@ -26,7 +26,7 @@ int main()
 	//collision detection
 	Coordinate coorA = Coordinate(1.0, 1.0, 0.0);
 	Coordinate coorB = Coordinate(2.0, 2.0, 0.0);
-	Obstacle obs(Coordinate(1.5, 1.5, 0.0), 0.1);
+	Circle obs(Coordinate(1.5, 1.5, 0.0), 0.1);
 	int hasCollision = navigation.hasCollision(coorA, coorB, obs);
 	cout << hasCollision << endl;
 	//navigation.DefineBoundingBox(100);
@@ -38,5 +38,6 @@ int main()
 	//navigation.PushObsToWaypoints(); //For debugging, to see the obstacles on the map
 
 	navigation.WriteToFile(out_path, home, takeoff, descent, ascent);
+	navigation.DumpDataToFile(string("../test_files/points.txt"));
 	return EXIT_SUCCESS;
 }

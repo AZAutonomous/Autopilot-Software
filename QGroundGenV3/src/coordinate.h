@@ -6,12 +6,21 @@
 //HOLDS DATA FOR 3D SPACE, BUT ALL FUNCTIONS BUT THE DOT/CROSS
 //PRODUCTS ACT IN 2D SPACE. MADE FOR AZ AUTONOMOUS PATH GEN.
 
+//Class Declarations
+class Coordinate;
+class Vector;
+class Line;
+class Circle;
+
+//Class Definitions
 struct Coordinate {
 	Coordinate();
 	Coordinate(double x, double y, double z);
 	double x = 0;
 	double y = 0;
 	double z = 0;
+
+	Coordinate operator+(Vector& displacement_vector);
 };
 
 class Vector {
@@ -25,6 +34,7 @@ public:
 	Vector();
 	Vector(double x, double y, double z);
 	Vector(Coordinate coord1, Coordinate coord2);
+	Vector(double magnitude, double angle); //Create a vector given the counterclockwise angle and magnitude
 
 	double getX() const;
 	double getY() const;
@@ -39,6 +49,8 @@ public:
 	Vector operator/(double div);
 	Vector operator+(Vector& vect);
 	Vector operator-(Vector& vect);
+
+	double getDirection(); //Returns the angle counterclockwise from the origin that the vector is pointing
 };
 
 class Line {

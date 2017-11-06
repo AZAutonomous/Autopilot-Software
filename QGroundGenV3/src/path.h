@@ -11,7 +11,7 @@ private:
 	vector<Coordinate> _search_corners; //Holds the coordinates for the search area corners
 	vector<Coordinate> _op_area_corners; //Holds the coordinates for the op area corners
 	vector<Coordinate> _bounding_box; //Coordinates that define the box around the search area
-	vector<Obstacle> _obstacles; //Holds the obstacles
+	vector<Circle> _obstacles; //Holds the obstacles
 	double DmsToDecimal(double deg, double min, double sec); //Used in the ReadFromFile function, has no use otherwise
 
 public:
@@ -21,17 +21,17 @@ public:
 	vector<Coordinate> getSearchCorners() const;
 	vector<Coordinate> getOpAreaCorners() const;
 	vector<Coordinate> getBoundingBox() const;
-	vector<Obstacle> getObstacles() const;
+	vector<Circle> getObstacles() const;
 
 	void setWaypoints(vector<Coordinate> waypoints);
 	void setSearchCorners(vector<Coordinate> search_corners);
 	void setOpAreaCorners(vector<Coordinate> op_area_corners);
 	void setBoundingBox(vector<Coordinate> bounding_box); //Shouldn't be used except for testing purposes
-	void setObstacles(vector<Obstacle> obstacles);
+	void setObstacles(vector<Circle> obstacles);
 
 	//void PartitionSearchArea(); //Possible approach, not a priority. Divides the search area into the smallest number of rectangles that covers the entire area
 	bool ReadFromFile(string file_path, double search_alt); //Reads data from a file containing points and their designations and assigns them to the waypoint or corner vectors
-	bool WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Coordinate descent, Coordinate ascent);
+	bool WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Coordinate descent, Coordinate ascent); //Generates the 
 	void DefineNormalBoundingBox(double search_alt); //Sets up the rectangle that bounds the search area, always oriented perpendicular to cardinal directions
 	void DefineBoundingBox(double search_alt); //Sets up the rectangle, oriented so its longest edges are parallel to the longest edges of the search area
 	void CreateNormalEdgeNodes(double view_radius); //Adds points to the short edge of the rectangle created by DefineNormalBoundingBox to use as waypoints
@@ -43,8 +43,10 @@ public:
 	void PushOpToWaypoints(); //For debugging. Pushes the op area boundary to waypoints
 	void PushObsToWaypoints(); //For debugging. Pushes the obstacles to the waypoint vector so they can be seen on the map
 	bool ReadObstacles(string file_path);
-	int hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O); //returns 0 if no collosion between points, 1 if between points 2 if on coorA and 3 if on coorB
-	Coordinate AvoidObstacle(Coordinate A, Coordinate B, Circle O, int flag); //After a detection, this will run to create an avoidance point
+	int hasCollision(Coordinate coorA, Coordinate coorB, Circle O); //returns 0 if no collosion between points, 1 if between points 2 if on coorA and 3 if on coorB
+	Coordinate AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index, int flag); //After a detection, this will run to create an avoidance point
+	double PathLength(int begin, int end); //Returns the length of a segment of path defined by beginning and ending indexes
+	bool DumpDataToFile(string file_path); //Writes all raw waypoint, search corner, op area corner, and obstacle data to a file. For debugging.
 };
 
 #endif

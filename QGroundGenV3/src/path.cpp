@@ -1,5 +1,5 @@
 #include "path.h"
-#include "obstacle.h"
+//#include "obstacle.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,13 +12,13 @@ vector<Coordinate> Path::getWaypoints() const { return this->_waypoints; }
 vector<Coordinate> Path::getSearchCorners() const { return this->_search_corners; }
 vector<Coordinate> Path::getOpAreaCorners() const { return this->_op_area_corners; }
 vector<Coordinate> Path::getBoundingBox() const { return this->_bounding_box; }
-vector<Obstacle> Path::getObstacles() const { return this->_obstacles; }
+vector<Circle> Path::getObstacles() const { return this->_obstacles; }
 
 void Path::setWaypoints(vector<Coordinate> waypoints) { _waypoints = waypoints; }
 void Path::setSearchCorners(vector<Coordinate> search_corners) { _search_corners = search_corners; }
 void Path::setOpAreaCorners(vector<Coordinate> op_area_corners) { _op_area_corners = op_area_corners; }
 void Path::setBoundingBox(vector<Coordinate> bounding_box) { _bounding_box = bounding_box; }
-void Path::setObstacles(vector<Obstacle> obstacles) { _obstacles = obstacles; }
+void Path::setObstacles(vector<Circle> obstacles) { _obstacles = obstacles; }
 
 bool Path::ReadFromFile(string file_path, double search_alt)
 {
@@ -182,6 +182,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 
 void Path::DefineNormalBoundingBox(double search_alt)
 {
+	if (_search_corners.empty())
+		return;
+
 	double west = _search_corners.front().x, east = _search_corners.front().x; //Holds the longitude for the western/eastern-most points
 	double north = _search_corners.front().y, south = _search_corners.front().y; //Same as above for north and south
 
@@ -705,7 +708,7 @@ void Path::PushObsToWaypoints()
 {
 	for (unsigned int i = 0; i < _obstacles.size(); i++)
 	{
-		_waypoints.push_back(_obstacles[i].getLocation());
+		_waypoints.push_back(_obstacles[i].getCenter());
 	}
 }
 
@@ -726,20 +729,20 @@ bool Path::ReadObstacles(string file_path)
 		double x, y, r;
 		inSS >> x >> y >> r;
 		Coordinate temp(x, y, 0);
-		Obstacle obs(temp, r);
+		Circle obs(temp, r);
 		_obstacles.push_back(obs);
 	}
 	return true;
 }
 
-int Path::hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O)
+int Path::hasCollision(Coordinate coorA, Coordinate coorB, Circle O)
 {
-	Vector OAv = Vector(coorA, O.getLocation());
+	Vector OAv = Vector(coorA, O.getCenter());
 	double OA = OAv.getMagnitude();
-	Vector OBv = Vector(coorB, O.getLocation());
+	Vector OBv = Vector(coorB, O.getCenter());
 	double OB = OBv.getMagnitude();
-	double thetaOBA = AngleBetween(coorB, coorA, O.getLocation());
-	double thetaOAB = AngleBetween(coorA, coorB, O.getLocation());
+	double thetaOBA = AngleBetween(coorB, coorA, O.getCenter());
+	double thetaOAB = AngleBetween(coorA, coorB, O.getCenter());
 	double height = OA*sin(thetaOAB);
 	if (thetaOBA >= PI/2 || thetaOAB >= PI/2) { //Used to have a check for theta being 0
 		if (OA <= O.getRadius() && OB <= O.getRadius()) {
@@ -769,41 +772,150 @@ int Path::hasCollision(Coordinate coorA, Coordinate coorB, Obstacle O)
 	return 0;
 }
 
-Coordinate Path::AvoidObstacle(Coordinate A, Coordinate B, Circle O, int flag = 1)
+Coordinate Path::AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index, int flag = 1)
 {
-	Line line_ab(A, B);
 	Coordinate avoidance_point;
+	double kDistance = 0.00001;
 	if (flag == 1) //If the obstacle is on the path between point B and A
 	{
+		Line line_ab(A, B);
 		vector<Coordinate> intersections = FindSolutions(O, line_ab);
 		if (intersections.size() == 2) //The path intersects the obstacle twice
 		{
 			Line tangent1(intersections[0], O.FindSlope(intersections[0]));
 			Line tangent2(intersections[1], O.FindSlope(intersections[1]));
-			avoidance_point = Coordinate(FindSolution(tangent1, tangent2));
+			avoidance_point = FindSolution(tangent1, tangent2);
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
 		}
 		else if (intersections.size() == 1) //The path intersects the obstacle once
 		{
-
+			avoidance_point = intersections[0];
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
 		}
 		else if (intersections.size() == 0) //There is no intersection
 		{
-			//There is no solution and the detection algorithm is incorrect
+			
 		}
 	}
 	else if (flag == 2) //If the obstacle covers point A
 	{
-
+		Vector obstacle_to_point(O.getCenter(), A);
+		A = A + (obstacle_to_point / obstacle_to_point.getMagnitude() * (O.getRadius() + kDistance));
+		Line line_ab(A, B);
+		vector<Coordinate> intersections = FindSolutions(O, line_ab);
+		if (intersections.size() == 2) //The path intersects the obstacle twice
+		{
+			Line tangent1(intersections[0], O.FindSlope(intersections[0]));
+			Line tangent2(intersections[1], O.FindSlope(intersections[1]));
+			avoidance_point = FindSolution(tangent1, tangent2);
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 1) //The path intersects the obstacle once
+		{
+			avoidance_point = intersections[0];
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 0) //There is no intersection
+		{
+			
+		}
 	}
 	else if (flag == 3) //If the obstacle covers point B
 	{
-
+		Vector obstacle_to_point(O.getCenter(), B);
+		B = B + (obstacle_to_point / obstacle_to_point.getMagnitude() * (O.getRadius() + kDistance));
+		Line line_ab(A, B);
+		vector<Coordinate> intersections = FindSolutions(O, line_ab);
+		if (intersections.size() == 2) //The path intersects the obstacle twice
+		{
+			Line tangent1(intersections[0], O.FindSlope(intersections[0]));
+			Line tangent2(intersections[1], O.FindSlope(intersections[1]));
+			avoidance_point = FindSolution(tangent1, tangent2);
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 1) //The path intersects the obstacle once
+		{
+			avoidance_point = intersections[0];
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 0) //There is no intersection
+		{
+			
+		}
 	}
 	else if (flag == 4) //If the obstacle covers both points
 	{
-
+		Vector obstacle_to_a(O.getCenter(), A);
+		A = A + (obstacle_to_a / obstacle_to_a.getMagnitude() * (O.getRadius() + kDistance));
+		Vector obstacle_to_b(O.getCenter(), B);
+		B = B + (obstacle_to_b / obstacle_to_b.getMagnitude() * (O.getRadius() + kDistance));
+		Line line_ab(A, B);
+		vector<Coordinate> intersections = FindSolutions(O, line_ab);
+		if (intersections.size() == 2) //The path intersects the obstacle twice
+		{
+			Line tangent1(intersections[0], O.FindSlope(intersections[0]));
+			Line tangent2(intersections[1], O.FindSlope(intersections[1]));
+			avoidance_point = FindSolution(tangent1, tangent2);
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 1) //The path intersects the obstacle once
+		{
+			avoidance_point = intersections[0];
+			Vector obstacle_to_avoidance(O.getCenter(), avoidance_point);
+			avoidance_point = avoidance_point + (obstacle_to_avoidance / obstacle_to_avoidance.getMagnitude() * (O.getRadius() + kDistance));
+		}
+		else if (intersections.size() == 0) //There is no intersection
+		{
+			
+		}
 	}
 	return avoidance_point;
+}
+
+double Path::PathLength(int begin, int end)
+{
+	double length = 0.0;
+	for (int i = begin; i < end; i++)
+	{
+		Vector temp(_waypoints[i], _waypoints[i + 1]);
+		length += temp.getMagnitude();
+	}
+	return length;
+}
+
+bool Path::DumpDataToFile(string file_path)
+{
+	ofstream out_file(file_path);
+	if (!out_file.is_open())
+	{
+		cout << "Error opening data output file";
+		return false;
+	}
+	for (unsigned int i = 0; i < _waypoints.size(); i++)
+	{
+		out_file << "W " << _waypoints[i].x << " " << _waypoints[i].y << " " << _waypoints[i].z << endl;
+	}
+	for (unsigned int i = 0; i < _search_corners.size(); i++)
+	{
+		out_file << "S " << _search_corners[i].x << " " << _search_corners[i].y << " " << _search_corners[i].z << endl;
+	}
+	for (unsigned int i = 0; i < _op_area_corners.size(); i++)
+	{
+		out_file << "B " << _op_area_corners[i].x << " " << _op_area_corners[i].y << " " << _op_area_corners[i].z << endl;
+	}
+	for (unsigned int i = 0; i < _obstacles.size(); i++)
+	{
+		out_file << "O " << _obstacles[i].getCenter().x << " " << _obstacles[i].getCenter().y << " " << _obstacles[i].getCenter().z << " " << _obstacles[i].getRadius() << endl;
+	}
+	out_file.close();
+	return true;
 }
 
 double Path::DmsToDecimal(double deg, double min, double sec)

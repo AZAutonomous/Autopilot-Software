@@ -3,6 +3,10 @@
 #include <cmath>
 #include <limits>
 
+////////////////////////
+//COORDINATE FUNCTIONS//
+////////////////////////
+
 Coordinate::Coordinate() {}
 
 Coordinate::Coordinate(double x, double y, double z)
@@ -10,6 +14,11 @@ Coordinate::Coordinate(double x, double y, double z)
 	this->x = x;
 	this->y = y;
 	this->z = z;
+}
+
+Coordinate Coordinate::operator+(Vector& displacement_vector)
+{
+	return Coordinate(x + displacement_vector.getX(), y + displacement_vector.getY(), z + displacement_vector.getZ());
 }
 
 ////////////////////
@@ -38,6 +47,14 @@ Vector::Vector(Coordinate coord1, Coordinate coord2) //This constructor does the
 	this->_y = coord2.y - coord1.y;
 	this->_z = coord2.z - coord1.z;
 	this->_magnitude = sqrt(pow(_x, 2) + pow(_y, 2) + pow(_z, 2));
+}
+
+Vector::Vector(double magnitude, double angle) //Does not create a 3-space vector
+{
+	this->_x = magnitude * cos(angle);
+	this->_y = magnitude * sin(angle);
+	this->_z = 0;
+	this->_magnitude = magnitude;
 }
 
 double Vector::getX() const { return _x; }
@@ -85,6 +102,27 @@ Vector Vector::operator-(Vector& vect)
 {
 	Vector result(_x - vect.getX(), _y - vect.getY(), _z - vect.getZ());
 	return result;
+}
+
+double Vector::getDirection()
+{
+	if (_x > 0)
+	{
+		return atan(_y / _x);
+	}
+	else if (_x < 0)
+	{
+		return atan(_y / _x) + M_PI;
+	}
+	else if (_x == 0)
+	{
+		if (_y > 0)
+			return M_PI / 2;
+		else if (_y < 0)
+			return -M_PI / 2;
+		else if (_y == 0)
+			return std::numeric_limits<double>::quiet_NaN();
+	}
 }
 
 /////////////////////////////
@@ -177,13 +215,6 @@ double AngleBetween(Vector vect1, Vector vect2) //Returns positive angle between
 
 	result = atan(deter / dot); //Using arctan means no domain restrictions, but output must be corrected
 
-	//if (dot < 0 && deter / dot > 0) //Fixes how arctan handles angles larger than 90 degrees
-	//	return M_PI - result;
-	//else if (dot < 0 && deter / dot < 0) //Same as above, but for when the signs of deter and dot are different
-	//	return result + M_PI;
-	//else
-	//	return fabs(result);
-
 	if (deter != 0)
 	{
 		if (dot > 0)
@@ -259,7 +290,7 @@ std::vector<Coordinate> FindSolutions(Circle circ, Line line)
 		solutions.push_back(solution1);
 		solutions.push_back(solution2);
 	}
-	else //Single Repeated Root
+	else //Single Repeated Root (tangent point)
 	{
 		x1 = (-1 * b) / (2 * a);
 		solution1 = Coordinate(x1, line.FindYatX(x1), 0);
@@ -272,17 +303,23 @@ std::vector<Coordinate> FindSolutions(Circle circ, Line line)
 std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point)
 {
 	std::vector<Coordinate> points;
-	Circle new_circle(Coordinate(), circle.getRadius()); //Shift the circle towards the origin
-	Coordinate new_point(point.x - circle.getCenter().x, point.y - circle.getCenter().y, 0); //Shift the point as much as the circle was shifted
 	Coordinate tangent_point1, tangent_point2;
-	double a, b, c; //Coefficients of a quadratic equation
-	double slope1, slope2;
-	if (new_point.x != new_circle.getRadius()) //To prevent dividing by zero
+	Vector point_to_circle(point, circle.getCenter());
+	double angle, angle_shift, tangent_magnitude; //The angle of the point_to_circle vector, how much to rotate it to create a tangent, and the magnitude of the tangent
+	if (point_to_circle.getMagnitude() > circle.getRadius()) //If the point is outside of the circle
 	{
-		//a = (pow(point.x - circle.getCenter().x, 2) / pow(point.y - circle.getCenter().y, 2)) + 1;
-		//b = (-2 * (circle.getCenter().x * point.x - pow(circle.getCenter().x, 2) + pow(circle.getRadius(), 2)) * (point.x - circle.getCenter().x)) / pow(point.y - circle.getCenter().y, 2) - 2 * circle.getCenter().x;
-		//c = pow(circle.getCenter().x * point.x - pow(circle.getCenter().x, 2) + pow(circle.getRadius(), 2), 2) / pow(point.y - circle.getCenter().y, 2) + pow(circle.getCenter().x, 2) - pow(circle.getRadius(), 2);
-		slope1 = ((-new_point.x * new_point.y) + (new_circle.getRadius() * sqrt(pow(new_point.x, 2) + pow(new_point.y, 2) - pow(new_circle.getRadius(), 2)))) / (pow(new_circle.getRadius(), 2) - pow(new_point.x, 2));
-		slope2 = ((-new_point.x * new_point.y) - (new_circle.getRadius() * sqrt(pow(new_point.x, 2) + pow(new_point.y, 2) - pow(new_circle.getRadius(), 2)))) / (pow(new_circle.getRadius(), 2) - pow(new_point.x, 2));
+		angle = point_to_circle.getDirection();
+		angle_shift = asin(circle.getRadius() / point_to_circle.getMagnitude()); //Angle at vertex point of a triangle defined by the tangency point, "point", and circle center
+		tangent_magnitude = sqrt(pow(point_to_circle.getMagnitude(), 2) - pow(circle.getRadius(), 2));
+		Vector tangent1(tangent_magnitude, angle + angle_shift); //Create a tangent that is angle_shift ahead of the point_to_circle vector
+		Vector tangent2(tangent_magnitude, angle - angle_shift); //Create a tangent that is angle_shift behind the point_to_circle vector
+		tangent_point1 = Coordinate(point.x + tangent1.getX(), point.y + tangent1.getY(), 0); //Create points by adding the displacement vectors to the original point
+		tangent_point2 = Coordinate(point.x + tangent2.getX(), point.y + tangent2.getY(), 0);
 	}
+	else if (point_to_circle.getMagnitude() == circle.getRadius()) //"point" is a point of tangency
+	{
+		points.push_back(point);
+	}
+	
+	return points;
 }
