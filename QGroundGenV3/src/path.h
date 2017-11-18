@@ -3,31 +3,30 @@
 #include <vector>
 #include "coordinate.h"
 #include "obstacle.h"
-using namespace std;
 
 class Path {
 private:
-	vector<Coordinate> _waypoints; //Holds every point in the order that they will be traveled to
-	vector<Coordinate> _search_corners; //Holds the coordinates for the search area corners
-	vector<Coordinate> _op_area_corners; //Holds the coordinates for the op area corners
-	vector<Coordinate> _bounding_box; //Coordinates that define the box around the search area
-	vector<Circle> _obstacles; //Holds the obstacles
+	std::vector<Coordinate> _waypoints; //Holds every point in the order that they will be traveled to
+	std::vector<Coordinate> _search_corners; //Holds the coordinates for the search area corners
+	std::vector<Coordinate> _op_area_corners; //Holds the coordinates for the op area corners
+	std::vector<Coordinate> _bounding_box; //Coordinates that define the box around the search area
+	std::vector<Circle> _obstacles; //Holds the obstacles
 	double DmsToDecimal(double deg, double min, double sec); //Used in the ReadFromFile function, has no use otherwise
 
 public:
 	Path();
 
-	vector<Coordinate> getWaypoints() const;
-	vector<Coordinate> getSearchCorners() const;
-	vector<Coordinate> getOpAreaCorners() const;
-	vector<Coordinate> getBoundingBox() const;
-	vector<Circle> getObstacles() const;
+	std::vector<Coordinate> getWaypoints() const;
+	std::vector<Coordinate> getSearchCorners() const;
+	std::vector<Coordinate> getOpAreaCorners() const;
+	std::vector<Coordinate> getBoundingBox() const;
+	std::vector<Circle> getObstacles() const;
 
-	void setWaypoints(vector<Coordinate> waypoints);
-	void setSearchCorners(vector<Coordinate> search_corners);
-	void setOpAreaCorners(vector<Coordinate> op_area_corners);
-	void setBoundingBox(vector<Coordinate> bounding_box); //Shouldn't be used except for testing purposes
-	void setObstacles(vector<Circle> obstacles);
+	void setWaypoints(std::vector<Coordinate> waypoints);
+	void setSearchCorners(std::vector<Coordinate> search_corners);
+	void setOpAreaCorners(std::vector<Coordinate> op_area_corners);
+	void setBoundingBox(std::vector<Coordinate> bounding_box); //Shouldn't be used except for testing purposes
+	void setObstacles(std::vector<Circle> obstacles);
 
 	//void PartitionSearchArea(); //Possible approach, not a priority. Divides the search area into the smallest number of rectangles that covers the entire area
 	bool ReadFromFile(string file_path, double search_alt); //Reads data from a file containing points and their designations and assigns them to the waypoint or corner vectors

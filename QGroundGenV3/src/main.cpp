@@ -17,13 +17,13 @@ int main()
 	Coordinate ascent(-76.4295, 38.1492, 91.44);
 	Coordinate descent(-76.4342, 38.1509, 50);
 
-	//This block is for an unrotated bounding box
-	
+	//This block is for an unrotated bounding box	
 	navigation.DefineNormalBoundingBox(100);
 	navigation.CreateNormalEdgeNodes(0.00025);
 	navigation.SortNormalBoundingBoxNodes();
 	navigation.ShrinkNormalNodesToFit();
-	//collision detection
+
+	//collision detection testing
 	Coordinate coorA = Coordinate(1.0, 1.0, 0.0);
 	Coordinate coorB = Coordinate(2.0, 2.0, 0.0);
 	Circle obs(Coordinate(1.5, 1.5, 0.0), 0.1);

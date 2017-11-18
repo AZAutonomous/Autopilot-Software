@@ -8,7 +8,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-size = (1000, 1000)
+size = (800, 800)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Test")
 
@@ -88,11 +88,14 @@ for a in op_corners:
 pygame.draw.lines(screen, GREEN, False, waypoints, 1)
 pygame.draw.lines(screen, BLUE, True, search_corners, 1)
 pygame.draw.lines(screen, BLACK, True, op_corners, 1)
-#for o in obstacles:
-	#position = ()
-	#pygame.draw.circle(screen, RED, )
+for o in obstacles:
+	position = (o[0], o[1])
+	radius = round(50000 * o[2])
+	pygame.draw.circle(screen, RED, position, radius, 1)
 
 #Update the screen
+temp_screen = pygame.transform.flip(screen, False, True)
+screen.blit(temp_screen, (0, 0))
 pygame.display.flip()
 
 #Run until user exits

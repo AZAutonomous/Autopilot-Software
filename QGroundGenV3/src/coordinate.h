@@ -7,7 +7,7 @@
 //PRODUCTS ACT IN 2D SPACE. MADE FOR AZ AUTONOMOUS PATH GEN.
 
 //Class Declarations
-class Coordinate;
+struct Coordinate;
 class Vector;
 class Line;
 class Circle;
@@ -20,7 +20,9 @@ struct Coordinate {
 	double y = 0;
 	double z = 0;
 
-	Coordinate operator+(Vector& displacement_vector);
+	Coordinate& operator+=(const Vector& displacement_vector);
+	Coordinate& operator-=(const Vector& displacement_vector);
+	//Coordinate operator+(const Vector& displacement_vector);
 };
 
 class Vector {
@@ -88,6 +90,8 @@ public:
 	double FindSlope(Coordinate point);
 };
 
+Coordinate const operator+(Coordinate lhs, const Vector& displacement_vector);
+Coordinate const operator-(Coordinate lhs, const Vector& displacement_vector);
 Vector CrossProduct(Vector vect1, Vector vect2); //Returns a vector product of 2 3-space vectors
 double DotProduct(Vector vect1, Vector vect2); //Returns the 3D dot product of 2 3-space vectors
 double AngleBetween(Vector vect1, Vector vect2); //Returns the angle between two vectors, with respect to xy-plane
@@ -95,5 +99,6 @@ double AngleBetween(Coordinate vertex, Coordinate coord1, Coordinate coord2); //
 Coordinate FindSolution(Line line1, Line line2); //Returns the coordinate of the point that the two lines intersect at
 std::vector<Coordinate> FindSolutions(Circle circ, Line line); //Finds the coordinates that a line intersects a circle
 std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point); //Finds lines tangent to a circle that contain the coordinate 'point'
+
 
 #endif

@@ -16,9 +16,32 @@ Coordinate::Coordinate(double x, double y, double z)
 	this->z = z;
 }
 
-Coordinate Coordinate::operator+(Vector& displacement_vector)
+Coordinate& Coordinate::operator+=(const Vector& displacement_vector)
 {
-	return Coordinate(x + displacement_vector.getX(), y + displacement_vector.getY(), z + displacement_vector.getZ());
+	this->x += displacement_vector.getX();
+	this->y += displacement_vector.getY();
+	this->z += displacement_vector.getZ();
+	return *this;
+}
+
+Coordinate& Coordinate::operator-=(const Vector& displacement_vector)
+{
+	this->x -= displacement_vector.getX();
+	this->y -= displacement_vector.getY();
+	this->z -= displacement_vector.getZ();
+	return *this;
+}
+
+Coordinate const operator+(Coordinate lhs, const Vector& displacement_vector)
+{
+	lhs += displacement_vector;
+	return lhs;
+}
+
+Coordinate const operator-(Coordinate lhs, const Vector& displacement_vector)
+{
+	lhs -= displacement_vector;
+	return lhs;
 }
 
 ////////////////////
@@ -123,6 +146,8 @@ double Vector::getDirection()
 		else if (_y == 0)
 			return std::numeric_limits<double>::quiet_NaN();
 	}
+	
+	return std::numeric_limits<double>::quiet_NaN();
 }
 
 /////////////////////////////
@@ -315,6 +340,8 @@ std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point)
 		Vector tangent2(tangent_magnitude, angle - angle_shift); //Create a tangent that is angle_shift behind the point_to_circle vector
 		tangent_point1 = Coordinate(point.x + tangent1.getX(), point.y + tangent1.getY(), 0); //Create points by adding the displacement vectors to the original point
 		tangent_point2 = Coordinate(point.x + tangent2.getX(), point.y + tangent2.getY(), 0);
+		points.push_back(tangent_point1);
+		points.push_back(tangent_point2);
 	}
 	else if (point_to_circle.getMagnitude() == circle.getRadius()) //"point" is a point of tangency
 	{
