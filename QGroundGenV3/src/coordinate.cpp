@@ -44,6 +44,22 @@ Coordinate const operator-(Coordinate lhs, const Vector& displacement_vector)
 	return lhs;
 }
 
+bool longitudesort(const Coordinate& lhs, const Coordinate& rhs)
+{
+	if (rhs.x == lhs.x) //If longitude is the same
+		return lhs.y < rhs.y; //The one with the smaller latitude is less than the other
+	else
+		return lhs.x < rhs.x; //The smallest longitude is the smaller one
+}
+
+bool latitudesort(const Coordinate& lhs, const Coordinate& rhs)
+{
+	if (rhs.y == lhs.y) //If latitude is the same
+		return lhs.x < rhs.x; //The one with the smaller longitude is less than the other
+	else
+		return lhs.y < rhs.y; //The smallest latitude is the smaller one
+}
+
 ////////////////////
 //VECTOR FUNCTIONS//
 ////////////////////

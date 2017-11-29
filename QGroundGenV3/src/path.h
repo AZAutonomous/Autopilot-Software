@@ -2,7 +2,6 @@
 #define PATH_H
 #include <vector>
 #include "coordinate.h"
-#include "obstacle.h"
 
 class Path {
 private:
@@ -11,6 +10,7 @@ private:
 	std::vector<Coordinate> _op_area_corners; //Holds the coordinates for the op area corners
 	std::vector<Coordinate> _bounding_box; //Coordinates that define the box around the search area
 	std::vector<Circle> _obstacles; //Holds the obstacles
+	bool _use_vertical;
 	double DmsToDecimal(double deg, double min, double sec); //Used in the ReadFromFile function, has no use otherwise
 
 public:

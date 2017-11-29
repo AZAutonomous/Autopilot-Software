@@ -1,10 +1,10 @@
+#define _USE_MATH_DEFINES
 #include "path.h"
-//#include "obstacle.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#define PI 3.14159265358979
+#include <algorithm>
 
 using namespace std;
 
@@ -291,6 +291,7 @@ void Path::CreateNormalEdgeNodes(double view_radius)
 
 	if (edge1.getMagnitude() < edge2.getMagnitude() || edge1.getMagnitude() == edge2.getMagnitude()) //If northern/southern edge is smaller or they are equal
 	{
+		_use_vertical = false;
 		temp_coord.y = _bounding_box[0].y; //Since this is adding points to the northern edge, y is constant
 		for (int i = 1; i < edge1.getMagnitude() / view_radius; i++)
 		{
@@ -311,6 +312,7 @@ void Path::CreateNormalEdgeNodes(double view_radius)
 	}
 	else if (edge1.getMagnitude() > edge2.getMagnitude()) //If the eastern/western edge is smaller
 	{
+		_use_vertical = true;
 		temp_coord.x = _bounding_box[1].x; //Work on the eastern edge first, holding x constant
 		for (int i = 1; i < edge2.getMagnitude() / view_radius; i++)
 		{
@@ -336,6 +338,63 @@ void Path::CreateEdgeNodes(double view_radius)
 
 }
 
+void Path::SortNormalBoundingBoxNodes() //Method 2 sorting the points by (lat/long)itude beforehand, then swapping
+{
+	Coordinate temp; //For swapping coordinates
+	const unsigned int size = _bounding_box.size(); //Just to prevent an unnecessary number of calls for the size
+
+	//Choose the sorting method depending on which sides hold the points
+	if (!_use_vertical) //If the north/south sides (horizontal edges) hold the points
+		sort(_bounding_box.begin(), _bounding_box.end(), longitudesort);
+	else //If the east/west sides hold the points
+		sort(_bounding_box.begin(), _bounding_box.end(), latitudesort);
+
+	//Rearranging points into a ladder pattern after finding the best point to start at
+	if (_waypoints.size() > 1)//Make sure there is more than one point so a heading can be calculated
+	{
+		Vector last_path(_waypoints[_waypoints.size() - 2], _waypoints.back()); //Create a vector that defines the current heading
+		unsigned int index = 0; //Index of the best starting point in the vector
+		double min_turn = M_PI; //Used to find the path with the lowest turn angle
+		for (unsigned int i = size - 2; i < size + 2; i++) //Scan the ending point pairs for the best starting point
+		{
+			Vector temp(_waypoints.back(), _bounding_box[i % size]);
+			if (AngleBetween(last_path, temp) < min_turn)
+			{
+				min_turn = AngleBetween(last_path, temp);
+				index = i % size;
+			}
+		}
+
+		//Swap the points into a ladder pattern
+		if (index == 0 || index == 1) //If the starting point is on the lesser edge (lower lat/longitude)
+		{
+			for (unsigned int i = (index ? 0 : 2); i < size; i += 4)
+			{
+				temp = _bounding_box[i];
+				_bounding_box[i] = _bounding_box[i + 1];
+				_bounding_box[i + 1] = temp;
+			}
+		}
+		else if (index == size - 2 || index == size - 1) //If the starting point is on the greater edge (largest lat/longitude)
+		{
+			for (unsigned int i = ((size - 2) % 4 ? 2 : 0); i < size; i += 4)
+			{
+				temp = _bounding_box[i];
+				_bounding_box[i] = _bounding_box[i + 1];
+				_bounding_box[i + 1] = temp;
+			}
+		}
+	}
+	else //Just make a ladder pattern using the bottom right point as the start
+	{
+		for (unsigned int i = 2; i < size; i += 4) //Go through and swap alternate pairs
+		{
+			temp = _bounding_box[i];
+			_bounding_box[i] = _bounding_box[i + 1];
+			_bounding_box[i + 1] = temp;
+		}
+	}
+}
 /*
 Steps for sorting
 1. Pick the best corner point to start at, based on previous heading. Swap into the 0th index.
@@ -343,118 +402,118 @@ Steps for sorting
 3. Cycle through all other points, first picking the closest one, then the farthest straight shot across the boundary.
 	Swap into ther correct positions.
 */
-void Path::SortNormalBoundingBoxNodes()
-{
-	Coordinate temp = _waypoints.back(); //For swapping purposes
-	Vector test_path(_bounding_box[0], _bounding_box[2]); //Vector that will be used to check for turning angles and distances
-	Vector last_path;
-	int index = 0; //The index of the first corner to travel to
-	double min_turn_angle = PI;
-	double max_distance = 0.0;
-	double min_distance = test_path.getMagnitude(); //Test path currently goes diagonally across the entire bounding box, the max distance possible
-	const double kMaxDistance = min_distance;
-
-	//SECTION 1: Choosing best starting point
-	if (_waypoints.size() > 1) //If there are at least 2 prior points to get a previous heading, else the starting point remains the top-left corner
-	{
-		last_path = Vector(_waypoints[_waypoints.size() - 2], _waypoints.back()); //Defines the previous heading
-		for (int i = 0; i < 4; i++) //Find the point that would require the least turning
-		{
-			test_path.setX(_bounding_box[i].x - temp.x);
-			test_path.setY(_bounding_box[i].y - temp.y);
-			test_path.setZ(_bounding_box[i].z - temp.z);
-
-			if (AngleBetween(last_path, test_path) < min_turn_angle)
-			{
-				min_turn_angle = AngleBetween(last_path, test_path);
-				index = i;
-			}
-		}
-
-		//Swap the best starting point with the first coordinate
-		temp = _bounding_box[index];
-		_bounding_box[index] = _bounding_box[0];
-		_bounding_box[0] = temp;
-		last_path = test_path;
-	}
-	
-	//END SECTION 1
-
-	//SECTION 2: Choosing the next point to fly to
-	//Bounding box 1, 2, 3 are the corners. Find farthest that is on same line of latitude/longitude
-	for (int i = 1; i < 4; i++)
-	{
-		test_path.setX(_bounding_box[i].x - _bounding_box[0].x);
-		test_path.setY(_bounding_box[i].y - _bounding_box[0].y);
-		test_path.setZ(_bounding_box[i].z - _bounding_box[0].z);
-
-		if (_bounding_box[i].x == _bounding_box[0].x && test_path.getMagnitude() > max_distance) //If on the same line of longitude (vertical edge)
-		{
-			index = i;
-			max_distance = test_path.getMagnitude();
-		}
-		else if (_bounding_box[i].y == _bounding_box[0].y && test_path.getMagnitude() > max_distance) //If on the same line of latitude (horizontal edge)
-		{
-			index = i;
-			max_distance = test_path.getMagnitude();
-		}
-	}
-
-	//Swap the second corner with the next corner to be flown to
-	temp = _bounding_box[index];
-	_bounding_box[index] = _bounding_box[1];
-	_bounding_box[1] = temp;
-
-	//Set the last path flown
-	last_path.setX(_bounding_box[1].x - _bounding_box[0].x);
-	last_path.setY(_bounding_box[1].y - _bounding_box[0].y);
-	last_path.setZ(_bounding_box[1].z - _bounding_box[0].z);
-	Vector long_edge(_bounding_box[0], _bounding_box[1]); //Holds the long edge for magnitude comparison
-
-	//END SECTION 2
-
-	//SECTION 3: Alternating between turning and flying across
-	//Next point is the closest one that creates a near perpendicular vector
-	//After that, the next point closest to a 90 degree turn, closest to 0 dot product
-	for (unsigned int i = 1; i < _bounding_box.size() - 1; i += 2)
-	{
-		min_distance = kMaxDistance;
-		for (unsigned int j = i + 1; j < _bounding_box.size(); j++) //Loop for turning and going to the nearest point
-		{
-			test_path.setX(_bounding_box[j].x - _bounding_box[i].x);
-			test_path.setY(_bounding_box[j].y - _bounding_box[i].y);
-			test_path.setZ(_bounding_box[j].z - _bounding_box[i].z);
-			
-			if (test_path.getMagnitude() < min_distance)
-			{
-				min_distance = test_path.getMagnitude();
-				index = j;
-			}
-		}
-
-		temp = _bounding_box[index];
-		_bounding_box[index] = _bounding_box[i + 1];
-		_bounding_box[i + 1] = temp;
-
-		for (unsigned int j = i + 2; j < _bounding_box.size(); j++) //Loop for turning and going across the region
-		{
-			test_path.setX(_bounding_box[j].x - _bounding_box[i + 1].x);
-			test_path.setY(_bounding_box[j].y - _bounding_box[i + 1].y);
-			test_path.setZ(_bounding_box[j].z - _bounding_box[i + 1].z);
-
-			if (test_path.getMagnitude() == long_edge.getMagnitude())
-			{
-				index = j;
-			}
-		}
-
-		temp = _bounding_box[index];
-		_bounding_box[index] = _bounding_box[i + 2];
-		_bounding_box[i + 2] = temp;
-	}
-
-	//END SECTION 3
-}
+//void Path::SortNormalBoundingBoxNodes()
+//{
+//	Coordinate temp = _waypoints.back(); //For swapping purposes
+//	Vector test_path(_bounding_box[0], _bounding_box[2]); //Vector that will be used to check for turning angles and distances
+//	Vector last_path;
+//	int index = 0; //The index of the first corner to travel to
+//	double min_turn_angle = PI;
+//	double max_distance = 0.0;
+//	double min_distance = test_path.getMagnitude(); //Test path currently goes diagonally across the entire bounding box, the max distance possible
+//	const double kMaxDistance = min_distance;
+//
+//	//SECTION 1: Choosing best starting point
+//	if (_waypoints.size() > 1) //If there are at least 2 prior points to get a previous heading, else the starting point remains the top-left corner
+//	{
+//		last_path = Vector(_waypoints[_waypoints.size() - 2], _waypoints.back()); //Defines the previous heading
+//		for (int i = 0; i < 4; i++) //Find the point that would require the least turning
+//		{
+//			test_path.setX(_bounding_box[i].x - temp.x);
+//			test_path.setY(_bounding_box[i].y - temp.y);
+//			test_path.setZ(_bounding_box[i].z - temp.z);
+//
+//			if (AngleBetween(last_path, test_path) < min_turn_angle)
+//			{
+//				min_turn_angle = AngleBetween(last_path, test_path);
+//				index = i;
+//			}
+//		}
+//
+//		//Swap the best starting point with the first coordinate
+//		temp = _bounding_box[index];
+//		_bounding_box[index] = _bounding_box[0];
+//		_bounding_box[0] = temp;
+//		last_path = test_path;
+//	}
+//	
+//	//END SECTION 1
+//
+//	//SECTION 2: Choosing the next point to fly to
+//	//Bounding box 1, 2, 3 are the corners. Find farthest that is on same line of latitude/longitude
+//	for (int i = 1; i < 4; i++)
+//	{
+//		test_path.setX(_bounding_box[i].x - _bounding_box[0].x);
+//		test_path.setY(_bounding_box[i].y - _bounding_box[0].y);
+//		test_path.setZ(_bounding_box[i].z - _bounding_box[0].z);
+//
+//		if (_bounding_box[i].x == _bounding_box[0].x && test_path.getMagnitude() > max_distance) //If on the same line of longitude (vertical edge)
+//		{
+//			index = i;
+//			max_distance = test_path.getMagnitude();
+//		}
+//		else if (_bounding_box[i].y == _bounding_box[0].y && test_path.getMagnitude() > max_distance) //If on the same line of latitude (horizontal edge)
+//		{
+//			index = i;
+//			max_distance = test_path.getMagnitude();
+//		}
+//	}
+//
+//	//Swap the second corner with the next corner to be flown to
+//	temp = _bounding_box[index];
+//	_bounding_box[index] = _bounding_box[1];
+//	_bounding_box[1] = temp;
+//
+//	//Set the last path flown
+//	last_path.setX(_bounding_box[1].x - _bounding_box[0].x);
+//	last_path.setY(_bounding_box[1].y - _bounding_box[0].y);
+//	last_path.setZ(_bounding_box[1].z - _bounding_box[0].z);
+//	Vector long_edge(_bounding_box[0], _bounding_box[1]); //Holds the long edge for magnitude comparison
+//
+//	//END SECTION 2
+//
+//	//SECTION 3: Alternating between turning and flying across
+//	//Next point is the closest one that creates a near perpendicular vector
+//	//After that, the next point closest to a 90 degree turn, closest to 0 dot product
+//	for (unsigned int i = 1; i < _bounding_box.size() - 1; i += 2)
+//	{
+//		min_distance = kMaxDistance;
+//		for (unsigned int j = i + 1; j < _bounding_box.size(); j++) //Loop for turning and going to the nearest point
+//		{
+//			test_path.setX(_bounding_box[j].x - _bounding_box[i].x);
+//			test_path.setY(_bounding_box[j].y - _bounding_box[i].y);
+//			test_path.setZ(_bounding_box[j].z - _bounding_box[i].z);
+//			
+//			if (test_path.getMagnitude() < min_distance)
+//			{
+//				min_distance = test_path.getMagnitude();
+//				index = j;
+//			}
+//		}
+//
+//		temp = _bounding_box[index];
+//		_bounding_box[index] = _bounding_box[i + 1];
+//		_bounding_box[i + 1] = temp;
+//
+//		for (unsigned int j = i + 2; j < _bounding_box.size(); j++) //Loop for turning and going across the region
+//		{
+//			test_path.setX(_bounding_box[j].x - _bounding_box[i + 1].x);
+//			test_path.setY(_bounding_box[j].y - _bounding_box[i + 1].y);
+//			test_path.setZ(_bounding_box[j].z - _bounding_box[i + 1].z);
+//
+//			if (test_path.getMagnitude() == long_edge.getMagnitude())
+//			{
+//				index = j;
+//			}
+//		}
+//
+//		temp = _bounding_box[index];
+//		_bounding_box[index] = _bounding_box[i + 2];
+//		_bounding_box[i + 2] = temp;
+//	}
+//
+//	//END SECTION 3
+//}
 
 /*
 Steps for Shrinking Nodes to Fit the search area
@@ -747,7 +806,7 @@ int Path::hasCollision(Coordinate coorA, Coordinate coorB, Circle O)
 	double thetaOBA = AngleBetween(coorB, coorA, O.getCenter());
 	double thetaOAB = AngleBetween(coorA, coorB, O.getCenter());
 	double height = OA*sin(thetaOAB);
-	if (thetaOBA >= PI/2 || thetaOAB >= PI/2) { //Used to have a check for theta being 0
+	if (thetaOBA >= M_PI/2 || thetaOAB >= M_PI/2) { //Used to have a check for theta being 0
 		if (OA <= O.getRadius() && OB <= O.getRadius()) {
 			return 4;
 		}

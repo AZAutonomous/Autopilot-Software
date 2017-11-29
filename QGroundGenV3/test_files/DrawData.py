@@ -1,6 +1,6 @@
 import pygame
 
-f = open('D:/Coding/AZAutonomous/Autopilot-Software/QGroundGenV3/test_files/points.txt', 'r')
+f = open('points.txt', 'r')
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -8,7 +8,7 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-size = (800, 800)
+size = (800, 600)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Test")
 

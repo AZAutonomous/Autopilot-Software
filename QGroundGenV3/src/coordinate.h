@@ -10,10 +10,12 @@
 struct Coordinate;
 class Vector;
 class Line;
+class LineSeg;
 class Circle;
 
 //Class Definitions
-struct Coordinate {
+struct Coordinate
+{
 	Coordinate();
 	Coordinate(double x, double y, double z);
 	double x = 0;
@@ -25,7 +27,8 @@ struct Coordinate {
 	//Coordinate operator+(const Vector& displacement_vector);
 };
 
-class Vector {
+class Vector
+{
 private:
 	double _x;
 	double _y;
@@ -55,7 +58,8 @@ public:
 	double getDirection(); //Returns the angle counterclockwise from the origin that the vector is pointing
 };
 
-class Line {
+class Line
+{
 private:
 	double _slope; //Slope of line formed by coord1 and coord2
 	double _y_intercept; //Y intercept of resulting line from coord1 and coord2
@@ -73,7 +77,28 @@ public:
 	double FindXatY(double y); //Returns the X value where a given Y value occurs
 };
 
-class Circle {
+class LineSeg
+{
+private:
+	double _slope;
+	double _y_intercept;
+	double _coord1;
+	double _coord2;
+public:
+	LineSeg();
+	LineSeg(Coordinate coord1, Coordinate coord2);
+
+	double getSlope();
+	double getYIntercept;
+
+	double FindYatX(double x);
+	double FindXatY(double y);
+
+	bool isOnSegment(Coordinate coord); //Checks if the coordinate is within a rectangle defined by diagonal from _coord1 to _coord2
+};
+
+class Circle
+{
 private:
 	Coordinate _center;
 	double _radius;
@@ -100,5 +125,6 @@ Coordinate FindSolution(Line line1, Line line2); //Returns the coordinate of the
 std::vector<Coordinate> FindSolutions(Circle circ, Line line); //Finds the coordinates that a line intersects a circle
 std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point); //Finds lines tangent to a circle that contain the coordinate 'point'
 
-
+bool longitudesort(const Coordinate& lhs, const Coordinate& rhs);
+bool latitudesort(const Coordinate& lhs, const Coordinate& rhs);
 #endif
