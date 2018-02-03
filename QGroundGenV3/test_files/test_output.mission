@@ -169,7 +169,7 @@
 "command": 16,
 "coordinate": [
 38.14103889,
--76.42617217,
+-76.4262378,
 100
 ],
 "doJumpId": 9,
@@ -186,8 +186,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14134444,
--76.42617217,
+38.14130344,
+-76.4262378,
 100
 ],
 "doJumpId": 10,
@@ -204,8 +204,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14134444,
--76.43266363,
+38.14130344,
+-76.432643,
 100
 ],
 "doJumpId": 11,
@@ -222,8 +222,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14159444,
--76.43266363,
+38.14156799,
+-76.432643,
 100
 ],
 "doJumpId": 12,
@@ -240,8 +240,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14159444,
--76.42537186,
+38.14156799,
+-76.42539091,
 100
 ],
 "doJumpId": 13,
@@ -258,8 +258,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14184444,
--76.42537186,
+38.14183254,
+-76.42539091,
 100
 ],
 "doJumpId": 14,
@@ -276,8 +276,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14184444,
--76.43305339,
+38.14183254,
+-76.43305545,
 100
 ],
 "doJumpId": 15,
@@ -294,8 +294,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14209444,
--76.43305339,
+38.14209709,
+-76.43305545,
 100
 ],
 "doJumpId": 16,
@@ -312,8 +312,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14209444,
--76.42457154,
+38.14209709,
+-76.42454402,
 100
 ],
 "doJumpId": 17,
@@ -330,8 +330,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14234444,
--76.42457154,
+38.14236164,
+-76.42454402,
 100
 ],
 "doJumpId": 18,
@@ -348,8 +348,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14234444,
--76.43344315,
+38.14236164,
+-76.4334679,
 100
 ],
 "doJumpId": 19,
@@ -366,8 +366,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14259444,
--76.43344315,
+38.14262619,
+-76.4334679,
 100
 ],
 "doJumpId": 20,
@@ -384,8 +384,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14259444,
--76.42377123,
+38.14262619,
+-76.42369713,
 100
 ],
 "doJumpId": 21,
@@ -402,8 +402,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14284444,
--76.42377123,
+38.14289074,
+-76.42369713,
 100
 ],
 "doJumpId": 22,
@@ -420,8 +420,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14284444,
--76.43383292,
+38.14289074,
+-76.43388035,
 100
 ],
 "doJumpId": 23,
@@ -438,8 +438,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14309444,
--76.43383292,
+38.14315529,
+-76.43388035,
 100
 ],
 "doJumpId": 24,
@@ -456,8 +456,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14309444,
--76.42297092,
+38.14315529,
+-76.42285024,
 100
 ],
 "doJumpId": 25,
@@ -474,8 +474,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14334444,
--76.42297092,
+38.14341984,
+-76.42285024,
 100
 ],
 "doJumpId": 26,
@@ -492,8 +492,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14334444,
--76.43331541,
+38.14341984,
+-76.43308983,
 100
 ],
 "doJumpId": 27,
@@ -510,8 +510,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14359444,
--76.43331541,
+38.14368439,
+-76.43308983,
 100
 ],
 "doJumpId": 28,
@@ -528,8 +528,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14359444,
--76.42217061,
+38.14368439,
+-76.42205557,
 100
 ],
 "doJumpId": 29,
@@ -546,8 +546,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14384444,
--76.42217061,
+38.14394894,
+-76.42205557,
 100
 ],
 "doJumpId": 30,
@@ -564,8 +564,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14384444,
--76.43181945,
+38.14394894,
+-76.43150681,
 100
 ],
 "doJumpId": 31,
@@ -582,8 +582,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14409444,
--76.43181945,
+38.14421349,
+-76.43150681,
 100
 ],
 "doJumpId": 32,
@@ -600,8 +600,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14409444,
--76.42214005,
+38.14421349,
+-76.42220918,
 100
 ],
 "doJumpId": 33,
@@ -618,8 +618,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14434444,
--76.42214005,
+38.14447804,
+-76.42220918,
 100
 ],
 "doJumpId": 34,
@@ -636,8 +636,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14434444,
--76.43032349,
+38.14447804,
+-76.42992378,
 100
 ],
 "doJumpId": 35,
@@ -654,8 +654,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14459444,
--76.43032349,
+38.14474259,
+-76.42992378,
 100
 ],
 "doJumpId": 36,
@@ -672,8 +672,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14459444,
--76.42243038,
+38.14474259,
+-76.4225164,
 100
 ],
 "doJumpId": 37,
@@ -690,8 +690,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14484444,
--76.42243038,
+38.14500714,
+-76.4225164,
 100
 ],
 "doJumpId": 38,
@@ -708,8 +708,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14484444,
--76.42882753,
+38.14500714,
+-76.42834075,
 100
 ],
 "doJumpId": 39,
@@ -726,8 +726,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14509444,
--76.42882753,
+38.14527169,
+-76.42834075,
 100
 ],
 "doJumpId": 40,
@@ -744,8 +744,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14509444,
--76.4227207,
+38.14527169,
+-76.42282362,
 100
 ],
 "doJumpId": 41,
@@ -762,8 +762,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14534444,
--76.4227207,
+38.14553624,
+-76.42282362,
 100
 ],
 "doJumpId": 42,
@@ -780,8 +780,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14534444,
--76.42733157,
+38.14553624,
+-76.42675772,
 100
 ],
 "doJumpId": 43,
@@ -798,8 +798,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14559444,
--76.42733157,
+38.14580079,
+-76.42675772,
 100
 ],
 "doJumpId": 44,
@@ -816,8 +816,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14559444,
--76.42301102,
+38.14580079,
+-76.42313084,
 100
 ],
 "doJumpId": 45,
@@ -834,8 +834,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14584444,
--76.42301102,
+38.14606534,
+-76.42313084,
 100
 ],
 "doJumpId": 46,
@@ -852,8 +852,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14584444,
--76.42583561,
+38.14606534,
+-76.42517469,
 100
 ],
 "doJumpId": 47,
@@ -870,8 +870,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14609444,
--76.42583561,
+38.14632989,
+-76.42517469,
 100
 ],
 "doJumpId": 48,
@@ -888,8 +888,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14609444,
--76.42330134,
+38.14632989,
+-76.42359167,
 100
 ],
 "doJumpId": 49,
@@ -906,8 +906,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14634444,
--76.42330134,
+38.14659444,
+-76.42359167,
 100
 ],
 "doJumpId": 50,
@@ -924,8 +924,8 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14634444,
--76.42359167,
+38.14315556,
+-76.43388056,
 100
 ],
 "doJumpId": 51,
@@ -942,11 +942,65 @@
 "autoContinue": true,
 "command": 16,
 "coordinate": [
-38.14659444,
--76.42359167,
+38.14315556,
+-76.43388056,
 100
 ],
 "doJumpId": 52,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14103889,
+-76.43223056,
+100
+],
+"doJumpId": 53,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.14126111,
+-76.42630556,
+100
+],
+"doJumpId": 54,
+"frame": 3,
+"params": [
+0,
+0,
+0,
+0
+],
+"type": "SimpleItem"
+},
+{
+"autoContinue": true,
+"command": 16,
+"coordinate": [
+38.143925,
+-76.42204167,
+100
+],
+"doJumpId": 55,
 "frame": 3,
 "params": [
 0,
@@ -964,7 +1018,7 @@
 -76.42359167,
 100
 ],
-"doJumpId": 53,
+"doJumpId": 56,
 "frame": 3,
 "params": [
 0,

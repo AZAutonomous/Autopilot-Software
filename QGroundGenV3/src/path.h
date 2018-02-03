@@ -16,17 +16,17 @@ private:
 public:
 	Path();
 
-	std::vector<Coordinate> getWaypoints() const;
-	std::vector<Coordinate> getSearchCorners() const;
-	std::vector<Coordinate> getOpAreaCorners() const;
-	std::vector<Coordinate> getBoundingBox() const;
-	std::vector<Circle> getObstacles() const;
+	const std::vector<Coordinate>& getWaypoints() const { return _waypoints; }
+	const std::vector<Coordinate> Path::getSearchCorners() const { return this->_search_corners; }
+	const std::vector<Coordinate> Path::getOpAreaCorners() const { return this->_op_area_corners; }
+	const std::vector<Coordinate> Path::getBoundingBox() const { return this->_bounding_box; }
+	const std::vector<Circle> Path::getObstacles() const { return this->_obstacles; }
 
-	void setWaypoints(std::vector<Coordinate> waypoints);
-	void setSearchCorners(std::vector<Coordinate> search_corners);
-	void setOpAreaCorners(std::vector<Coordinate> op_area_corners);
-	void setBoundingBox(std::vector<Coordinate> bounding_box); //Shouldn't be used except for testing purposes
-	void setObstacles(std::vector<Circle> obstacles);
+	void setWaypoints(std::vector<Coordinate> waypoints) { _waypoints = waypoints; }
+	void setSearchCorners(std::vector<Coordinate> search_corners) { _search_corners = search_corners; }
+	void setOpAreaCorners(std::vector<Coordinate> op_area_corners) { _op_area_corners = op_area_corners; }
+	void setBoundingBox(std::vector<Coordinate> bounding_box) { _bounding_box = bounding_box; }
+	void setObstacles(std::vector<Circle> obstacles) { _obstacles = obstacles; }
 
 	//void PartitionSearchArea(); //Possible approach, not a priority. Divides the search area into the smallest number of rectangles that covers the entire area
 	bool ReadFromFile(std::string file_path, double search_alt); //Reads data from a file containing points and their designations and assigns them to the waypoint or corner vectors

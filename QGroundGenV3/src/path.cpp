@@ -10,18 +10,6 @@ using namespace std;
 
 Path::Path() {}
 
-vector<Coordinate> Path::getWaypoints() const { return this->_waypoints; }
-vector<Coordinate> Path::getSearchCorners() const { return this->_search_corners; }
-vector<Coordinate> Path::getOpAreaCorners() const { return this->_op_area_corners; }
-vector<Coordinate> Path::getBoundingBox() const { return this->_bounding_box; }
-vector<Circle> Path::getObstacles() const { return this->_obstacles; }
-
-void Path::setWaypoints(vector<Coordinate> waypoints) { _waypoints = waypoints; }
-void Path::setSearchCorners(vector<Coordinate> search_corners) { _search_corners = search_corners; }
-void Path::setOpAreaCorners(vector<Coordinate> op_area_corners) { _op_area_corners = op_area_corners; }
-void Path::setBoundingBox(vector<Coordinate> bounding_box) { _bounding_box = bounding_box; }
-void Path::setObstacles(vector<Circle> obstacles) { _obstacles = obstacles; }
-
 bool Path::ReadFromFile(string file_path, double search_alt)
 {
 	ifstream in;
@@ -280,6 +268,9 @@ void Path::DefineBoundingBox(double search_alt)
 
 void Path::CreateNormalEdgeNodes(double view_radius)
 {
+	if (_bounding_box.empty())
+		return;
+
 	Coordinate temp_coord;
 	const double kViewRadiusMult = 1.00; //Used to scale the view radius
 	view_radius *= kViewRadiusMult;
@@ -288,47 +279,60 @@ void Path::CreateNormalEdgeNodes(double view_radius)
 	Vector edge1(_bounding_box[0], _bounding_box[1]); //Vector along northern edge (same as southern edge)
 	Vector edge2(_bounding_box[1], _bounding_box[2]); //Vector along eastern edge (same as western edge)
 	Vector temp_vector;
+	double distance_between_points;
+	int num_points;
 
-	if (edge1.getMagnitude() < edge2.getMagnitude() || edge1.getMagnitude() == edge2.getMagnitude()) //If northern/southern edge is smaller or they are equal
+	//If northern/southern edge is smaller than the eastern/western edge or they are equal
+	if (edge1.getMagnitude() < edge2.getMagnitude() || edge1.getMagnitude() == edge2.getMagnitude())
 	{
+		num_points = floor(edge1.getMagnitude() / view_radius) - 1;
+
+		if (num_points == 0) //To avoid a divide by zero
+			return;
+
+		distance_between_points = edge1.getMagnitude() / num_points;
 		_use_vertical = false;
 		temp_coord.y = _bounding_box[0].y; //Since this is adding points to the northern edge, y is constant
-		for (int i = 1; i < edge1.getMagnitude() / view_radius; i++)
+
+		for (int i = 1; i < num_points; i++)
 		{
-			temp_coord.x = _bounding_box[0].x + (view_radius * i); //Adding points from left to right
+			temp_coord.x = _bounding_box[0].x + (distance_between_points * i); //Adding points from left to right
 			temp_vector.setX(_bounding_box[1].x - temp_coord.x);
-			if (temp_vector.getMagnitude() > view_radius) //Don't add a point if it is at or within view radius of corner
-				_bounding_box.push_back(temp_coord);
+			_bounding_box.push_back(temp_coord);
 		}
 
 		temp_coord.y = _bounding_box[3].y; //Now along southern edge, y is constant
-		for (int i = 1; i < edge1.getMagnitude() / view_radius; i++)
+		for (int i = 1; i < num_points; i++)
 		{
-			temp_coord.x = _bounding_box[3].x + (view_radius * i); //Adding points from left to right
+			temp_coord.x = _bounding_box[3].x + (distance_between_points * i); //Adding points from left to right
 			temp_vector.setX(_bounding_box[2].x - temp_coord.x);
-			if (temp_vector.getMagnitude() > view_radius)
-				_bounding_box.push_back(temp_coord);
+			_bounding_box.push_back(temp_coord);
 		}
 	}
 	else if (edge1.getMagnitude() > edge2.getMagnitude()) //If the eastern/western edge is smaller
 	{
+		num_points = floor(edge2.getMagnitude() / view_radius) - 1;
+
+		if (num_points == 0)
+			return;
+
+		distance_between_points = edge2.getMagnitude() / num_points;
 		_use_vertical = true;
 		temp_coord.x = _bounding_box[1].x; //Work on the eastern edge first, holding x constant
-		for (int i = 1; i < edge2.getMagnitude() / view_radius; i++)
+
+		for (int i = 1; i < num_points; i++)
 		{
-			temp_coord.y = _bounding_box[1].y - (view_radius * i); //Add points from top to bottom
+			temp_coord.y = _bounding_box[1].y - (distance_between_points * i); //Add points from top to bottom
 			temp_vector.setY(_bounding_box[2].y - temp_coord.y);
-			if (temp_vector.getMagnitude() > view_radius)
-				_bounding_box.push_back(temp_coord);
+			_bounding_box.push_back(temp_coord);
 		}
 
 		temp_coord.x = _bounding_box[0].x; //Work on the western edge
-		for (int i = 1; i < edge2.getMagnitude() / view_radius; i++)
+		for (int i = 1; i < num_points; i++)
 		{
-			temp_coord.y = _bounding_box[0].y - (view_radius * i); //Add points from top to bottom
+			temp_coord.y = _bounding_box[0].y - (distance_between_points * i); //Add points from top to bottom
 			temp_vector.setY(_bounding_box[3].y - temp_coord.y);
-			if (temp_vector.getMagnitude() > view_radius)
-				_bounding_box.push_back(temp_coord);
+			_bounding_box.push_back(temp_coord);
 		}
 	}
 }
@@ -338,7 +342,7 @@ void Path::CreateEdgeNodes(double view_radius)
 
 }
 
-void Path::SortNormalBoundingBoxNodes() //Method 2 sorting the points by (lat/long)itude beforehand, then swapping
+void Path::SortNormalBoundingBoxNodes() //Sorts the points by (lat/long)itude beforehand, then swaps into ladder pattern
 {
 	Coordinate temp; //For swapping coordinates
 	const unsigned int size = _bounding_box.size(); //Just to prevent an unnecessary number of calls for the size
@@ -357,10 +361,10 @@ void Path::SortNormalBoundingBoxNodes() //Method 2 sorting the points by (lat/lo
 		double min_turn = M_PI; //Used to find the path with the lowest turn angle
 		for (unsigned int i = size - 2; i < size + 2; i++) //Scan the ending point pairs for the best starting point
 		{
-			Vector temp(_waypoints.back(), _bounding_box[i % size]);
-			if (AngleBetween(last_path, temp) < min_turn)
+			Vector temp_vector(_waypoints.back(), _bounding_box[i % size]);
+			if (AngleBetween(last_path, temp_vector) < min_turn)
 			{
-				min_turn = AngleBetween(last_path, temp);
+				min_turn = AngleBetween(last_path, temp_vector);
 				index = i % size;
 			}
 		}
@@ -395,125 +399,6 @@ void Path::SortNormalBoundingBoxNodes() //Method 2 sorting the points by (lat/lo
 		}
 	}
 }
-/*
-Steps for sorting
-1. Pick the best corner point to start at, based on previous heading. Swap into the 0th index.
-2. Set the next point to the farthest corner along same line of latitude/longitude. Swap into the 1st index.
-3. Cycle through all other points, first picking the closest one, then the farthest straight shot across the boundary.
-	Swap into ther correct positions.
-*/
-//void Path::SortNormalBoundingBoxNodes()
-//{
-//	Coordinate temp = _waypoints.back(); //For swapping purposes
-//	Vector test_path(_bounding_box[0], _bounding_box[2]); //Vector that will be used to check for turning angles and distances
-//	Vector last_path;
-//	int index = 0; //The index of the first corner to travel to
-//	double min_turn_angle = PI;
-//	double max_distance = 0.0;
-//	double min_distance = test_path.getMagnitude(); //Test path currently goes diagonally across the entire bounding box, the max distance possible
-//	const double kMaxDistance = min_distance;
-//
-//	//SECTION 1: Choosing best starting point
-//	if (_waypoints.size() > 1) //If there are at least 2 prior points to get a previous heading, else the starting point remains the top-left corner
-//	{
-//		last_path = Vector(_waypoints[_waypoints.size() - 2], _waypoints.back()); //Defines the previous heading
-//		for (int i = 0; i < 4; i++) //Find the point that would require the least turning
-//		{
-//			test_path.setX(_bounding_box[i].x - temp.x);
-//			test_path.setY(_bounding_box[i].y - temp.y);
-//			test_path.setZ(_bounding_box[i].z - temp.z);
-//
-//			if (AngleBetween(last_path, test_path) < min_turn_angle)
-//			{
-//				min_turn_angle = AngleBetween(last_path, test_path);
-//				index = i;
-//			}
-//		}
-//
-//		//Swap the best starting point with the first coordinate
-//		temp = _bounding_box[index];
-//		_bounding_box[index] = _bounding_box[0];
-//		_bounding_box[0] = temp;
-//		last_path = test_path;
-//	}
-//	
-//	//END SECTION 1
-//
-//	//SECTION 2: Choosing the next point to fly to
-//	//Bounding box 1, 2, 3 are the corners. Find farthest that is on same line of latitude/longitude
-//	for (int i = 1; i < 4; i++)
-//	{
-//		test_path.setX(_bounding_box[i].x - _bounding_box[0].x);
-//		test_path.setY(_bounding_box[i].y - _bounding_box[0].y);
-//		test_path.setZ(_bounding_box[i].z - _bounding_box[0].z);
-//
-//		if (_bounding_box[i].x == _bounding_box[0].x && test_path.getMagnitude() > max_distance) //If on the same line of longitude (vertical edge)
-//		{
-//			index = i;
-//			max_distance = test_path.getMagnitude();
-//		}
-//		else if (_bounding_box[i].y == _bounding_box[0].y && test_path.getMagnitude() > max_distance) //If on the same line of latitude (horizontal edge)
-//		{
-//			index = i;
-//			max_distance = test_path.getMagnitude();
-//		}
-//	}
-//
-//	//Swap the second corner with the next corner to be flown to
-//	temp = _bounding_box[index];
-//	_bounding_box[index] = _bounding_box[1];
-//	_bounding_box[1] = temp;
-//
-//	//Set the last path flown
-//	last_path.setX(_bounding_box[1].x - _bounding_box[0].x);
-//	last_path.setY(_bounding_box[1].y - _bounding_box[0].y);
-//	last_path.setZ(_bounding_box[1].z - _bounding_box[0].z);
-//	Vector long_edge(_bounding_box[0], _bounding_box[1]); //Holds the long edge for magnitude comparison
-//
-//	//END SECTION 2
-//
-//	//SECTION 3: Alternating between turning and flying across
-//	//Next point is the closest one that creates a near perpendicular vector
-//	//After that, the next point closest to a 90 degree turn, closest to 0 dot product
-//	for (unsigned int i = 1; i < _bounding_box.size() - 1; i += 2)
-//	{
-//		min_distance = kMaxDistance;
-//		for (unsigned int j = i + 1; j < _bounding_box.size(); j++) //Loop for turning and going to the nearest point
-//		{
-//			test_path.setX(_bounding_box[j].x - _bounding_box[i].x);
-//			test_path.setY(_bounding_box[j].y - _bounding_box[i].y);
-//			test_path.setZ(_bounding_box[j].z - _bounding_box[i].z);
-//			
-//			if (test_path.getMagnitude() < min_distance)
-//			{
-//				min_distance = test_path.getMagnitude();
-//				index = j;
-//			}
-//		}
-//
-//		temp = _bounding_box[index];
-//		_bounding_box[index] = _bounding_box[i + 1];
-//		_bounding_box[i + 1] = temp;
-//
-//		for (unsigned int j = i + 2; j < _bounding_box.size(); j++) //Loop for turning and going across the region
-//		{
-//			test_path.setX(_bounding_box[j].x - _bounding_box[i + 1].x);
-//			test_path.setY(_bounding_box[j].y - _bounding_box[i + 1].y);
-//			test_path.setZ(_bounding_box[j].z - _bounding_box[i + 1].z);
-//
-//			if (test_path.getMagnitude() == long_edge.getMagnitude())
-//			{
-//				index = j;
-//			}
-//		}
-//
-//		temp = _bounding_box[index];
-//		_bounding_box[index] = _bounding_box[i + 2];
-//		_bounding_box[i + 2] = temp;
-//	}
-//
-//	//END SECTION 3
-//}
 
 /*
 Steps for Shrinking Nodes to Fit the search area
@@ -565,35 +450,12 @@ void Path::ShrinkNormalNodesToFit()
 
 			if (use_vertical_edge && _bounding_box[i].y <= temp_coord1.y && _bounding_box[i].y >= temp_coord2.y) //If the current bounding box point is between two search area corners
 			{
-				//THIS SECTION CAN BE REWRITTEN USING LINEAR EQUATIONS TO FIND THE CLOSEST EDGE MORE ACCURATELY
-				//THIS PART IS THE SAME WHETHER WORKING ON THE VERTICAL OR HORIZONTAL EDGE
-				//Determine if this edge is closer than the last one
-				/*temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
-				temp_vector1.setY(_bounding_box[i].y - temp_coord1.y);
-				temp_vector2.setX(_bounding_box[i].x - temp_coord2.x);
-				temp_vector2.setY(_bounding_box[i].y - temp_coord2.y);
-				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
-				{
-					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
-					edge_coord1 = temp_coord1;
-					edge_coord2 = temp_coord2;
-				}*/
-				/*temp_edge.setCoord1(temp_coord1);
-				temp_edge.setCoord2(temp_coord2);
-				LinearEq temp_line(_bounding_box[i], -1 / temp_edge.getSlope());
-				intersect_coord = FindSolution(temp_edge, temp_line);
-				Vector temp_vector(_bounding_box[i], intersect_coord);
-				if (temp_vector.getMagnitude() < min_distance)
-				{
-					min_distance = temp_vector.getMagnitude();
-					edge_coord1 = temp_coord1;
-					edge_coord2 = temp_coord2;
-				}*/
 				temp_edge = Line(temp_coord1, temp_coord2);
-				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
+				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i].y);
 				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
 				intersect_coord.z = kSearchAlt;
-				Vector temp_vector(intersect_coord, _bounding_box[i + 1]);
+				Vector temp_vector(intersect_coord, _bounding_box[i]);
+
 				if (temp_vector.getMagnitude() < min_distance)
 				{
 					min_distance = temp_vector.getMagnitude();
@@ -603,13 +465,15 @@ void Path::ShrinkNormalNodesToFit()
 			}
 			else if (!use_vertical_edge && _bounding_box[i].x <= temp_coord1.x && _bounding_box[i].x >= temp_coord2.x)
 			{
-				temp_vector1.setX(_bounding_box[i].x - temp_coord1.x);
-				temp_vector1.setY(_bounding_box[i].y - temp_coord1.y);
-				temp_vector2.setX(_bounding_box[i].x - temp_coord2.x);
-				temp_vector2.setY(_bounding_box[i].y - temp_coord2.y);
-				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
+				temp_edge = Line(temp_coord1, temp_coord2);
+				intersect_coord.y = temp_edge.FindYatX(_bounding_box[i].x);
+				intersect_coord.x = temp_edge.FindXatY(intersect_coord.y);
+				intersect_coord.z = kSearchAlt;
+				Vector temp_vector(intersect_coord, _bounding_box[i]);
+
+				if (temp_vector.getMagnitude() < min_distance)
 				{
-					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					min_distance = temp_vector.getMagnitude();
 					edge_coord1 = temp_coord1;
 					edge_coord2 = temp_coord2;
 				}
@@ -643,38 +507,12 @@ void Path::ShrinkNormalNodesToFit()
 
 			if (use_vertical_edge && _bounding_box[i + 1].y <= temp_coord1.y && _bounding_box[i + 1].y >= temp_coord2.y)
 			{
-				//Determine if this edge is closer than the last one
-				//Method 1: Sum of distances to the points defining the edge
-				/*temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
-				temp_vector1.setY(_bounding_box[i + 1].y - temp_coord1.y);
-				temp_vector2.setX(_bounding_box[i + 1].x - temp_coord2.x);
-				temp_vector2.setY(_bounding_box[i + 1].y - temp_coord2.y);
-				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
-				{
-					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
-					edge_coord1 = temp_coord1;
-					edge_coord2 = temp_coord2;
-				}*/
-
-				//Method 2: Length of a path that is perpendicular to the edge
-				/*temp_edge.setCoord1(temp_coord1);
-				temp_edge.setCoord2(temp_coord2);
-				LinearEq temp_line(_bounding_box[i + 1], -1 / temp_edge.getSlope());
-				intersect_coord = FindSolution(temp_edge, temp_line);
-				Vector temp_vector(_bounding_box[i + 1], intersect_coord);
-				if (temp_vector.getMagnitude() < min_distance)
-				{
-					min_distance = temp_vector.getMagnitude();
-					edge_coord1 = temp_coord1;
-					edge_coord2 = temp_coord2;
-				}*/
-
-				//Method 3: Shortest translational distance directly to edge (depends on use_vertical_edge)
 				temp_edge = Line(temp_coord1, temp_coord2);
 				intersect_coord.x = temp_edge.FindXatY(_bounding_box[i + 1].y);
 				intersect_coord.y = temp_edge.FindYatX(intersect_coord.x);
 				intersect_coord.z = kSearchAlt;
 				Vector temp_vector(intersect_coord, _bounding_box[i + 1]);
+
 				if (temp_vector.getMagnitude() < min_distance)
 				{
 					min_distance = temp_vector.getMagnitude();
@@ -684,13 +522,15 @@ void Path::ShrinkNormalNodesToFit()
 			}
 			else if (!use_vertical_edge && _bounding_box[i + 1].x <= temp_coord1.x && _bounding_box[i + 1].x >= temp_coord2.x)
 			{
-				temp_vector1.setX(_bounding_box[i + 1].x - temp_coord1.x);
-				temp_vector1.setY(_bounding_box[i + 1].y - temp_coord1.y);
-				temp_vector2.setX(_bounding_box[i + 1].x - temp_coord2.x);
-				temp_vector2.setY(_bounding_box[i + 1].y - temp_coord2.y);
-				if ((temp_vector1.getMagnitude() + temp_vector2.getMagnitude()) < min_distance)
+				temp_edge = Line(temp_coord1, temp_coord2);
+				intersect_coord.y = temp_edge.FindYatX(_bounding_box[i + 1].x);
+				intersect_coord.x = temp_edge.FindXatY(intersect_coord.y);
+				intersect_coord.z = kSearchAlt;
+				Vector temp_vector(intersect_coord, _bounding_box[i + 1]);
+
+				if (temp_vector.getMagnitude() < min_distance)
 				{
-					min_distance = temp_vector1.getMagnitude() + temp_vector2.getMagnitude();
+					min_distance = temp_vector.getMagnitude();
 					edge_coord1 = temp_coord1;
 					edge_coord2 = temp_coord2;
 				}
@@ -944,7 +784,7 @@ Coordinate Path::AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index
 double Path::PathLength(int begin, int end)
 {
 	double length = 0.0;
-	for (int i = begin; i < end; i++)
+	for (int i = begin; i < end - 1; i++)
 	{
 		Vector temp(_waypoints[i], _waypoints[i + 1]);
 		length += temp.getMagnitude();

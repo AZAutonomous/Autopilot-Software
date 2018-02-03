@@ -88,18 +88,13 @@ Vector::Vector(Coordinate coord1, Coordinate coord2) //This constructor does the
 	this->_magnitude = sqrt(pow(_x, 2) + pow(_y, 2) + pow(_z, 2));
 }
 
-Vector::Vector(double magnitude, double angle) //Does not create a 3-space vector
+Vector::Vector(double magnitude, double angle) //Does not create a 3-space vector (it does but z is always 0)
 {
 	this->_x = magnitude * cos(angle);
 	this->_y = magnitude * sin(angle);
 	this->_z = 0;
 	this->_magnitude = magnitude;
 }
-
-double Vector::getX() const { return _x; }
-double Vector::getY() const { return _y; }
-double Vector::getZ() const { return _z; }
-double Vector::getMagnitude() const { return _magnitude; }
 
 void Vector::setX(double x)
 {
@@ -188,9 +183,6 @@ Line::Line(Coordinate point, double slope)
 	this->_y_intercept = point.y - (_slope * point.x);
 }
 
-double Line::getSlope() { return this->_slope; }
-double Line::getYIntercept() { return this->_y_intercept; }
-
 double Line::CalculateSlope(Coordinate coord1, Coordinate coord2)
 {
 	if (coord1.x - coord2.x == 0) //This makes the slope undefined
@@ -212,6 +204,32 @@ double Line::FindXatY(double y)
 		return (y - _y_intercept) / _slope;
 }
 
+//////////////////////////
+//LINE SEGMENT FUNCTIONS//
+//////////////////////////
+
+bool LineSeg::PointIsBetweenPerpendiculars(Coordinate point)
+{
+	Line perp1(_coord1, -1 / _slope);
+	Line perp2(_coord2, -1 / _slope);
+
+	//Check if the point is above or below both lines. If it is, then it is not between them
+	if ((point.y < perp1.FindYatX(point.x) && point.y < perp2.FindYatX(point.x)) || (point.y > perp1.FindYatX(point.x) && point.y > perp2.FindYatX(point.x)))
+		return false;
+	else
+		return true;
+}
+
+bool LineSeg::PointIsInRectangle(Coordinate point)
+{
+	if (point.x > _coord1.x && point.x > _coord2.x || point.x < _coord1.x && point.x < _coord2.x)
+		return false;
+	else if (point.y > _coord1.y && point.y > _coord2.y || point.y < _coord1.y && point.y < _coord2.y)
+		return false;
+	else
+		return true;
+}
+
 ////////////////////
 //CIRCLE FUNCTIONS//
 ////////////////////
@@ -221,12 +239,6 @@ Circle::Circle(Coordinate center = Coordinate(), double radius = 1.0)
 	this->_center = center;
 	this->_radius = radius;
 }
-
-Coordinate Circle::getCenter() { return this->_center; }
-double Circle::getRadius() { return this->_radius; }
-
-void Circle::setCenter(Coordinate center) { this->_center = center; }
-void Circle::setRadius(double radius) { this->_radius = radius; }
 
 double Circle::FindSlope(Coordinate point)
 {
@@ -341,28 +353,71 @@ std::vector<Coordinate> FindSolutions(Circle circ, Line line)
 	return solutions;
 }
 
-std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point)
+//std::vector<Coordinate> FindSolutions(Circle first, Circle second)
+//{
+//	
+//}
+
+//std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point)
+//{
+//	//std::vector<Coordinate> points;
+//	//Coordinate tangent_point1, tangent_point2;
+//	//Vector point_to_circle(point, circle.getCenter());
+//	//double angle, angle_shift, tangent_magnitude; //The angle of the point_to_circle vector, how much to rotate it to create a tangent, and the magnitude of the tangent
+//	//if (point_to_circle.getMagnitude() > circle.getRadius()) //If the point is outside of the circle
+//	//{
+//	//	angle = point_to_circle.getDirection();
+//	//	angle_shift = asin(circle.getRadius() / point_to_circle.getMagnitude()); //Angle at vertex point of a triangle defined by the tangency point, "point", and circle center
+//	//	tangent_magnitude = sqrt(pow(point_to_circle.getMagnitude(), 2) - pow(circle.getRadius(), 2));
+//	//	Vector tangent1(tangent_magnitude, angle + angle_shift); //Create a tangent that is angle_shift ahead of the point_to_circle vector
+//	//	Vector tangent2(tangent_magnitude, angle - angle_shift); //Create a tangent that is angle_shift behind the point_to_circle vector
+//	//	tangent_point1 = Coordinate(point.x + tangent1.getX(), point.y + tangent1.getY(), 0); //Create points by adding the displacement vectors to the original point
+//	//	tangent_point2 = Coordinate(point.x + tangent2.getX(), point.y + tangent2.getY(), 0);
+//	//	points.push_back(tangent_point1);
+//	//	points.push_back(tangent_point2);
+//	//}
+//	//else if (point_to_circle.getMagnitude() == circle.getRadius()) //"point" is a point of tangency
+//	//{
+//	//	points.push_back(point);
+//	//}
+//	//
+//	//return points;
+//
+//	std::vector<Coordinate> points;
+//	Coordinate tangent_point1, tangent_point2;
+//	Vector point_to_circle(point, circle.getCenter());
+//	Circle midpoint_circle(Midpoint(point, circle.getCenter()), point_to_circle.getMagnitude() / 2); //Create a circle at the midpoint b/w the point and starting circle
+//
+//}
+
+Coordinate Midpoint(Coordinate first, Coordinate second)
 {
-	std::vector<Coordinate> points;
-	Coordinate tangent_point1, tangent_point2;
-	Vector point_to_circle(point, circle.getCenter());
-	double angle, angle_shift, tangent_magnitude; //The angle of the point_to_circle vector, how much to rotate it to create a tangent, and the magnitude of the tangent
-	if (point_to_circle.getMagnitude() > circle.getRadius()) //If the point is outside of the circle
-	{
-		angle = point_to_circle.getDirection();
-		angle_shift = asin(circle.getRadius() / point_to_circle.getMagnitude()); //Angle at vertex point of a triangle defined by the tangency point, "point", and circle center
-		tangent_magnitude = sqrt(pow(point_to_circle.getMagnitude(), 2) - pow(circle.getRadius(), 2));
-		Vector tangent1(tangent_magnitude, angle + angle_shift); //Create a tangent that is angle_shift ahead of the point_to_circle vector
-		Vector tangent2(tangent_magnitude, angle - angle_shift); //Create a tangent that is angle_shift behind the point_to_circle vector
-		tangent_point1 = Coordinate(point.x + tangent1.getX(), point.y + tangent1.getY(), 0); //Create points by adding the displacement vectors to the original point
-		tangent_point2 = Coordinate(point.x + tangent2.getX(), point.y + tangent2.getY(), 0);
-		points.push_back(tangent_point1);
-		points.push_back(tangent_point2);
-	}
-	else if (point_to_circle.getMagnitude() == circle.getRadius()) //"point" is a point of tangency
-	{
-		points.push_back(point);
-	}
-	
-	return points;
+	return Coordinate((first.x + second.x) / 2, (first.y + second.y) / 2, (first.z + second.z) / 2);
 }
+
+double DistanceBetween(Coordinate first, Coordinate second)
+{
+	return sqrt(pow(first.x - second.x, 2) + pow(first.y - second.y, 2) + pow(first.z - second.z, 2));
+}
+
+//Not quite proven that this will work, just a skeleton for now
+//bool isInBoundary(std::vector<Coordinate>& boundary, Coordinate point)
+//{
+//	//Method 1: See if sum of angles in form of <OAB + <OBA sum to the interior sum ± 0.5%
+//	//Method 2: See if sum of angles in form of <AOB do not sum to 360 ± 0.5%
+//	double angle_sum = 0.0;
+//	const double target_sum = (boundary.size() - 2) * 180; //The sum of the interior angles of the boundary shape
+//
+//	if (boundary.size() < 2) //If the boundary is not closed
+//		return false;
+//
+//	for (unsigned int i = 0; i < boundary.size(); i++)
+//	{
+//		angle_sum += AngleBetween(point, boundary[i], boundary[(i + 1) % boundary.size()]);
+//	}
+//
+//	if (angle_sum < (360 * 0.995) || angle_sum > (360 * 0.995)) //if angle_sum does not fall within margin of error
+//		return false;
+//	else
+//		return true;
+//}

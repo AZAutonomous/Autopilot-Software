@@ -41,10 +41,10 @@ public:
 	Vector(Coordinate coord1, Coordinate coord2);
 	Vector(double magnitude, double angle); //Create a vector given the counterclockwise angle and magnitude
 
-	double getX() const;
-	double getY() const;
-	double getZ() const;
-	double getMagnitude() const;
+	double getX() const { return _x; }
+	double getY() const { return _y; }
+	double getZ() const { return _z; }
+	double getMagnitude() const { return _magnitude; }
 
 	void setX(double x);
 	void setY(double y);
@@ -60,7 +60,7 @@ public:
 
 class Line
 {
-private:
+protected:
 	double _slope; //Slope of line formed by coord1 and coord2
 	double _y_intercept; //Y intercept of resulting line from coord1 and coord2
 	double CalculateSlope(Coordinate coord1, Coordinate coord2); //Helper for handling slope
@@ -70,31 +70,28 @@ public:
 	Line(Coordinate coord1, Coordinate coord2);
 	Line(Coordinate point, double slope);
 
-	double getSlope();
-	double getYIntercept();
+	double getSlope() { return _slope; }
+	double getYIntercept() { return _y_intercept; }
 
 	double FindYatX(double x); //Returns the Y value for a given X value
 	double FindXatY(double y); //Returns the X value where a given Y value occurs
 };
 
-class LineSeg
+class LineSeg: public Line
 {
 private:
-	double _slope;
-	double _y_intercept;
-	double _coord1;
-	double _coord2;
+	Coordinate _coord1;
+	Coordinate _coord2;
+
 public:
-	LineSeg();
-	LineSeg(Coordinate coord1, Coordinate coord2);
+	Coordinate getCoord1() { return _coord1; }
+	Coordinate getCoord2() { return _coord2; }
 
-	double getSlope();
-	double getYIntercept;
+	void setCoord1(Coordinate coord) { _coord1 = coord; }
+	void setCoord2(Coordinate coord) { _coord2 = coord; }
 
-	double FindYatX(double x);
-	double FindXatY(double y);
-
-	bool isOnSegment(Coordinate coord); //Checks if the coordinate is within a rectangle defined by diagonal from _coord1 to _coord2
+	bool PointIsInRectangle(Coordinate point); //Returns true if the point provided is within the rectangle defined by the diagonal formed by coord1 and coord2
+	bool PointIsBetweenPerpendiculars(Coordinate point); //Returns true if the point provided is between perpendicular lines passing through coord1 and coord2
 };
 
 class Circle
@@ -106,11 +103,11 @@ private:
 public:
 	Circle(Coordinate center, double radius);
 
-	Coordinate getCenter();
-	double getRadius();
+	Coordinate getCenter() { return _center; }
+	double getRadius() { return _radius; }
 
-	void setCenter(Coordinate center);
-	void setRadius(double radius);
+	void setCenter(Coordinate center) { _center = center; }
+	void setRadius(double radius) { _radius = radius; }
 
 	double FindSlope(Coordinate point);
 };
@@ -123,7 +120,11 @@ double AngleBetween(Vector vect1, Vector vect2); //Returns the angle between two
 double AngleBetween(Coordinate vertex, Coordinate coord1, Coordinate coord2); //Does the same as the above, but with coordinates instead of vectors
 Coordinate FindSolution(Line line1, Line line2); //Returns the coordinate of the point that the two lines intersect at
 std::vector<Coordinate> FindSolutions(Circle circ, Line line); //Finds the coordinates that a line intersects a circle
-std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point); //Finds lines tangent to a circle that contain the coordinate 'point'
+//std::vector<Coordinate> FindSolutions(Circle first, Circle second); //Finds the coordinates where a circle intersects another circle
+//std::vector<Coordinate> FindTangentPoints(Circle circle, Coordinate point); //For finding the lines containing 'point' that are tangent to a circle
+Coordinate Midpoint(Coordinate first, Coordinate second);
+double DistanceBetween(Coordinate first, Coordinate second);
+//bool isInBoundary(std::vector<Coordinate>& boundary, Coordinate object); //Returns true if the coordinate is within the boundary defined by the vector of coordinates. Assumes coordinate vector is ordered properly
 
 bool longitudesort(const Coordinate& lhs, const Coordinate& rhs);
 bool latitudesort(const Coordinate& lhs, const Coordinate& rhs);
