@@ -1,7 +1,12 @@
 #include <iostream>
 #include <list>
 #include <Vector>
+#include "coordinate.h"
+#include "obstacle.h"
+
 using namespace std;
+class static_obstacle;
+class dynamic_obstacle;
 
 //This program takes in the goal/goal coordinates of waypoints, and finds the best path from the plane's
 //current location to the objectives, considering risk and distance.
@@ -27,39 +32,7 @@ using namespace std;
 //int latitude_prefix;
 //int longitude_prefix;
 
-//Create dynamic and static object classes
-class static_obstacle
-{
-    //Access specifier
-    public:
-    
-    //Data Members
-    int id;
-    float radius;
-    
-    
-}
-class dynamic_obstacle
-{
-    //Access specifier
-    public:
-    
-    //Data Members
-    int id;
-    float radius;
-    float turning_radius;
-    float velocity [2]; //actual velocity with direction and magnitude?
-    
-    //Past coordinates
-    std:: list<pair<int, int> > past_coordinates
-    
-    //Collision test vectors
-    
-    //Stored prediction equations
-    pair<float, float> left_turn_radius_point
-    pair<float, float> right_turn_radius_point
-    
-}
+
 
 
 int main()
@@ -76,30 +49,10 @@ int main()
 	//Initialize known obstacles
     
     //Initialize static obstacles
-    static_obstacle static1;
-    static1.id = 1;
-    static1.radius = 5;
+	static_obstacle teststatic1;
     
     //Initialize dynamic obstacles
-    dynamic_obstacle dynamic1;
-    dynamic1.id = 2;
-    dynamic1.radius = 10;
-    dynamic1.turning_radius = 20;
-    dynamic1.velocity[0] = 5;
-    dynamic1.velocity[1] = -5;
-    dynamic1.past_coordinates.push_back(make_pair(10, 80)); 
-	dynamic1.past_coordinates.push_back(make_pair(15, 75));
-	dynamic1.past_coordinates.push_back(make_pair(20, 70));
-    
-       dynamic_obstacle dynamic2;
-    dynamic2.id = 2;
-    dynamic2.radius = 10;
-    dynamic2.turning_radius = 20;
-    dynamic2.velocity[0] = -5;
-    dynamic2.velocity[1] = 5;
-    dynamic2.past_coordinates.push_back(make_pair(90, 40)); 
-	dynamic2.past_coordinates.push_back(make_pair(85, 45));
-	dynamic2.past_coordinates.push_back(make_pair(80, 50));
+   
 
 
 	
