@@ -37,7 +37,7 @@ class dynamic_obstacle;
 
 int main()
 {
-    
+	cout << "test\n";
 	//Initialize coordinate lists
 	std::list<pair<int, int> > coordinate_list;
 

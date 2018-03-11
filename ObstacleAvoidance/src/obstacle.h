@@ -1,15 +1,13 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 #include <vector>
-class static_obstacle;
-class dynamic_obstacle;
+class obstacle;
 
-class static_obstacle {
+//FIXME: change the .cpp to reflect the new .h file
+class obstacle {
 public:
-	static_obstacle();
+	obstacle();
 };
 
-class dynamic_obstacle {
 
-};
 #endif
