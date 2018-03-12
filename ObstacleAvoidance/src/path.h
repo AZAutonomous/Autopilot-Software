@@ -15,6 +15,7 @@ public:
 	calc if there is a collision between _coordinates[0] and _coordinates[1]
 	calculate this over all obstacles
 	returns all obsticals it collides with(in under x time)
+	in order
 	*/
 	std::vector<obstacle> hasCollition(std::vector<obstacle> obstacles);
 	/*

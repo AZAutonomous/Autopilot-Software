@@ -49,7 +49,7 @@ int main()
 	//Initialize known obstacles
     
     //Initialize static obstacles
-	static_obstacle teststatic1;
+	obstacle teststatic1;
     
     //Initialize dynamic obstacles
    
