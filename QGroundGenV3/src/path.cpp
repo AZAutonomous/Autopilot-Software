@@ -42,34 +42,10 @@ bool Path::ReadFromFile(string file_path, double search_alt)
 		else
 			return false;
 
-		dd = latitude.substr(1, 2);
-		deg = stod(dd);
+		lon = stod(longitude);
+		lat = stod(latitude);
 
-		mm = latitude.substr(4, 2);
-		min = stod(mm);
-
-		ss = latitude.substr(7, 5);
-		sec = stod(ss);
-
-		lat = DmsToDecimal(deg, min, sec);
-
-		dd = longitude.substr(1, 2);
-		deg = stod(dd);
-
-		mm = longitude.substr(4, 2);
-		min = stod(mm);
-
-		ss = longitude.substr(7, 5);
-		sec = stod(ss);
-
-		lon = DmsToDecimal(deg, min, sec);
-
-		if (altitude == "-")
-			coord.z = search_alt;
-		else
-			coord.z = stod(altitude);
-
-		coord.x = lon * -1;
+		coord.x = lon;
 		coord.y = lat;
 
 		if (flag == 3)
@@ -606,15 +582,15 @@ void Path::PushOpToWaypoints()
 	}
 }
 
-void Path::PushObsToWaypoints()
+/*void Path::PushObsToWaypoints()
 {
 	for (unsigned int i = 0; i < _obstacles.size(); i++)
 	{
 		_waypoints.push_back(_obstacles[i].getCenter());
 	}
-}
+}*/
 
-bool Path::ReadObstacles(string file_path)
+/*bool Path::ReadObstacles(string file_path)
 {
 	ifstream in;
 	in.open(file_path);
@@ -635,7 +611,7 @@ bool Path::ReadObstacles(string file_path)
 		_obstacles.push_back(obs);
 	}
 	return true;
-}
+}*/
 
 int Path::hasCollision(Coordinate coorA, Coordinate coorB, Circle O)
 {
@@ -674,7 +650,7 @@ int Path::hasCollision(Coordinate coorA, Coordinate coorB, Circle O)
 	return 0;
 }
 
-Coordinate Path::AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index, int flag = 1)
+/*Coordinate Path::AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index, int flag = 1)
 {
 	Coordinate avoidance_point;
 	double kDistance = 0.00001;
@@ -779,7 +755,7 @@ Coordinate Path::AvoidObstacle(Coordinate& A, Coordinate& B, Circle O, int index
 		}
 	}
 	return avoidance_point;
-}
+}*/
 
 double Path::PathLength(int begin, int end)
 {
@@ -807,8 +783,8 @@ bool Path::DumpDataToFile(string file_path)
 		out_file << "S " << _search_corners[i].x << " " << _search_corners[i].y << " " << _search_corners[i].z << endl;
 	for (unsigned int i = 0; i < _op_area_corners.size(); i++)
 		out_file << "B " << _op_area_corners[i].x << " " << _op_area_corners[i].y << " " << _op_area_corners[i].z << endl;
-	for (unsigned int i = 0; i < _obstacles.size(); i++)
-		out_file << "O " << _obstacles[i].getCenter().x << " " << _obstacles[i].getCenter().y << " " << _obstacles[i].getCenter().z << " " << _obstacles[i].getRadius() << endl;
+	//for (unsigned int i = 0; i < _obstacles.size(); i++)
+		//out_file << "O " << _obstacles[i].getCenter().x << " " << _obstacles[i].getCenter().y << " " << _obstacles[i].getCenter().z << " " << _obstacles[i].getRadius() << endl;
 
 	out_file.close();
 	return true;
