@@ -72,9 +72,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 22,\n\"coordinate\": [\n";
-	fileout << takeoff.y << ",\n";
-	fileout << takeoff.x << ",\n";
-	fileout << takeoff.z << "\n";
+	fileout << std::fixed << std::setprecision(3) << takeoff.y << ",\n";
+	fileout << std::fixed << std::setprecision(3) << takeoff.x << ",\n";
+	fileout << std::fixed << std::setprecision(3) << takeoff.z << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -84,9 +84,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 	//print take off way
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-	fileout << ascent.y << ",\n";
-	fileout << ascent.x << ",\n";
-	fileout << ascent.z << "\n";
+	fileout << std::fixed << std::setprecision(3) << ascent.y << ",\n";
+	fileout << std::fixed << std::setprecision(3) << ascent.x << ",\n";
+	fileout << std::fixed << std::setprecision(3) << ascent.z << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -99,9 +99,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 	for (int i = 0; i < size; i++) {
 		fileout << "{\n";
 		fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-		fileout << _waypoints[i].y << ",\n";
-		fileout << _waypoints[i].x << ",\n";
-		fileout << _waypoints[i].z << "\n";
+		fileout << std::fixed << std::setprecision(3) << _waypoints[i].y << ",\n";
+		fileout << std::fixed << std::setprecision(3) << _waypoints[i].x << ",\n";
+		fileout << std::fixed << std::setprecision(3) << _waypoints[i].z << "\n";
 		fileout << "],\n";
 		fileout << "\"doJumpId\": " << i + 2 << ",\n";
 		fileout << "\"frame\": 3,\n";
@@ -113,9 +113,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 	//print pre land
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 16,\n\"coordinate\": [\n";
-	fileout << descent.y << ",\n";
-	fileout << descent.x << ",\n";
-	fileout << descent.z << "\n";
+	fileout << std::fixed << std::setprecision(3) << descent.y << ",\n";
+	fileout << std::fixed << std::setprecision(3) << descent.x << ",\n";
+	fileout << std::fixed << std::setprecision(3) << descent.z << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -125,9 +125,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 	//print land
 	fileout << "{\n";
 	fileout << "\"autoContinue\": true,\n\"command\": 21,\n\"coordinate\": [\n";
-	fileout << home.y << ",\n";
-	fileout << home.x << ",\n";
-	fileout << home.z << "\n";
+	fileout << std::fixed << std::setprecision(3) << home.y << ",\n";
+	fileout << std::fixed << std::setprecision(3) << home.x << ",\n";
+	fileout << std::fixed << std::setprecision(3) << home.z << "\n";
 	fileout << "],\n";
 	fileout << "\"doJumpId\": " << "1" << ",\n";
 	fileout << "\"frame\": 3,\n";
@@ -137,9 +137,9 @@ bool Path::WriteToFile(string file_path, Coordinate home, Coordinate takeoff, Co
 	//print the home pos
 	fileout << "],\n";
 	fileout << "\"plannedHomePosition\": [\n";
-	fileout << home.y << ",\n";
-	fileout << home.x << ",\n";
-	fileout << home.z << "\n";
+	fileout << std::fixed << std::setprecision(3) << home.y << ",\n";
+	fileout << std::fixed << std::setprecision(3) << home.x << ",\n";
+	fileout << std::fixed << std::setprecision(3) << home.z << "\n";
 	fileout << "],\n";
 	fileout << "\"version\": 2\n";
 	fileout << "}";
