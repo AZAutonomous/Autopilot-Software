@@ -1,0 +1,10 @@
+﻿  path.cpp
+src\path.cpp(20): warning C4101: 'min': unreferenced local variable
+src\path.cpp(20): warning C4101: 'sec': unreferenced local variable
+src\path.cpp(20): warning C4101: 'deg': unreferenced local variable
+src\path.cpp(264): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+src\path.cpp(290): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  main.cpp
+  coordinate.cpp
+  Generating Code...
+  pathgen3.vcxproj -> C:\Users\james\Desktop\aza\Autopilot-Software\QGroundGenV3\Debug\pathgen3.exe

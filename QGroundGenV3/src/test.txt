@@ -1,0 +1,13 @@
+A1 Op Area 125.12 125.63 -
+A2 Op Area 125.12 130.12 -
+A3 Op Area 130.63 125.63 -
+A4 Op Area 130.63 130.12 -
+S1 Search Area 125.12 125.63 -
+S2 Search Area 125.12 130.12 -
+S3 Search Area 130.63 125.63 -
+S4 Search Area 130.63 130.12 -
+W1 Waypoint #1 126.23 127.15 200
+W2 Waypoint #2 128.26 128.13 300
+W3 Waypoint #3 125.89 126.04 300
+W4 Waypoint #4 126.10 129.01 300
+W5 Waypoint #5 125.99 130.01 400

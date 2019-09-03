@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include "coordinate.h"
@@ -6,11 +7,15 @@ using namespace std;
 
 int main()
 {
-	string in_path = "../test_files/flydaymissionfixed.txt";
+	string in_path = "test.txt";
 	string out_path = "../test_files/test_output.mission";
 	//string obs_path = "../test_files/obstacle_list.txt";
 	Path navigation;
-	navigation.ReadFromFile(in_path, 100);
+	if (navigation.ReadFromFile(in_path, 100) == false) {
+		printf("could not open\n");
+		system("pause");
+		return 0;
+	}
 
 	Coordinate home(-76.4342, 38.1509, 0);
 	Coordinate takeoff(-76.4291, 38.1453, 60.96);
